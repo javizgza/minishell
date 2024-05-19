@@ -6,23 +6,30 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:22:55 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/19 16:49:09 by jazarago         ###   ########.fr       */
+/*   Updated: 2024/05/19 17:19:06 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 #include "unistd.h"
 
-t_tokens    ft_define_tokens(char **token)
+t_token ft_define_tokens(char **token)
 {
+    t_token result;
+    result.value = NULL;
+
     while (ft_skip_white_spaces(token))
         (*token)++;
     if (**token == '\0')
-        return (END);
+    {
+        result.type = END;
+        return result;
+    }
     else if (**token == '|')
     {
         (*token)++;
-        return (PIPE);
+        result.type = PIPE;
+        return result;
     }
     else if (**token == '>')
     {
@@ -30,9 +37,11 @@ t_tokens    ft_define_tokens(char **token)
         if (**token == '>')
         {
             (*token)++;
-            return (BIGGERX2);
+            result.type = BIGGERX2;
+            return result;
         }
-        return (BIGGER);
+        result.type = BIGGER;
+        return result;
     }
     else if (**token == '<')
     {
@@ -40,11 +49,14 @@ t_tokens    ft_define_tokens(char **token)
         if (**token == '<')
         {
             (*token)++;
-            return (SMALLERX2);
+            result.type = SMALLERX2;
+            return result;
         }
-        return (SMALLER);
+        result.type = SMALLER;
+        return result;
     }
     (*token)++;
-    return (ERROR);
+    result.type = ERROR;
+    return result;
 }
 

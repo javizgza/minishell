@@ -6,56 +6,59 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:01:47 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/19 16:34:27 by jazarago         ###   ########.fr       */
+/*   Updated: 2024/05/19 17:53:46 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void    parse_redir(char *input)
+void parse_redir(char *input, t_commands *actual_command)
 {
-    char        *actual_pos;
-    t_commands  *actual_command;
-    t_tokens token_type;
-    
+    char *actual_pos;
+    t_token token;
+
     actual_pos = input;
+    
+    actual_command->command = NULL;
+    actual_command->args = NULL;
+    actual_command->args_num = 0;
+    actual_command->input = NULL;
+    actual_command->output = NULL;
+    actual_command->output_append = NULL;
+    actual_command->input_delim = NULL;
+
     while (true)
     {
-        token_type = ft_define_tokens(&actual_pos);
-        if (token_type == END)
+        token = ft_define_tokens(&actual_pos);
+        if (token.type == END)
             break;
-        else if (token_type == ERROR)
+        else if (token.type == ERROR)
         {
             printf("Syntax Error.\n");
             break;
         }
-        if (token_type == BIGGER || token_type == SMALLER ||
-                token_type == BIGGERX2 || token_type == SMALLERX2)
-                ft_set_up_redir(actual_command, token_type, &actual_pos);
+        if (token.type == BIGGER || token.type == SMALLER ||
+                token.type == BIGGERX2 || token.type == SMALLERX2)
+            ft_set_up_redir(actual_command, token.type, &token);
     }
+     printf("Output file: %s\n", actual_command->output);
+    printf("Append file: %s\n", actual_command->output_append);
+    printf("Input file: %s\n", actual_command->input);
+    printf("Input delimiter file: %s\n", actual_command->input_delim);
 }
+
 
 int main() {
     char input[] = "> >> < <<";  // Entrada simulada para redirecciones
-    char *current_position = input;
-    t_commands command = {0};
+    t_commands command;
 
-    // Llamada a la función de parseo (simulada aquí)
-    while (true) {
-        t_tokens token_type = ft_define_tokens(&current_position);
-        if (token_type == END) {
-            break;
-        } else {
-            ft_set_up_redir(&command, token_type, &current_position);
-        }
-    }
+    parse_redir(input, &command);
 
-    // Imprimir resultados para verificar
-    printf("Output file: %d\n", command.output);
-    printf("Append file: %d\n", command.output_append);
-    printf("Input file: %d\n", command.input);
-    printf("Input delimiter file: %d\n", command.input_delim);
+    // Limpieza (liberar la memoria asignada a los nombres de archivo)
+    free(command.output);
+    free(command.output_append);
+    free(command.input);
+    free(command.input_delim);
 
-    // Limpieza (normalmente deberías también liberar la memoria asignada a los nombres de archivo
     return 0;
 }
