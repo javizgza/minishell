@@ -6,11 +6,12 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:22:55 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/19 16:34:04 by jazarago         ###   ########.fr       */
+/*   Updated: 2024/05/19 16:49:09 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+#include "unistd.h"
 
 t_tokens    ft_define_tokens(char **token)
 {
