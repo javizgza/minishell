@@ -6,9 +6,10 @@
 /*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 16:40:24 by cagonza2          #+#    #+#             */
-/*   Updated: 2023/10/08 12:47:00 by cagonza2         ###   ########.fr       */
+/*   Updated: 2024/05/19 17:51:37 by cagonza2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static size_t	ft_pos(const char *str, const char *to_find, size_t pos)
@@ -35,7 +36,7 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t size)
 		return (NULL);
 	if (!to_find[i] || to_find == str)
 		return ((char *)str);
-	if (size < 0)
+	if (size <= 0)
 		size = ft_strlen(str) + size;
 	while (str[i])
 	{
