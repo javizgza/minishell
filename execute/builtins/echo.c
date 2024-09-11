@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.h                                          :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/11 15:59:35 by cagonza2         ###   ########.fr       */
+/*   Created: 2024/09/11 15:07:30 by cagonza2          #+#    #+#             */
+/*   Updated: 2024/09/11 15:58:19 by cagonza2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-# include "../../libft/libft.h"
+#include "../include/execute.h"
 
-int	ft_is_equal(char *a, char *b);
-int ft_echo(char **args);
-
-#endif
+int	ft_echo(char **args)
+{
+	return (ft_strlen(args[0]));
+}

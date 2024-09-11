@@ -1,43 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/11 17:49:31 by cagonza2         ###   ########.fr       */
+/*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
+/*   Updated: 2024/09/11 15:49:43 by cagonza2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/execute.h"
+#include "../include/execute.h"
 
-int ft_shell(char *cLine)
-{
-	if (ft_is_equal(cLine, "echo"))
-		return (ft_echo(cLine));
-	return (1);
-}
 
-void  ft_free_all(char **args, int nb_chars)
+int	ft_is_equal(char *a, char *b)
 {
 	int	i;
 
 	i = 0;
-	while (i < nb_chars)
-		free(args[i]);
-	free(args);
-}
-
-int	main(void)
-{
-    char	*cLine;
-    char	**csLine;
-	int		i;
-
-    cLine = readline("minishell> ");
-	printf("\nComando: %s\n", cLine);
-    ft_shell(csLine);
-	free(cLine);
-    return 0;
+	if (ft_strlen(a) != ft_strlen(b))
+		return (0);
+	while (a[i])
+	{
+		if (a[i] != b[i])
+			return (0);
+		i += 1;
+	}
+	return (1);
 }

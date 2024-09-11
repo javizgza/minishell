@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 19:58:00 by cagonza2          #+#    #+#             */
-/*   Updated: 2023/10/08 11:51:18 by cagonza2         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:32:36 by cagonza2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static void	ft_allocate(char **result, char const *s, char c)
@@ -40,7 +41,7 @@ static int	ft_speclen(char const *str, char c)
 
 	i = 0;
 	counter = 0;
-	while (str[i])
+	while (i < ft_strlen(str))
 	{
 		if (str[i] != c)
 			counter += 1;
