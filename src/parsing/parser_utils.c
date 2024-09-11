@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2024/05/19 16:34:51 by jazarago         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:04:31 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,9 @@ int ft_white_spaces(char c)
 
 int ft_skip_white_spaces(char **token)
 {
-    int j;
-    int i;
-
-    i = 0;
-    j = 0;
-    while (ft_white_spaces(token[i][j]))
-        j++;
-    return (j);
+    while (ft_white_spaces(**token))
+        (*token)++;
+    return (0);
 }
 
 char	*ft_strdup(const char *s)
