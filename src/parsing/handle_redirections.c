@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:01:47 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/11 17:51:49 by jazarago         ###   ########.fr       */
+/*   Updated: 2024/09/12 14:55:10 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,47 +26,26 @@ void    parse_redir(char *input)
         t_tokens token_type = ft_define_tokens(&actual_pos);
         if (token_type == END)
             break;
-        // else if (token_type == ERROR)
-        // {
-        //     printf("Syntax Error.\n");
-        //     break;
-        //     printf("hoola\n");
-        // }
         if (token_type == BIGGER || token_type == SMALLER ||
-                token_type == BIGGERX2 || token_type == SMALLERX2)
-        {
-                ft_set_up_redir(actual_command, token_type, &actual_pos);
-                
-        }
+                token_type == BIGGERX2 || token_type == SMALLERX2 ||
+                    token_type == ENV_VAR || token_type == RECENT || token_type == PIPE)
+            ft_set_up_redir(actual_command, token_type, &actual_pos);
+        // if (token_type == PIPE || token_type == RECENT || token_type == ENV_VAR)
+        // {
+        //     ft_set_up_redir2(actual_command, token_type, &actual_pos);
+        // }
     }
     printf("Output file: %s\n", actual_command->output ? actual_command->output : "NULL");
     printf("Append file: %s\n", actual_command->output_append ? actual_command->output_append : "NULL");
     printf("Input file: %s\n", actual_command->input ? actual_command->input : "NULL");
     printf("Input delimiter file: %s\n", actual_command->input_delim ? actual_command->input_delim : "NULL");
+    printf("Env var: %s\n", actual_command->env_var ? actual_command->env_var : "NULL");
+    printf("Pipes: %s\n", actual_command->pipes ? actual_command->pipes : "NULL");
+    printf("Recent: %s\n", actual_command->recent ? actual_command->recent : "NULL");
 }
 
 int main() {
-    char input[] = "> file1 >> file2 < file3 << file4";
+    char input[] = "> file1 >> file2 < file3 << file4 | grep something $VAR $? p"; 
     parse_redir(input);
     return 0;
 }
-
-// int main() {
-//     char input[] = "> >> < <<";
-//     char *current_position = input;
-//     t_commands command = {0};
-
-//     while (true) {
-//         t_tokens token_type = ft_define_tokens(&current_position);
-//         if (token_type == END) {
-//             break;
-//         } else {
-//             ft_set_up_redir(&command, token_type, &current_position);
-//         }
-//     }
-//     printf("Output file: %s\n", command.output);
-//     printf("Append file: %s\n", command.output_append);
-//     printf("Input file: %s\n", command.input);
-//     printf("Input delimiter file: %s\n", command.input_delim);
-//     return (0);
-// }
