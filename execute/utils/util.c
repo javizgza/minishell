@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/11 15:49:43 by cagonza2         ###   ########.fr       */
+/*   Updated: 2024/09/14 16:20:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,46 @@ int	ft_is_equal(char *a, char *b)
 		i += 1;
 	}
 	return (1);
+}
+
+int	ft_nb_args(char **args)
+{
+	int		size;
+
+	size = 0;
+	while (args[size])
+		size += 1;
+	return (size);
+}
+
+void	ft_clean_array(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+	{
+		free(matrix[i]);
+		i += 1;
+	}
+	free(matrix);
+}
+
+void	ft_error(char *s)
+{
+	int	i;
+
+	if (!ft_strncmp(s, "ERROR", 5))
+		perror(s);
+	else
+	{
+		i = 0;
+		while (s[i])
+		{
+			write(2, &s[i], 1);
+			i += 1;
+		}
+		write(2, "\n", 1);
+	}
+	exit(1);
 }

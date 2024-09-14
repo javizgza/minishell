@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 15:07:30 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/14 15:53:36 by marvin           ###   ########.fr       */
+/*   Created: 2024/09/14 16:10:54 by marvin            #+#    #+#             */
+/*   Updated: 2024/09/14 16:24:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_echo(char **args)
+char	**ft_split_path(char *envp[])
 {
-	int	i;
-	int	jump;
+	int		i;
+	char	**aux;
+	char	**path;
 
-	i = 1;
-	jump = 1;
-	if (ft_is_equal(args[1], "-n"))
-		jump = 0;
-	while (args[i] != NULL)
+	i = 0;
+	while (envp[i])
 	{
-		printf("%s ", args[i]);
+		if (!ft_strncmp(envp[i], "PATH", 4))
+			break ;
 		i += 1;
 	}
-	if (jump)
-		printf("\n");
-	return (ft_strlen(args[0]));
+	if (!envp[i])
+		return (NULL);
+	aux = ft_split(envp[i], '=');
+	path = ft_split(aux[1], ':');
+	ft_clean_array(aux);
+	return (path);
 }

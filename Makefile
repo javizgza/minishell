@@ -9,9 +9,10 @@ RM = rm -f
 LIB = ar rcs
 
 SRCS =  ./execute/main.c\
-		./libft/ft_strlen.c ./libft/ft_strjoin.c ./libft/ft_split.c ./libft/ft_substr.c\
+		./libft/ft_strlen.c ./libft/ft_strjoin.c ./libft/ft_split.c ./libft/ft_substr.c ./libft/ft_strncmp.c\
 		./execute/utils/util.c\
-		./execute/builtins/echo.c\
+		./execute/builtins/echo.c ./execute/builtins/pwd.c ./execute/builtins/env.c\
+		./execute/env/enviroment.c ./execute/env/execute.c\
 
 OBJTS = $(SRCS:.c=.o)
 

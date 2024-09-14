@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 15:07:30 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/14 15:53:36 by marvin           ###   ########.fr       */
+/*   Created: 2024/09/14 17:12:05 by marvin            #+#    #+#             */
+/*   Updated: 2024/09/14 17:13:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_echo(char **args)
+int	ft_env(char **env)
 {
-	int	i;
-	int	jump;
-
-	i = 1;
-	jump = 1;
-	if (ft_is_equal(args[1], "-n"))
-		jump = 0;
-	while (args[i] != NULL)
+	int	i = 0;
+	while (env[i])
 	{
-		printf("%s ", args[i]);
+		printf("%s\n", env[i]);
 		i += 1;
 	}
-	if (jump)
-		printf("\n");
-	return (ft_strlen(args[0]));
+	return (1);
 }
