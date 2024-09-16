@@ -13,6 +13,7 @@ SRCS =  ./execute/main.c\
 		./execute/utils/util.c\
 		./execute/builtins/echo.c ./execute/builtins/pwd.c ./execute/builtins/env.c\
 		./execute/env/enviroment.c ./execute/env/execute.c\
+		./execute/list/list.c ./execute/list/list_op.c\
 
 OBJTS = $(SRCS:.c=.o)
 

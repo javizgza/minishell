@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/14 16:20:38 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/16 17:48:02 by cagonza2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,18 @@ void	ft_error(char *s)
 		write(2, "\n", 1);
 	}
 	exit(1);
+}
+
+int	ft_load_env(t_List *l, char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (!ft_add_node(l, env[i]))
+			return (0);
+		i += 1;
+	}
+	return (1);
 }

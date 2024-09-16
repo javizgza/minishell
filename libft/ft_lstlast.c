@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:48:25 by cagonza2          #+#    #+#             */
-/*   Updated: 2023/10/01 18:57:26 by cagonza2         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:33:02 by cagonza2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+
+t_List	*ft_lstlast(t_List *lst)
 {
-	t_list	*aux;
+	t_List	*aux;
 
 	aux = lst;
 	if (!aux)

@@ -3,22 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 17:12:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/14 17:13:11 by marvin           ###   ########.fr       */
+/*   Updated: 2024/09/16 17:50:05 by cagonza2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_env(char **env)
+int	ft_env(t_List *env)
 {
-	int	i = 0;
-	while (env[i])
+	t_Node	*aux;
+
+	aux = env->first;
+	while (aux->next)
 	{
-		printf("%s\n", env[i]);
-		i += 1;
+		printf("%s\n", aux->element);
+		aux = aux->next;
 	}
+	printf("%s\n", aux->element);
 	return (1);
 }
