@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 18:28:42 by cagonza2          #+#    #+#             */
-/*   Updated: 2023/10/04 19:25:07 by cagonza2         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:33:02 by cagonza2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+
+void	ft_lstadd_front(t_List **lst, t_List *new)
 {
 	new -> next = *lst;
 	*lst = new;

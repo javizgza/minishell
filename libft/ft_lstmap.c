@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 16:44:33 by cagonza2          #+#    #+#             */
-/*   Updated: 2023/10/04 19:25:36 by cagonza2         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:33:02 by cagonza2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *))
+
+t_List	*ft_lstmap(t_List *lst, void *(*f)(void *), void(*del)(void *))
 {
-	t_list	*aux;
-	t_list	*new;
+	t_List	*aux;
+	t_List	*new;
 
 	if (!lst || !f || !del)
 		return (NULL);

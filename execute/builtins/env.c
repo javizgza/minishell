@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 19:20:18 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/16 16:33:02 by cagonza2         ###   ########.fr       */
+/*   Created: 2024/09/14 17:12:05 by marvin            #+#    #+#             */
+/*   Updated: 2024/09/16 17:50:05 by cagonza2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/execute.h"
 
-void	ft_lstclear(t_List **lst, void (*del)(void*))
+int	ft_env(t_List *env)
 {
-	t_List	*aux;
+	t_Node	*aux;
 
-	if (!lst || !del)
-		return ;
-	while (*lst)
+	aux = env->first;
+	while (aux->next)
 	{
-		aux = (*lst)-> next;
-		ft_lstdelone(*lst, del);
-		*lst = aux;
+		printf("%s\n", aux->element);
+		aux = aux->next;
 	}
-	*lst = NULL;
+	printf("%s\n", aux->element);
+	return (1);
 }

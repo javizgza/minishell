@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 18:38:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/16 16:33:02 by cagonza2         ###   ########.fr       */
+/*   Created: 2024/09/11 15:07:30 by cagonza2          #+#    #+#             */
+/*   Updated: 2024/09/14 15:53:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/execute.h"
 
-int	ft_lstsize(t_List *lst)
+int	ft_echo(char **args)
 {
-	int		i;
-	t_List	*aux;
+	int	i;
+	int	jump;
 
-	aux = lst;
 	i = 1;
-	if (!aux)
-		return (0);
-	while (aux -> next)
+	jump = 1;
+	if (ft_is_equal(args[1], "-n"))
+		jump = 0;
+	while (args[i] != NULL)
 	{
-		aux = aux -> next;
+		printf("%s ", args[i]);
 		i += 1;
 	}
-	return (i);
+	if (jump)
+		printf("\n");
+	return (ft_strlen(args[0]));
 }
