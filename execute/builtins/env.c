@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 17:12:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/16 17:50:05 by cagonza2         ###   ########.fr       */
+/*   Updated: 2024/11/13 12:37:28 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_env(t_List *env)
+int	ft_env(t_mini *mini)
 {
-	t_Node	*aux;
+	int	i;
 
-	aux = env->first;
-	while (aux->next)
+	i = 0;
+	while (mini->env[i])
 	{
-		printf("%s\n", aux->element);
-		aux = aux->next;
+		printf("%s\n", mini->env[i]);
+		i++;
 	}
-	printf("%s\n", aux->element);
+	mini->last_command = 1;
 	return (1);
 }

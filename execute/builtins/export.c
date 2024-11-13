@@ -3,62 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:53:54 by cravegli          #+#    #+#             */
-/*   Updated: 2024/11/05 14:50:01 by cravegli         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:09:54 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_print_env(t_list *env)
+int	ft_print_env(char	**env)
 {
-	t_node	*node;
-	int		i;
+	int	i;
+	int	y;
 
-	node = env->first;
-	while (node)
+	y = 0;
+	while (env[y])
 	{
 		i = 0;
 		printf("declare -x ");
-		while (node->element[i] != '=')
+		while (env[y][i] != '=')
 		{
-			printf("%c", node->element[i]);
+			printf("%c", env[y][i]);
 			i++;
 		}
-		printf("%c", node->element[i]);
+		printf("%c", env[y][i]);
 		i++;
 		printf("%c", 34);
-		while (node->element[i])
+		while (env[y][i])
 		{
-			printf("%c", node->element[i]);
+			printf("%c", env[y][i]);
 			i++;
 		}
 		printf("%c\n", 34);
-		node = node->next;
+		y++;
 	}
 	return (1);
 }
 
-int	ft_export(char **arg, t_list *env)
+int	ft_export(t_mini *mini)
 {
 	char	**vars;
 	char	*value;
 
-	if (ft_nb_args(arg) < 2)
-		return (ft_print_env(env));
-	if (ft_strchr(arg[1], '='))
+	if (ft_nb_args(mini->command) < 2)
 	{
-		vars = ft_split(arg[1], '=');
-		value = get_env_val(vars[0], env);
+		mini->last_command = 1;
+		return (ft_print_env(mini->env));
+	}
+	if (ft_strchr(mini->command[1], '='))
+	{
+		vars = ft_split(mini->command[1], '=');
+		value = get_env_val(vars[0], mini->env);
 		if (!value)
 		{
 			ft_clean_array(vars);
-			return (ft_add_node(env, arg[1]));
+			mini->last_command = 1;
+			return (0);
 		}
-		set_env_val(arg[1], env);
+		set_env_val(mini->command[1], mini->env);
 		ft_clean_array(vars);
 	}
+	mini->last_command = 1;
 	return (1);
 }

@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:25:26 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/16 17:59:21 by cagonza2         ###   ########.fr       */
+/*   Updated: 2024/11/13 12:25:53 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_pwd(t_List *env)
+int	ft_pwd(t_mini *mini)
 {
-	t_Node	*node;
+	int		i;
 	char	**aux;
 
-	node = env->first;
-	while (node->next)
+	i = 0;
+	while (mini->env[i])
 	{
-		if (!ft_strncmp(node->element, "PWD", 3))
+		if (!ft_strncmp(mini->env[i], "PWD", 3))
 			break ;
-		node = node->next;
+		i++;
 	}
-	if (!ft_strncmp(node->element, "PWD", 3))
+	if (!ft_strncmp(mini->env[i], "PWD", 3))
 	{
-		aux = ft_split(node->element, '=');
+		aux = ft_split(mini->env[i], '=');
 		printf("%s\n", aux[1]);
 		ft_clean_array(aux);
 	}
+	mini->last_command = 1;
 	return (1);
 }

@@ -3,30 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:56 by cravegli          #+#    #+#             */
-/*   Updated: 2024/11/05 14:23:39 by cravegli         ###   ########.fr       */
+/*   Updated: 2024/11/13 13:15:02 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_exit(char **arg, t_list *env)
+int	ft_exit(t_mini *mini)
 {
-	if (ft_nb_args(arg) < 2)
+	int	e;
+
+	e = 0;
+	if (ft_nb_args(mini->command) < 2)
 	{
 		rl_clear_history();
-		ft_clean_array(arg);
-		ft_delete_list(env);
+		ft_clean_array(mini->command);
+		ft_clean_array(mini->env);
 		exit(115);
 	}
-	if (ft_nb_args(arg) == 2)
+	if (ft_nb_args(mini->command) == 2)
 	{
+		e = ft_atoi(mini->command[1]);
 		rl_clear_history();
-		ft_clean_array(arg);
-		ft_delete_list(env);
-		exit(ft_atoi(arg[1]));
+		ft_clean_array(mini->command);
+		ft_clean_array(mini->env);
+		exit (e);
 	}
 	return (1);
 }

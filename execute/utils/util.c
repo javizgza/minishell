@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/16 17:48:02 by cagonza2         ###   ########.fr       */
+/*   Updated: 2024/11/13 12:20:22 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,26 @@ void	ft_error(char *s)
 		}
 		write(2, "\n", 1);
 	}
-	exit(1);
+	exit(2);
 }
 
-int	ft_load_env(t_List *l, char **env)
+int	ft_load_env(t_mini *mini, char**env)
 {
 	int	i;
 
+	mini->env = ft_calloc(sizeof(char *), ft_nb_args(env));
+	if (!mini->env)
+		return (0);
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_add_node(l, env[i]))
+		mini->env[i] = ft_strdup(env[i]);
+		if (!mini->env[i])
+		{
+			ft_clean_array(mini->env);
 			return (0);
-		i += 1;
+		}
+		i++;
 	}
 	return (1);
 }

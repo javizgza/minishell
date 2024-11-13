@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:07:30 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/14 15:53:36 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 12:34:46 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_echo(char **args)
+int	ft_echo(char **args, t_mini *mini)
 {
 	int	i;
 	int	jump;
@@ -28,5 +28,6 @@ int	ft_echo(char **args)
 	}
 	if (jump)
 		printf("\n");
+	mini->last_command(ft_strlen(args[0]));
 	return (ft_strlen(args[0]));
 }
