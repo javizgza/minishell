@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/11/13 12:20:22 by carlos           ###   ########.fr       */
+/*   Updated: 2024/11/13 17:10:47 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_is_equal(char *a, char *b)
 	{
 		if (a[i] != b[i])
 			return (0);
-		i += 1;
+		i ++;
 	}
 	return (1);
 }
@@ -35,7 +35,7 @@ int	ft_nb_args(char **args)
 
 	size = 0;
 	while (args[size])
-		size += 1;
+		size ++;
 	return (size);
 }
 
@@ -47,7 +47,7 @@ void	ft_clean_array(char **matrix)
 	while (matrix[i])
 	{
 		free(matrix[i]);
-		i += 1;
+		i ++;
 	}
 	free(matrix);
 }
@@ -64,7 +64,7 @@ void	ft_error(char *s)
 		while (s[i])
 		{
 			write(2, &s[i], 1);
-			i += 1;
+			i ++;
 		}
 		write(2, "\n", 1);
 	}
@@ -75,7 +75,7 @@ int	ft_load_env(t_mini *mini, char**env)
 {
 	int	i;
 
-	mini->env = ft_calloc(sizeof(char *), ft_nb_args(env));
+	mini->env = ft_calloc(sizeof(char *), ft_nb_args(env) + 1);
 	if (!mini->env)
 		return (0);
 	i = 0;

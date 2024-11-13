@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 15:07:30 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/11/13 12:34:46 by carlos           ###   ########.fr       */
+/*   Updated: 2024/11/13 16:43:16 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	ft_echo(char **args, t_mini *mini)
 	}
 	if (jump)
 		printf("\n");
-	mini->last_command(ft_strlen(args[0]));
+	mini->last_command = ft_strlen(args[0]);
 	return (ft_strlen(args[0]));
 }

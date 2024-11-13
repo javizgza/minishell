@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:53:54 by cravegli          #+#    #+#             */
-/*   Updated: 2024/11/13 13:09:54 by carlos           ###   ########.fr       */
+/*   Updated: 2024/11/13 18:21:25 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ int	ft_export(t_mini *mini)
 		{
 			ft_clean_array(vars);
 			mini->last_command = 1;
-			return (0);
+			mini->env = ft_add_env_val(mini->command[1], mini->env);
+			return (1);
 		}
-		set_env_val(mini->command[1], mini->env);
+		set_env_val(ft_strdup(mini->command[1]), mini->env);
 		ft_clean_array(vars);
 	}
 	mini->last_command = 1;

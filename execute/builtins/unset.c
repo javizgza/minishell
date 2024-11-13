@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/14 16:25:26 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 21:00:59 by cravegli         ###   ########.fr       */
+/*   Created: 2024/11/13 18:33:15 by cravegli          #+#    #+#             */
+/*   Updated: 2024/11/13 18:57:33 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_pwd(t_mini *mini)
+int	ft_unset(t_mini *mini)
 {
-	char	*aux;
+	int	i;
 
-	aux = getcwd(NULL, 0);
-	printf("%s\n", aux);
-	free(aux);
-	mini->last_command = 1;
+	i = 1;
+	while (mini->command[i])
+	{
+		if (get_env_val(mini->command[i], mini->env))
+			mini->env = ft_del_env_val(mini->command[i], mini->env);
+		i++;
+	}
 	return (1);
 }

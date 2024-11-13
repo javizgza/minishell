@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/11/13 13:16:13 by carlos           ###   ########.fr       */
+/*   Updated: 2024/11/13 20:52:32 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/execute.h"
 
-int	ft_is_builtins(t_mini mini)
+int	ft_is_builtins(t_mini *mini)
 {
-	if (ft_is_equal(mini.command[0], "echo"))
-		return (ft_echo(mini.c_line, mini));
-	if (ft_is_equal(mini.command[0], "pwd"))
+	if (ft_is_equal(mini->command[0], "echo"))
+		return (ft_echo(mini->command, mini));
+	if (ft_is_equal(mini->command[0], "pwd"))
 		return (ft_pwd(mini));
-	if (ft_is_equal(mini.command[0], "env"))
+	if (ft_is_equal(mini->command[0], "env"))
 		return (ft_env(mini));
-	if (ft_is_equal(mini.command[0], "exit"))
+	if (ft_is_equal(mini->command[0], "exit"))
 		return (ft_exit(mini));
-	if (ft_is_equal(mini.command[0], "cd"))
+	if (ft_is_equal(mini->command[0], "cd"))
 		return (ft_cd(mini));
-	if (ft_is_equal(mini.command[0], "export"))
+	if (ft_is_equal(mini->command[0], "export"))
 		return (ft_export(mini));
-	if (ft_is_equal(mini.command[0], "exit"))
-		return (ft_exit(mini));
+	if (ft_is_equal(mini->command[0], "unset"))
+		return (ft_unset(mini));
 	return (0);
 }
 
@@ -37,8 +37,8 @@ int	ft_shell(t_mini *mini)
 	if (!ft_is_builtins(mini))
 	{
 		ft_clean_array(mini->command);
-		mini->last_command = ft_execute_command(mini->c_line, mini->env);
-		return (mini->last_command);
+		ft_execute(mini);
+		return (1);
 	}
 	ft_clean_array(mini->command);
 	return (1);
@@ -50,13 +50,14 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-	if (!ft_load_env(mini, envp))
+	if (!ft_load_env(&mini, envp))
 		ft_error("ERROR loading env");
 	while (1)
 	{
 		mini.c_line = readline("minishell> ");
 		if (!ft_shell(&mini))
 			return (0);
+		add_history(mini.c_line);
 	}
 	return (0);
 }

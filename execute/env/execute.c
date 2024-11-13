@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/14 16:20:02 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/13 21:07:58 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,26 @@ int	ft_execute_command(char *command, char *envp[])
 	aux = ft_split(command, ' ');
 	cmd = ft_create_cmd(path, aux[0]);
 	if (!cmd)
+	{
+		ft_clean_array(aux);
+		ft_clean_array(path);
 		return (0);
+	}
 	execve(cmd, aux, envp);
 	free(cmd);
 	ft_clean_array(path);
 	ft_clean_array(aux);
+	return (1);
+}
+
+int	ft_execute(t_mini *mini)
+{
+	pid_t	parent;
+
+	parent = fork();
+	if (!parent)
+		ft_execute_command(mini->c_line, mini->env);
+	if (parent)
+		waitpid(parent, &mini->last_command, 0);
 	return (1);
 }
