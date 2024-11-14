@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/11/13 18:59:41 by cravegli         ###   ########.fr       */
+/*   Updated: 2024/11/14 17:35:46 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../../libft/libft.h"
 # include <fcntl.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 
 typedef struct mini
 {
@@ -48,4 +49,6 @@ char	*get_env_val(char *var, char **env);
 int		set_env_val(char *var, char **env);
 char	**ft_add_env_val(char	*var, char **env);
 char	**ft_del_env_val(char *var, char **env);
+int		ft_is_dir(char *file);
+int		ft_is_reg_file(char *file);
 #endif
