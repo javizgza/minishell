@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:56 by cravegli          #+#    #+#             */
-/*   Updated: 2024/11/14 18:34:40 by cravegli         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:16:53 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_exit(t_mini *mini)
 	int	e;
 
 	e = 0;
-	printf("salir\n");
+	//printf("salir\n");
 	if (ft_nb_args(mini->command) < 2)
 	{
 		rl_clear_history();

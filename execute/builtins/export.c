@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:53:54 by cravegli          #+#    #+#             */
-/*   Updated: 2024/11/13 18:21:25 by cravegli         ###   ########.fr       */
+/*   Updated: 2024/11/18 14:08:26 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,37 @@ int	ft_print_env(char	**env)
 	return (1);
 }
 
-int	ft_export(t_mini *mini)
+int	ft_export_cont(t_mini *mini)
 {
 	char	**vars;
 	char	*value;
+	int		i;
 
+	i = 0;
+	while (i < ft_nb_args(mini->command))
+	{
+		if (ft_strchr(mini->command[i], '='))
+		{
+			vars = ft_split(mini->command[i], '=');
+			value = get_env_val(vars[0], mini->env);
+			if (!value)
+				mini->env = ft_add_env_val(mini->command[i], mini->env);
+			else
+				set_env_val(ft_strdup(mini->command[i]), mini->env);
+			ft_clean_array(vars);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	ft_export(t_mini *mini)
+{
 	if (ft_nb_args(mini->command) < 2)
 	{
-		mini->last_command = 1;
+		mini->last_command = 0;
 		return (ft_print_env(mini->env));
 	}
-	if (ft_strchr(mini->command[1], '='))
-	{
-		vars = ft_split(mini->command[1], '=');
-		value = get_env_val(vars[0], mini->env);
-		if (!value)
-		{
-			ft_clean_array(vars);
-			mini->last_command = 1;
-			mini->env = ft_add_env_val(mini->command[1], mini->env);
-			return (1);
-		}
-		set_env_val(ft_strdup(mini->command[1]), mini->env);
-		ft_clean_array(vars);
-	}
-	mini->last_command = 1;
-	return (1);
+	mini->last_command = 0;
+	return (ft_export_cont(mini));
 }

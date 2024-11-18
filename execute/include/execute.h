@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/11/14 17:35:46 by cravegli         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:50:00 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include <termios.h>
 
 typedef struct mini
 {

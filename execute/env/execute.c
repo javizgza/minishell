@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/14 18:51:22 by cravegli         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:16:44 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_execute_command(char *command, char *envp[])
 	cmd = ft_create_cmd(path, aux[0]);
 	if (!cmd)
 	{
-		printf("error\n");
+		//printf("error\n");
 		ft_clean_array(aux);
 		ft_clean_array(path);
 		return (1);
@@ -73,6 +73,6 @@ int	ft_execute(t_mini *mini)
 	}
 	waitpid(parent, &mini->last_command, 0);
 	mini->last_command /= 256;
-	printf("command: %i\n", mini->last_command);
+	//printf("command: %i\n", mini->last_command);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/11/13 20:52:32 by cravegli         ###   ########.fr       */
+/*   Updated: 2024/11/18 12:42:49 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,13 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		mini.c_line = readline("minishell> ");
-		if (!ft_shell(&mini))
-			return (0);
-		add_history(mini.c_line);
+		if (!ft_is_equal(mini.c_line, ""))
+		{
+			if (!ft_shell(&mini))
+				return (0);
+			add_history(mini.c_line);
+		}
+		free(mini.c_line);
 	}
 	return (0);
 }
