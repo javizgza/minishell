@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:41:49 by cravegli          #+#    #+#             */
-/*   Updated: 2024/11/18 12:24:13 by cravegli         ###   ########.fr       */
+/*   Updated: 2024/11/27 12:14:51 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,16 @@ int	ft_cd(t_mini *mini)
 	else
 		old_pwd = getcwd(NULL, 0);
 	if (ft_nb_args(mini->command) < 2 && get_env_val("HOME", mini->env))
-	{
 		value = get_env_val("HOME", mini->env);
-		ft_cd_aux("PWD=", value, mini->env);
-	}
 	else if (ft_is_dir(mini->command[1]) == 0)
-	{
 		value = mini->command[1];
-		chdir(value);
-		value = getcwd(NULL, 0);
-		ft_cd_aux("PWD=", value, mini->env);
-		free(value);
-	}
 	else
 		return (ft_cd_error(mini, old_pwd));
+	chdir(value);
+	value = getcwd(NULL, 0);
+	ft_cd_aux("PWD=", value, mini->env);
+	free(value);
 	ft_cd_aux("OLDPWD=", old_pwd, mini->env);
 	free(old_pwd);
 	return (1);
 }
-
