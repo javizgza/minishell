@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:01:47 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/12 14:55:10 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/01/04 19:23:27 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,62 @@
 
 void    parse_redir(char *input)
 {
-    char        *actual_pos;
-    t_commands  *actual_command;
-    
-    actual_pos = input;
+    t_token *tokens;
+    t_commands *actual_command;
+    size_t i = 0;
+
     actual_command = malloc(sizeof(t_commands));
-    while (true)
+    if (!actual_command)
+        return;
+    memset(actual_command, 0, sizeof(t_commands)); // Initialize the structure
+    actual_command->args = malloc(sizeof(char *) * 1024); // Allocate memory for args
+    if (!actual_command->args)
     {
-        while (*actual_pos != '<' && *actual_pos != '>' && *actual_pos)
-            actual_pos++;
-        t_tokens token_type = ft_define_tokens(&actual_pos);
-        if (token_type == END)
-            break;
-        if (token_type == BIGGER || token_type == SMALLER ||
-                token_type == BIGGERX2 || token_type == SMALLERX2 ||
-                    token_type == ENV_VAR || token_type == RECENT || token_type == PIPE)
-            ft_set_up_redir(actual_command, token_type, &actual_pos);
-        // if (token_type == PIPE || token_type == RECENT || token_type == ENV_VAR)
-        // {
-        //     ft_set_up_redir2(actual_command, token_type, &actual_pos);
-        // }
+        free(actual_command);
+        return;
     }
-    printf("Output file: %s\n", actual_command->output ? actual_command->output : "NULL");
-    printf("Append file: %s\n", actual_command->output_append ? actual_command->output_append : "NULL");
-    printf("Input file: %s\n", actual_command->input ? actual_command->input : "NULL");
-    printf("Input delimiter file: %s\n", actual_command->input_delim ? actual_command->input_delim : "NULL");
-    printf("Env var: %s\n", actual_command->env_var ? actual_command->env_var : "NULL");
-    printf("Pipes: %s\n", actual_command->pipes ? actual_command->pipes : "NULL");
-    printf("Recent: %s\n", actual_command->recent ? actual_command->recent : "NULL");
+    actual_command->args_num = 0;
+
+    tokens = lexer(input);
+    if (!tokens)
+    {
+        free(actual_command->args);
+        free(actual_command);
+        return;
+    }
+    while (tokens[i].type != END)
+    {
+        ft_set_up_redir(actual_command, tokens[i].type, &tokens[i].value);
+        i++;
+    }
+    actual_command->args[actual_command->args_num] = NULL; // Null-terminate the args array
+    execute_commands(actual_command);
+
+    free(tokens);
+    free(actual_command->args);
+    free(actual_command);
+}
+
+void test_parsing()
+{
+    char *test_cases[] = {
+        "> file1 >> file2 < file3 << file4 | grep something $VAR $? p",
+        "command1 arg1 arg2 > output_file",
+        "command2 < input_file | command3 >> append_file",
+        "invalid_token > file",
+        "command4 | command5 $VAR",
+        NULL
+    };
+
+    for (int i = 0; test_cases[i] != NULL; i++)
+    {
+        printf("Test case %d: %s\n", i + 1, test_cases[i]);
+        parse_redir(test_cases[i]);
+        printf("\n");
+    }
 }
 
 int main() {
-    char input[] = "> file1 >> file2 < file3 << file4 | grep something $VAR $? p"; 
-    parse_redir(input);
+    test_parsing();
     return 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/12 14:39:20 by jazarago         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:16:08 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_strndup(const char *s, size_t n);
 t_tokens    ft_define_tokens(char **token);
 t_token ft_define_token_struct(char **token);
 int 		ft_skip_white_spaces(char **str);
-void    ft_set_up_redir2(t_commands *command, t_tokens type, char **token);
-t_token ft_define_token_struct2(char **token);
+t_token *lexer(char *input);
+void    execute_commands(t_commands *command);
 
 #endif
