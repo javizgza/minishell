@@ -6,12 +6,11 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/11/13 17:10:47 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:07:58 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
-
 
 int	ft_is_equal(char *a, char *b)
 {

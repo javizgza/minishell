@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/11/18 12:50:00 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:56:52 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ typedef struct mini
 	char	**env;
 	char	**command;
 	char	*c_line;
+	char	**args;
+	int		args_num;
+	char	*input;
+	char	*output;
+	char	*output_append;
+	char	*input_delim;
+	char	*env_var;
+	char	*pipes;
+	char	*recent;
 }	t_mini;
 
 void	ft_clean_array(char **matrix);

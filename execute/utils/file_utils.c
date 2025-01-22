@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:34:04 by cravegli          #+#    #+#             */
-/*   Updated: 2024/11/14 17:34:48 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:08:45 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	ft_is_dir(char *file)
 	if (S_ISDIR(stat_file.st_mode))
 		return (0);
 	return (1);
-
 }
 
 int	ft_is_reg_file(char *file)

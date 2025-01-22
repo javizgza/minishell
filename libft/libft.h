@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:43:41 by cravegli          #+#    #+#             */
-/*   Updated: 2024/06/18 02:02:49 by carlos           ###   ########.fr       */
+/*   Updated: 2025/01/22 14:09:17 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int			ft_toupper(int c);
 
 char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
-long			ft_atoi(const char *str);
+long		ft_atoi(const char *str);
 
 void		*ft_calloc(size_t count, size_t size);
 
