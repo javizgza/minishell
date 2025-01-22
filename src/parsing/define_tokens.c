@@ -6,7 +6,7 @@
 /*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/01/04 19:21:49 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/01/21 15:27:12 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,16 @@ t_tokens    ft_define_tokens(char **token)
     return (ERROR);
 }
 
+char *get_env_value(char *var)
+{
+    char *value = getenv(var);
+    return value ? value : "";
+}
+
 t_token ft_define_token_struct(char **token) 
 {
     t_token new_token;
+    char *start = *token;
 
     new_token.value = *token;
     while (ft_skip_white_spaces(token))
@@ -101,7 +108,16 @@ t_token ft_define_token_struct(char **token)
             (*token)++;
         } 
         else 
+        {
+            char *var_start = *token;
+            while (**token && !ft_skip_white_spaces(token) && **token != '>' && **token != '<' && **token != '|' && **token != '$')
+                (*token)++;
+            char var_name[256];
+            strncpy(var_name, var_start, *token - var_start);
+            var_name[*token - var_start] = '\0';
+            new_token.value = get_env_value(var_name);
             new_token.type = ENV_VAR;
+        }
     }
     else 
     {

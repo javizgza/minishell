@@ -6,7 +6,7 @@
 /*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:01:47 by codespace         #+#    #+#             */
-/*   Updated: 2025/01/04 19:23:27 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/01/21 15:27:12 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void test_parsing()
         "command1 arg1 arg2 > output_file",
         "command2 < input_file | command3 >> append_file",
         "invalid_token > file",
-        "command4 | command5 $VAR",
+        "command4 | command5 $HOME",
         NULL
     };
 
