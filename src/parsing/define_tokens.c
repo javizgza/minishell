@@ -6,13 +6,13 @@
 /*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/01/21 15:27:12 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/01/22 17:59:50 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-t_tokens    ft_define_tokens(char **token)
+t_tokens ft_define_tokens(char **token)
 {
     ft_skip_white_spaces(token);
     if (**token == '\0')

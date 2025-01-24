@@ -6,13 +6,13 @@
 /*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:01:47 by codespace         #+#    #+#             */
-/*   Updated: 2025/01/21 15:27:12 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/01/22 18:12:11 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void    parse_redir(char *input)
+void parse_redir(char *input)
 {
     t_token *tokens;
     t_commands *actual_command;
@@ -57,15 +57,17 @@ void test_parsing()
         "command1 arg1 arg2 > output_file",
         "command2 < input_file | command3 >> append_file",
         "invalid_token > file",
-        "command4 | command5 $HOME",
+        "command4 | command5 $PATH",
         NULL
     };
 
-    for (int i = 0; test_cases[i] != NULL; i++)
+    int i = 0;
+    while (test_cases[i] != NULL)
     {
         printf("Test case %d: %s\n", i + 1, test_cases[i]);
         parse_redir(test_cases[i]);
         printf("\n");
+        i++;
     }
 }
 
