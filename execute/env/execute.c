@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/01/22 13:50:39 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:27:02 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,47 @@ int	ft_error_exe(int last_command, char *c_line)
 	return (0);
 }
 
-int	ft_execute(t_mini *mini)
+int	ft_check_redir(t_mini *mini)
+{
+	int	i;
+
+	i = 0;
+	while (mini->c_line[i])
+	{
+		if (mini->c_line[i] == '<')
+		{
+			if (mini->c_line[i + 1] == '<')
+				ft_heredoc(mini);
+			else
+				ft_input_re(mini);
+			i++;
+		}
+		if (mini->c_line[i] == '>')
+		{
+			if (mini->c_line[i + 1] == '>')
+				ft_output_re_t(mini);
+			else
+				ft_output_re(mini);
+			i++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	ft_execute(t_mini *mini, char *line)
 {
 	pid_t	parent;
 
 	parent = fork();
 	if (!parent)
-		exit(ft_execute_command(mini->c_line, mini->env));
+	{
+		ft_check_redir(mini);
+		exit(ft_execute_command(line, mini->env));
+	}
 	waitpid(parent, &mini->last_command, 0);
 	mini->last_command /= 256;
 	ft_error_exe(mini->last_command, mini->c_line);
+	ft_clean_array(mini->command);
 	return (1);
 }

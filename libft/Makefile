@@ -6,7 +6,7 @@
 #    By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/20 11:40:28 by Carlos            #+#    #+#              #
-#    Updated: 2024/06/06 12:00:03 by cravegli         ###   ########.fr        #
+#    Updated: 2025/01/24 14:33:51 by cravegli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS			=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 							ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c \
 							ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c \
 							ft_tolower.c ft_toupper.c ft_printf.c ft_printf_aux.c ft_printf_utils.c
+							ft_get_next_line_bonus.c
 
 OBJS			= $(SRCS:.c=.o)
 

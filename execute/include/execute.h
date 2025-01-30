@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/01/22 13:56:52 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:25:24 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct mini
 	char	*env_var;
 	char	*pipes;
 	char	*recent;
+	int		pipe[2];
 }	t_mini;
 
 void	ft_clean_array(char **matrix);
@@ -51,7 +52,7 @@ int		ft_exit(t_mini *mini);
 int		ft_cd(t_mini *mini);
 int		ft_export(t_mini *mini);
 int		ft_nb_args(char **args);
-int		ft_execute(t_mini *mini);
+int		ft_execute(t_mini *mini, char *line);
 int		ft_env(t_mini *mini);
 int		ft_unset(t_mini *mini);
 int		ft_load_env(t_mini *mini, char**env);
@@ -61,4 +62,11 @@ char	**ft_add_env_val(char	*var, char **env);
 char	**ft_del_env_val(char *var, char **env);
 int		ft_is_dir(char *file);
 int		ft_is_reg_file(char *file);
+
+int		ft_input_re(t_mini *mini);
+int		ft_output_re(t_mini *mini);
+int		ft_output_re_t(t_mini *mini);
+int		ft_heredoc(t_mini *mini);
+int		ft_execute_command(char *command, char *envp[]);
+int		ft_mini_pipe(t_mini *mini);
 #endif
