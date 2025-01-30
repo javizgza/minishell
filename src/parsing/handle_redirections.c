@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:01:47 by codespace         #+#    #+#             */
-/*   Updated: 2025/01/04 19:23:27 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/01/30 13:45:32 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void    parse_redir(char *input)
         ft_set_up_redir(actual_command, tokens[i].type, &tokens[i].value);
         i++;
     }
-    actual_command->args[actual_command->args_num] = NULL; // Null-terminate the args array
+    actual_command->args[actual_command->args_num] = NULL;
     execute_commands(actual_command);
 
     free(tokens);
@@ -53,11 +53,7 @@ void    parse_redir(char *input)
 void test_parsing()
 {
     char *test_cases[] = {
-        "> file1 >> file2 < file3 << file4 | grep something $VAR $? p",
-        "command1 arg1 arg2 > output_file",
-        "command2 < input_file | command3 >> append_file",
-        "invalid_token > file",
-        "command4 | command5 $VAR",
+        "ls -l > file1 >> file2 < file3 << file4 | grep something $VAR $? p",
         NULL
     };
 
@@ -69,7 +65,7 @@ void test_parsing()
     }
 }
 
-int main() {
+/* int main() {
     test_parsing();
     return 0;
-}
+} */
