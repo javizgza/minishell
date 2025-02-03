@@ -3,54 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 16:40:24 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/05/19 17:51:37 by cagonza2         ###   ########.fr       */
+/*   Created: 2023/09/14 12:10:40 by cravegli          #+#    #+#             */
+/*   Updated: 2023/09/25 16:43:17 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_pos(const char *str, const char *to_find, size_t pos)
-{
-	char	find_lst;
-	size_t	i;
-
-	find_lst = to_find[ft_strlen(to_find) - 1];
-	i = pos;
-	while (find_lst != str[i])
-		i += 1;
-	if (ft_strlen(to_find) > 1 && str[i - 1] != to_find[ft_strlen(to_find) - 2])
-		return (ft_strlen(str) - 1);
-	return (i);
-}
-
-char	*ft_strnstr(const char *str, const char *to_find, size_t size)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
 	size_t	j;
 
 	i = 0;
-	if ((!str || !to_find) && size == 0)
-		return (NULL);
-	if (!to_find[i] || to_find == str)
-		return ((char *)str);
-	if (size <= 0)
-		size = ft_strlen(str) + size;
-	while (str[i])
+	if (ft_strlen(needle) == 0)
+		return ((char *) haystack);
+	while (haystack[i] && i < len)
 	{
 		j = 0;
-		while (str[i + j] && str[i + j] == to_find[j])
-		{
-			if (to_find[j + 1] == '\0')
-			{
-				if (ft_pos(str, to_find, i) < size)
-					return ((char *)&str[i]);
-			}
-			j += 1;
-		}
-		i += 1;
+		while (haystack[i + j] && needle[j]
+			&& (i + j) < len && haystack[i + j] == needle[j])
+			j++;
+		if (!needle[j])
+			return ((char *)(haystack + i));
+		i++;
 	}
-	return (0);
+	return (NULL);
 }

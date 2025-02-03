@@ -3,65 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 16:13:50 by cagonza2          #+#    #+#             */
-/*   Updated: 2023/10/04 19:23:29 by cagonza2         ###   ########.fr       */
+/*   Created: 2023/09/14 13:03:14 by cravegli          #+#    #+#             */
+/*   Updated: 2024/06/18 02:02:25 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-static int	ft_check_space(char first)
+long	ft_atoi(const char *str)
 {
-	if (first == '\n')
-		return (1);
-	else if (first == '\t')
-		return (1);
-	else if (first == '\v')
-		return (1);
-	else if (first == '\f')
-		return (1);
-	else if (first == '\r')
-		return (1);
-	else if (first == ' ')
-		return (1);
-	return (0);
-}
+	long	r;
+	long	s;
 
-static int	ft_part(const char *str, int num, int sig, int i)
-{
-	while (str[i])
+	r = 0;
+	s = 1;
+	while ((*str > 8 && *str < 14) || *str == ' ')
+		str++;
+	if (*str == '+' || *str == '-')
 	{
-		if (ft_check_space(str[i]) == 0)
-			break ;
-		i += 1;
+		if (*str == '-')
+			s = -s;
+		str++;
 	}
-	if (str[i] == '-')
+	while (*str >= '0' && *str <= '9')
 	{
-		sig *= -1;
-		i += 1;
+		r *= 10;
+		r += (char)*str - '0';
+		str++;
 	}
-	else if (str[i] == '+')
-		i += 1;
-	while (str[i])
-	{
-		if (str[i] >= 48 && str[i] <= 57)
-			num = (str[i] - '0') + (num * 10);
-		else
-			break ;
-		i += 1;
-	}
-	return (num * sig);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	num;
-	int	sig;
-	int	i;
-
-	num = 0;
-	sig = 1;
-	i = 0;
-	return (ft_part(str, num, sig, i));
+	r *= s;
+	return (r);
 }

@@ -1,79 +1,69 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa2.c                                         :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 19:04:53 by cagonza2          #+#    #+#             */
-/*   Updated: 2023/10/04 19:24:51 by cagonza2         ###   ########.fr       */
+/*   Created: 2023/09/21 12:46:23 by cravegli          #+#    #+#             */
+/*   Updated: 2023/09/27 18:32:12 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_digit(int n)
+int	ft_intsize(long int n)
 {
-	int	i;
+	int	s;
 
-	i = 0;
+	s = 0;
 	if (n < 0)
 	{
-		i += 1;
-		n *= -1;
+		n = -n;
+		s++;
 	}
-	else if (n == 0)
-		return (1);
+	if (n == 0)
+		s++;
 	while (n > 0)
 	{
-		i += 1;
-		n /= 10;
+		n = n / 10;
+		s++;
 	}
-	return (i);
+	return (s);
 }
 
-static char	*ft_min(void)
+char	*fill_str(char *c, long int n, int s)
 {
-	unsigned int	min;
-	int				digit;
-	char			*num;
-
-	min = 2147483648;
-	digit = 11;
-	num = (char *)malloc(sizeof(char) * (digit + 1));
-	num[0] = '-';
-	while (min > 0)
+	c[s] = 0;
+	s--;
+	if (n == 0)
+		c[0] = '0';
+	else
 	{
-		num[--digit] = (min % 10) + '0';
-		min /= 10;
+		if (n < 0)
+		{
+			c[0] = '-';
+			n = -n;
+		}
+		while (n > 0)
+		{
+			c[s] = (n % 10) + '0';
+			n = n / 10;
+			s--;
+		}
 	}
-	num[11] = '\0';
-	return (num);
+	return (c);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*num;
-	int		digit;
+	int			s;
+	char		*c;
 
-	if (n == -2147483648)
-		return (ft_min());
-	digit = ft_digit(n);
-	num = (char *)malloc(sizeof(char) * (digit + 1));
-	if (!num)
+	s = ft_intsize(n);
+	c = (char *)malloc((s + 1) * sizeof(char));
+	if (!c)
 		return (NULL);
-	else if (n == 0)
-		num[0] = '0';
-	else if (n < 0)
-	{
-		num[0] = '-';
-		n = -n;
-	}
-	num[digit] = '\0';
-	while (n > 0)
-	{
-		num[--digit] = (n % 10) + '0';
-		n /= 10;
-	}
-	return (num);
+	c = fill_str(c, n, s);
+	return (c);
 }
