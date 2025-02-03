@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*  ft_strrchr.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/23 18:59:00 by cagonza2          #+#    #+#             */
-/*   Updated: 2023/10/08 12:37:46 by cagonza2         ###   ########.fr       */
+/*   Created: 2023/09/13 14:34:39 by cravegli          #+#    #+#             */
+/*   Updated: 2023/09/25 17:49:06 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-char	*ft_strrchr(char const *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
-	int	last;
+	unsigned char	p;
+	int				size;
 
-	i = 0;
-	last = ft_strlen(s);
-	while (s[i])
+	p = (unsigned char)c;
+	size = ft_strlen(s);
+	while (size >= 0)
 	{
-		if (s[i] == (char)c)
-			last = i;
-		i += 1;
+		if (s[size] == p)
+			return ((char *)(s + size));
+		size--;
 	}
-	if (s[i] == (char)c)
-		return ((char *)&s[last]);
-	if (last != ft_strlen(s) && s[last] != '\0')
-		return ((char *)&s[last]);
 	return (NULL);
 }

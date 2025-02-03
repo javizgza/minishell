@@ -3,49 +3,85 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 12:06:28 by cagonza2          #+#    #+#             */
-/*   Updated: 2023/10/04 19:30:42 by cagonza2         ###   ########.fr       */
+/*   Created: 2023/09/15 10:39:42 by cravegli          #+#    #+#             */
+/*   Updated: 2023/09/27 16:01:31 by Carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	equal(char const *s1, char c)
+int	ft_countstart(char const *s1, char const *set)
 {
 	int	i;
+	int	j;
+	int	res;
+	int	o;
 
 	i = 0;
-	while (s1[i])
-		if (s1[i++] == c)
-			return (1);
-	return (0);
+	j = 0;
+	o = 0;
+	res = 0;
+	while (s1[i] && o == 0)
+	{
+		o = 1;
+		while (set[j] && o == 1)
+		{
+			if (set[j] == s1[i])
+			{
+				res++;
+				o = 0;
+			}
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (res);
+}
+
+int	ft_countend(char const *s1, char const *set)
+{
+	int	i;
+	int	j;
+	int	res;
+	int	o;
+
+	i = ft_strlen(s1) - 1;
+	j = 0;
+	o = 0;
+	res = 0;
+	while (i > 0 && o == 0)
+	{
+		o = 1;
+		while (set[j] && o == 1)
+		{
+			if (set[j] == s1[i])
+			{
+				res++;
+				o = 0;
+			}
+			j++;
+		}
+		j = 0;
+		i--;
+	}
+	return (res);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		i;
-	int		k;
-	int		size;
-	char	*result;
+	char	*r;
+	int		s;
+	int		e;
+	int		t;
 
-	i = 0;
-	k = 0;
-	if (!s1)
-		return (NULL);
-	size = ft_strlen(s1);
-	while (equal(set, s1[i]) && s1[i])
-		i += 1;
-	while (equal(set, s1[size - 1]) && (size - 1))
-		size -= 1;
-	if (size < i)
-		size = i;
-	result = malloc(size - i + 1);
-	if (!result)
-		return (NULL);
-	while (i < size)
-		result[k++] = s1[i++];
-	result[k] = '\0';
-	return (result);
+	s = ft_countstart(s1, set);
+	if (s == ft_strlen(s1))
+		return (ft_strdup(""));
+	e = ft_countend(s1, set);
+	t = s + e;
+	r = ft_substr(s1, s, ft_strlen(s1) - t);
+	return (r);
 }

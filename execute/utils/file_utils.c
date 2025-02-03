@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   file_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/26 12:05:55 by cravegli          #+#    #+#             */
-/*   Updated: 2023/09/26 12:09:27 by cravegli         ###   ########.fr       */
+/*   Created: 2024/11/14 17:34:04 by cravegli          #+#    #+#             */
+/*   Updated: 2025/01/22 14:08:45 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/execute.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_is_dir(char *file)
 {
-	write(fd, s, ft_strlen(s));
+	struct stat	stat_file;
+
+	stat(file, &stat_file);
+	if (S_ISDIR(stat_file.st_mode))
+		return (0);
+	return (1);
+}
+
+int	ft_is_reg_file(char *file)
+{
+	struct stat	stat_file;
+
+	stat(file, &stat_file);
+	if (S_ISREG(stat_file.st_mode))
+		return (0);
+	return (1);
 }

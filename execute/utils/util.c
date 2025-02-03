@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/16 17:48:02 by cagonza2         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:07:58 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
-
 
 int	ft_is_equal(char *a, char *b)
 {
@@ -24,7 +23,7 @@ int	ft_is_equal(char *a, char *b)
 	{
 		if (a[i] != b[i])
 			return (0);
-		i += 1;
+		i ++;
 	}
 	return (1);
 }
@@ -35,7 +34,7 @@ int	ft_nb_args(char **args)
 
 	size = 0;
 	while (args[size])
-		size += 1;
+		size ++;
 	return (size);
 }
 
@@ -47,7 +46,7 @@ void	ft_clean_array(char **matrix)
 	while (matrix[i])
 	{
 		free(matrix[i]);
-		i += 1;
+		i ++;
 	}
 	free(matrix);
 }
@@ -64,23 +63,30 @@ void	ft_error(char *s)
 		while (s[i])
 		{
 			write(2, &s[i], 1);
-			i += 1;
+			i ++;
 		}
 		write(2, "\n", 1);
 	}
-	exit(1);
+	exit(2);
 }
 
-int	ft_load_env(t_List *l, char **env)
+int	ft_load_env(t_mini *mini, char**env)
 {
 	int	i;
 
+	mini->env = ft_calloc(sizeof(char *), ft_nb_args(env) + 1);
+	if (!mini->env)
+		return (0);
 	i = 0;
 	while (env[i])
 	{
-		if (!ft_add_node(l, env[i]))
+		mini->env[i] = ft_strdup(env[i]);
+		if (!mini->env[i])
+		{
+			ft_clean_array(mini->env);
 			return (0);
-		i += 1;
+		}
+		i++;
 	}
 	return (1);
 }

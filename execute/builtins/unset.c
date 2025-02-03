@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Carlos <Carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 10:57:18 by cravegli          #+#    #+#             */
-/*   Updated: 2023/09/22 13:52:42 by Carlos           ###   ########.fr       */
+/*   Created: 2024/11/13 18:33:15 by cravegli          #+#    #+#             */
+/*   Updated: 2024/11/18 12:45:22 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "../include/execute.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_unset(t_mini *mini)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] && s2[i] && i < n)
+	i = 1;
+	while (mini->command[i])
+	{
+		if (get_env_val(mini->command[i], mini->env))
+			mini->env = ft_del_env_val(mini->command[i], mini->env);
 		i++;
-	if (s1[i] != s2[i] && i != n)
-		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	return (0);
+	}
+	mini->last_command = 0;
+	return (1);
 }

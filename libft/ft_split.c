@@ -3,66 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cagonza2 <cagonza2@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 19:58:00 by cagonza2          #+#    #+#             */
-/*   Updated: 2024/09/11 17:32:36 by cagonza2         ###   ########.fr       */
+/*   Created: 2023/09/15 11:19:29 by cravegli          #+#    #+#             */
+/*   Updated: 2023/10/02 13:09:14 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_allocate(char **result, char const *s, char c)
+char	**ft_memres(char const *s, char c)
 {
-	char const	*aux;
+	int		count;
+	int		i;
+	char	**res;
 
-	aux = s;
-	while (*aux)
+	count = 0;
+	i = 0;
+	while (s[i])
 	{
-		while (*s == c)
-			s += 1;
-		aux = s;
-		while (*aux && *aux != c)
-			aux += 1;
-		if (*aux == c || aux > s)
-		{
-			*result = ft_substr(s, 0, aux - s);
-			s = aux;
-			result += 1;
-		}
+		if (s[i] != c && ((s[i + 1] == c) || s[i + 1] == 0))
+			count++;
+		i++;
 	}
-	*result = NULL;
+	res = (char **)ft_calloc(count + 1, sizeof(char *));
+	return (res);
 }
 
-static int	ft_speclen(char const *str, char c)
+char	**ft_fillstr(char	**res, char const *s, int *d, int c)
+{
+	res[c] = ft_substr(s, d[0], d[1] - d[0]);
+	return (res);
+}
+
+void	*ft_freesplit(char **res, int c)
 {
 	int	i;
-	int	counter;
 
 	i = 0;
-	counter = 0;
-	while (i < ft_strlen(str))
+	while (i <= c)
 	{
-		if (str[i] != c)
-			counter += 1;
-		while (str[i] != c && str[i])
-			i += 1;
-		i += 1;
+		free(res[i]);
+		i++;
 	}
-	return (counter);
+	free(res);
+	return (NULL);
+}
+
+char	**ft_fillsplit(char **res, char const *s, char c)
+{
+	int	i;
+	int	d[2];
+	int	cn;
+
+	i = 0;
+	d[0] = 0;
+	cn = 0;
+	while (s[i])
+	{
+		while (s[d[0]] == c)
+			d[0]++;
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == 0))
+		{
+			d[1] = i + 1;
+			res = ft_fillstr(res, s, d, cn);
+			d[0] = d[1] + 1;
+			if (!res[cn])
+				return (ft_freesplit(res, cn));
+			cn ++;
+		}
+		i++;
+	}
+	return (res);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	int		size;
+	char	**res;
 
-	if (!s)
-		return (NULL);
-	size = ft_speclen(s, c);
-	result = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!result)
-		return (NULL);
-	ft_allocate(result, s, c);
-	return (result);
+	res = ft_memres(s, c);
+	if (!res)
+		return (0);
+	res = ft_fillsplit(res, s, c);
+	return (res);
 }
