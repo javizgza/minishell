@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/02/03 15:43:54 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:39:48 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_output_re_t(t_token *tokens)
 	return (0);
 }
 
-int	ft_mini_pipe(t_token *tokens, t_mini *mini)
+int	ft_mini_pipe(t_mini *mini)
 {
 	int		pip[2];
 	pid_t	parent;
@@ -59,7 +59,7 @@ int	ft_mini_pipe(t_token *tokens, t_mini *mini)
 		if (dup2(pip[1], 1) == -1)
 			return (1);
 		close(pip[0]);
-		return (ft_execute_command(tokens->value, mini->env));
+		return (ft_shell(mini));
 	}
 	waitpid(parent, 0, 0);
 	if (dup2(pip[0], 0) == -1)
