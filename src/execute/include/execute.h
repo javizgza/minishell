@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/01/30 14:25:24 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:47:03 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "../../libft/libft.h"
+# include "../../parsing/parsing.h"
+# include "../../../libft/libft.h"
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
@@ -37,6 +38,7 @@ typedef struct mini
 	char	*pipes;
 	char	*recent;
 	int		pipe[2];
+	t_token	*tokens;
 }	t_mini;
 
 void	ft_clean_array(char **matrix);
@@ -63,10 +65,10 @@ char	**ft_del_env_val(char *var, char **env);
 int		ft_is_dir(char *file);
 int		ft_is_reg_file(char *file);
 
-int		ft_input_re(t_mini *mini);
-int		ft_output_re(t_mini *mini);
-int		ft_output_re_t(t_mini *mini);
-int		ft_heredoc(t_mini *mini);
+int		ft_input_re(t_token *token);
+int		ft_output_re(t_token *token);
+int		ft_output_re_t(t_token *token);
+int		ft_heredoc(t_mini *mini, t_token *token);
 int		ft_execute_command(char *command, char *envp[]);
-int		ft_mini_pipe(t_mini *mini);
+int		ft_mini_pipe(t_token *token, t_mini *mini);
 #endif

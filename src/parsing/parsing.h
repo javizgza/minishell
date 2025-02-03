@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2024/12/19 11:16:08 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/02/03 15:54:09 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <stdbool.h> 
 # include <stdlib.h>
+# include "../../libft/libft.h"
 
 typedef enum s_tokens
 {
@@ -32,13 +33,14 @@ typedef enum s_tokens
 	RECENT,
 	END,
 	ERROR,
-}  t_tokens;
+}			t_tokens;
 
 typedef struct s_token
 {
-	t_tokens	type;
-	char		*value;
-}	t_token;
+	t_tokens			type;
+	char				*value;
+	struct s_token		*next;
+}				t_token;
 
 typedef struct s_commands
 {

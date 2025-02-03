@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/01/30 14:59:55 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:05:57 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ t_token *lexer(char *input)
         }
     }
     tokens[token_count].type = END; // Mark the end of tokens
-    return tokens;
+    return (tokens);
 }
 
-int main(void)
+/* int main(void)
 {
     char input[] = "echo hello | grep h > file.txt";
     t_token *tokens;
@@ -79,5 +79,5 @@ int main(void)
     
     free(tokens); // Free allocated memory
     return 0;
-}
+} */
 

@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:55:21 by cravegli          #+#    #+#             */
-/*   Updated: 2025/01/30 15:07:41 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:55:30 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,21 @@ int	ft_parent_heredoc(int heredoc[2], pid_t parent)
 	return (0);
 }
 
-int	ft_heredoc(t_mini *mini)
+int	ft_heredoc(t_mini *mini, t_token *tokens)
 {
 	int		heredoc[2];
 	pid_t	parent;
-	char	**aux;
-	int		i;
 
-	aux = ft_split(mini->c_line, ' ');
-	i = 0;
-	while (aux[i])
+	/* while (aux[i])
 	{
 		if (ft_is_equal(aux[i], "<<"))
-			mini->input_delim = aux[i + 1];
+			tokens->value = aux[i + 1];
 		i++;
-	}
+	} */
 	pipe(heredoc);
 	parent = fork();
 	if (!parent)
-		exit (ft_child_heredoc(heredoc[1], mini->input_delim, mini));
+		exit (ft_child_heredoc(heredoc[1], tokens->value, mini));
 	else
 		ft_parent_heredoc(heredoc, parent);
 	return (0);

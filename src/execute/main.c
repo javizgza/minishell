@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/01/30 14:26:23 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:51:19 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	ft_shell(t_mini *mini)
 	mini->command = ft_split(mini->c_line, ' ');
 	if (!ft_is_builtins(mini))
 	{
-		ft_execute(mini, mini->command[0]);
+		ft_clean_array(mini->command);
+		ft_execute(mini, mini->c_line);
 		return (1);
 	}
 	ft_clean_array(mini->command);

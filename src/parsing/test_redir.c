@@ -64,7 +64,7 @@ void    ft_set_up_redir(t_commands *command, t_tokens type, char **token)
         command->input_delim = ft_strdup(token_name.value);
 }
 
-// Función main para probar ft_set_up_redir
+/* // Función main para probar ft_set_up_redir
 int main() {
     char input[] = "> file1";
     char *current_position = input;
@@ -93,4 +93,4 @@ int main() {
     free(command.input_delim);
 
     return 0;
-}
+} */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2024/09/12 14:50:18 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/02/03 14:56:58 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*ft_strndup(const char *s, size_t n)
 	int		i;
 
 	size = ft_strlen(s) + 1;
+	(void) n;
 	result = (char *)malloc(size * sizeof(char));
 	if (!result)
 		return (NULL);
@@ -42,19 +43,4 @@ char	*ft_strndup(const char *s, size_t n)
 	}
 	result[i] = '\0';
 	return (result);
-}
-
-int	ft_strlen(char const *str)
-{
-	int	i;
-
-	i = 0;
-	while (*str && *str != '<' && *str != '>' && *str != '|' && *str != '$')
-	{
-		str++;
-		i++;	
-	}
-	if (*str == '<' || *str == '>')
-		i = i - 1;
-	return (i);
 }
