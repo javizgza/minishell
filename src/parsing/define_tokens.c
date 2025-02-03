@@ -6,7 +6,7 @@
 /*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/01/22 17:59:50 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/01/24 13:19:46 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,30 @@ t_token ft_define_token_struct(char **token)
             new_token.value = get_env_value(var_name);
             new_token.type = ENV_VAR;
         }
+    }
+    else if (**token == '\'') // single quote: literal content only, even if it doesn't close
+    {
+        (*token)++; 
+        // read until next single quote or string end
+        while (**token && **token != '\'')
+            (*token)++;
+        if (**token == '\'')
+            (*token)++;
+        // ...store that substring as literal in new_token.value, mark as COMMAND or ARG
+    }
+    else if (**token == '\"') // double quote: literal except for $
+    {
+        (*token)++;
+        // read until next double quote
+        while (**token && **token != '\"')
+        {
+            // if we see a '$', handle environment expansion
+            // otherwise treat as literal
+            (*token)++;
+        }
+        if (**token == '\"')
+            (*token)++;
+        // ...assign the parsed substring to new_token.value, mark as COMMAND or ARG
     }
     else 
     {
