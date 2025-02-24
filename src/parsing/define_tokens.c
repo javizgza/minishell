@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   define_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/01/04 19:21:49 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/02/24 13:48:28 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+char *ft_substr2(char *s, int start, int len) 
+{
+    char *substr = malloc(len + 1);
+    if (!substr)
+        return NULL;
+    ft_strncpy(substr, s + start, len);
+    printf("Len: %i\n", len);
+    substr[len] = '\0';
+    return substr;
+}
 
 t_tokens    ft_define_tokens(char **token)
 {
@@ -60,7 +71,7 @@ t_token ft_define_token_struct(char **token)
 {
     t_token new_token;
 
-    new_token.value = *token;
+    new_token.value = NULL;
     while (ft_skip_white_spaces(token))
         (*token)++;
     if (**token == '\0')
@@ -105,9 +116,16 @@ t_token ft_define_token_struct(char **token)
     }
     else 
     {
-        new_token.type = COMMAND;
-        while (**token && !ft_skip_white_spaces(token) && **token != '>' && **token != '<' && **token != '|' && **token != '$')
+        char *start = *token;
+        size_t len = 1;
+
+        while (**token && !ft_skip_white_spaces(token) && **token != '>' && **token != '<' && **token != '|' && **token != '$') 
+        {
             (*token)++;
+            len++;
+        }
+        new_token.value = ft_substr2(start, 0, len);
+        new_token.type = COMMAND;
     }
     printf("Token: %s, Type: %d\n", new_token.value, new_token.type);
     return (new_token);
