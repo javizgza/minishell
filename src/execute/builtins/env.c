@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 17:12:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/18 12:38:53 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:44:26 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_env(t_mini *mini)
 	i = 0;
 	if (ft_nb_args(mini->command) > 1)
 	{
-		printf("env: too many arguments\n");
+		ft_error("env: too many arguments\n");
 		mini->last_command = 2;
 		return (1);
 	}

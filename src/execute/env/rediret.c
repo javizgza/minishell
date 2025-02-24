@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/02/03 16:39:48 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:41:22 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int	ft_input_re(t_token *tokens)
 
 	input = open(tokens->value, O_RDONLY, 0);
 	if (input == -1)
-		ft_error("open error\n");
+	{
+		ft_error("bash: ");
+		ft_error(tokens->value);
+		ft_error(": No such file or directory\n");
+	}
 	if (dup2(input, 0) == -1)
 		ft_error("dup error\n");
 	return (0);
@@ -29,10 +33,7 @@ int	ft_output_re(t_token *tokens)
 	int		output;
 
 	output = open(tokens->value, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
-	if (output == -1)
-		ft_error("open error\n");
-	if (dup2(output, 1) == -1)
-		ft_error("dup error\n");
+	dup2(output, 1);
 	return (0);
 }
 
@@ -41,8 +42,7 @@ int	ft_output_re_t(t_token *tokens)
 	int		output;
 
 	output = open(tokens->value, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
-	if (dup2(output, 1) == -1)
-		ft_error("dup error\n");
+	dup2(output, 1);
 	return (0);
 }
 

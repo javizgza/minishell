@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/02/03 16:25:45 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:39:07 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ int	ft_execute_command(char *command, char *envp[])
 int	ft_error_exe(int last_command, char *c_line)
 {
 	if (last_command == 127)
-		printf("%s: command not found\n", c_line);
+	{
+		ft_error(c_line);
+		ft_error(": command not found\n");
+	}
 	return (0);
 }
 
