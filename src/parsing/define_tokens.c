@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/02/24 13:48:28 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:00:58 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,28 @@ t_tokens    ft_define_tokens(char **token)
 
 t_token ft_define_token_struct(char **token) 
 {
+    static int skip_file = 0;
     t_token new_token;
 
     new_token.value = NULL;
     while (ft_skip_white_spaces(token))
         (*token)++;
+
+    // Skip next token entirely if flagged
+    if (skip_file == 1)
+    {
+        skip_file = 0;
+        while (**token && !ft_white_spaces(**token)
+            && **token != '>' && **token != '<'
+            && **token != '|' && **token != '$')
+        {
+            (*token)++;
+        }
+        new_token.type = ERROR;
+        new_token.value = NULL;
+        return (new_token);
+    }
+
     if (**token == '\0')
         new_token.type = END;
     else if (**token == '>') 
@@ -86,6 +103,7 @@ t_token ft_define_token_struct(char **token)
         }
         else 
             new_token.type = BIGGER;
+        skip_file = 1;  // Next token is a file, so skip it
     }
     else if (**token == '<') 
     {
@@ -97,6 +115,7 @@ t_token ft_define_token_struct(char **token)
         } 
         else 
             new_token.type = SMALLER;
+        skip_file = 1;  // Next token is a file, so skip it
     }
     else if (**token == '|') 
     {

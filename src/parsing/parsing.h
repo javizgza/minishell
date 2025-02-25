@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/24 12:40:11 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:02:08 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int 		ft_skip_white_spaces(char **str);
 t_token *lexer(char *input);
 void    execute_commands(t_commands *command);
 char *ft_strncpy(char *dest, const char *src, size_t n);
+int ft_white_spaces(char c);
 
 #endif
