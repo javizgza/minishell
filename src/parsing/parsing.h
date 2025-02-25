@@ -6,7 +6,7 @@
 /*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/25 12:02:08 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/02/25 16:20:05 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef enum s_tokens
 	ARGUMENT,
 	ENV_VAR,
 	RECENT,
+	FILENAME, // <--- new token type
 	END,
 	ERROR,
 }			t_tokens;

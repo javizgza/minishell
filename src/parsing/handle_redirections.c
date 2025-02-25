@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirections.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:01:47 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/24 12:26:40 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:24:49 by javierzarag      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void parse_redir(char *input)
     free(tokens);
 }
 
-void test_parsing()
+/*void test_parsing()
 {
     char *test_cases[] = {
         "ls -l > file1 >> file2 < file3 << file4 | grep something $VAR $? p",
@@ -48,4 +48,4 @@ void test_parsing()
  int main() {
     test_parsing();
     return 0;
-}
+} */
