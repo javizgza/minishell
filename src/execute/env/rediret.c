@@ -3,47 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   rediret.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/02/26 02:08:35 by carlos           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:39:17 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
 
-int	ft_input_re(t_token tokens)
+int	ft_input_re(t_token tokens, t_mini *mini)
 {
-	int	input;
-
-	input = open(tokens.value, O_RDONLY, 0);
-	if (input == -1)
+	if (mini->input > 0)
+		close(mini->input);
+	mini->input = open(tokens.value, O_RDONLY, 0);
+	if (mini->input == -1)
 	{
 		ft_error("bash: ");
 		ft_error(tokens.value);
 		ft_error(": No such file or directory\n");
+		return (1);
 	}
-	if (dup2(input, 0) == -1)
+	if (dup2(mini->input, STDIN) == -1)
 		ft_error("dup error\n");
-	return (0);
+	return (1);
 }
 
-int	ft_output_re(t_token tokens)
+int	ft_output_re(t_token tokens, t_mini *mini)
 {
-	int		output;
-
-	output = open(tokens.value, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
-	dup2(output, 1);
-	return (0);
+	if (mini->output > 0)
+		close(mini->output);
+	mini->output = open(tokens.value, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
+	dup2(mini->output, STDOUT);
+	return (1);
 }
 
-int	ft_output_re_t(t_token tokens)
+int	ft_output_re_t(t_token tokens, t_mini *mini)
 {
-	int		output;
-
-	output = open(tokens.value, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
-	dup2(output, 1);
-	return (0);
+	if (mini->output > 0)
+		close(mini->output);
+	mini->output = open(tokens.value, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
+	dup2(mini->output, STDOUT);
+	return (1);
 }
 
 int	ft_mini_pipe(t_mini *mini)
@@ -56,13 +57,13 @@ int	ft_mini_pipe(t_mini *mini)
 	parent = fork();
 	if (!parent)
 	{
-		if (dup2(pip[1], 1) == -1)
+		if (dup2(pip[1], STDOUT) == -1)
 			return (1);
 		close(pip[0]);
 		exit (ft_shell(mini));
 	}
 	waitpid(parent, 0, 0);
-	if (dup2(pip[0], 0) == -1)
+	if (dup2(pip[0], STDIN) == -1)
 		return (1);
 	close(pip[1]);
 	return (0);

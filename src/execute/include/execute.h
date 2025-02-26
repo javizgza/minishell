@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/02/25 20:28:15 by carlos           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:35:38 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@
 # include <sys/stat.h>
 # include <termios.h>
 
+# define STDIN 0
+# define STDOUT 1
+# define STDERROR 2
+
 typedef struct mini
 {
 	int		last_command;
@@ -33,6 +37,8 @@ typedef struct mini
 	int		args_num;
 	int		input;
 	int		output;
+	int		in;
+	int		out;
 	char	*output_append;
 	char	*input_delim;
 	char	*env_var;
@@ -67,9 +73,9 @@ int		ft_is_dir(char *file);
 int		ft_is_reg_file(char *file);
 int		ft_shell(t_mini *mini);
 
-int		ft_input_re(t_token token);
-int		ft_output_re(t_token token);
-int		ft_output_re_t(t_token token);
+int		ft_input_re(t_token token, t_mini *mini);
+int		ft_output_re(t_token token, t_mini *mini);
+int		ft_output_re_t(t_token token, t_mini *mini);
 int		ft_heredoc(t_mini *mini, t_token token);
 int		ft_execute_command(char *command, char *envp[]);
 int		ft_mini_pipe(t_mini *mini);

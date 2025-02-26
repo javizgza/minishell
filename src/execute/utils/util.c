@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/02/25 21:02:37 by carlos           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:33:28 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_error(char *s)
 		i = 0;
 		while (s[i])
 		{
-			write(2, &s[i], 1);
+			write(STDERROR, &s[i], 1);
 			i ++;
 		}
 	}
