@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/25 18:00:45 by carlos           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:03:29 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,16 @@ typedef struct s_commands
 }	t_commands;
 
 /* FUNCTIONS */
-void ft_set_up_redir(t_commands *command, t_tokens type, char *token);
-int	ft_strlen(char const *str);
-char	*ft_strndup(const char *s, size_t n);
-t_tokens    ft_define_tokens(char **token);
-t_token ft_define_token_struct(char **token);
-int 		ft_skip_white_spaces(char **str);
-t_token *lexer(char *input);
-void    execute_commands(t_commands *command);
-char *ft_strncpy(char *dest, const char *src, size_t n);
-int ft_white_spaces(char c);
-void	ft_free_tokens(t_token *tokens);
+void		ft_set_up_redir(t_commands *command, t_tokens type, char *token);
+int			ft_strlen(char const *str);
+char		*ft_strndup(const char *s, size_t n);
+t_tokens	ft_define_tokens(char **token);
+t_token		ft_define_token_struct(char **token);
+int			ft_skip_white_spaces(char **str);
+t_token		*lexer(char *input);
+void		execute_commands(t_commands *command);
+char		*ft_strncpy(char *dest, const char *src, size_t n);
+int			ft_white_spaces(char c);
+void		ft_free_tokens(t_token *tokens);
 
 #endif

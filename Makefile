@@ -13,7 +13,7 @@ SRCS =  ./src/execute/main.c\
 		./src/execute/utils/util.c ./src/execute/utils/env_utils.c ./src/execute/utils/file_utils.c\
 		./src/execute/builtins/echo.c ./src/execute/builtins/pwd.c ./src/execute/builtins/env.c ./src/execute/builtins/cd.c ./src/execute/builtins/exit.c ./src/execute/builtins/export.c ./src/execute/builtins/unset.c\
 		./src/execute/env/enviroment.c ./src/execute/env/execute.c ./src/execute/env/rediret.c ./src/execute/env/heredoc.c\
-		./src/parsing/define_tokens.c ./src/parsing/execute_commands.c ./src/parsing/handle_redirections.c ./src/parsing/lexer.c ./src/parsing/parser_utils.c ./src/parsing/redirections.c
+		./src/parsing/define_tokens.c ./src/parsing/execute_commands.c ./src/parsing/lexer.c ./src/parsing/parser_utils.c ./src/parsing/redirections.c
 
 OBJTS = $(SRCS:.c=.o)
 

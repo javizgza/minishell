@@ -6,45 +6,46 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/26 12:36:53 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:01:51 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-char *ft_strncpy(char *dest, const char *src, size_t n) 
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-    size_t i = 0;
+	size_t	i;
 
-    while (i < n && src[i] != '\0') 
+	i = 0;
+	while (i < n && src[i] != '\0')
 	{
-        dest[i] = src[i];
-        i++;
-    }
-    while (i < n) 
-	{
-        dest[i] = '\0';
-        i++;
+		dest[i] = src[i];
+		i++;
 	}
-    return (dest);
+	while (i < n)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
 }
 
-int ft_white_spaces(char c)
+int	ft_white_spaces(char c)
 {
-    return ((c == ' ') || (c >= 9 && c<= 15));
+	return ((c == ' ') || (c >= 9 && c <= 15));
 }
 
-int ft_skip_white_spaces(char **token)
+int	ft_skip_white_spaces(char **token)
 {
 	int	yes;
 
 	yes = 0;
-    while (ft_white_spaces(**token))
+	while (ft_white_spaces(**token))
 	{
-        (*token)++;
+		(*token)++;
 		yes = 1;
 	}
-    return (yes);
+	return (yes);
 }
 
 void	ft_free_tokens(t_token *tokens)
