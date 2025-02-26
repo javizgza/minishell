@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 16:35:36 by jazarago          #+#    #+#             */
-/*   Updated: 2025/02/24 11:38:35 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/02/26 12:41:06 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,3 @@ void ft_set_up_redir(t_commands *command, t_tokens type, char *token)
             command->args[command->args_num++] = ft_strndup(token, n);
     }
 }
-
-/*  int main()
-{
-    t_commands command = {0};
-    char *token = "PATH";
-    setenv("HOME", "/home/user", 1);
-
-    ft_set_up_redir(&command, ENV_VAR, &token);
-
-    printf("Environment Variable Value: %s\n", command.env_var);
-
-    // Free allocated memory
-    free(command.env_var);
-
-    return 0;
-} */

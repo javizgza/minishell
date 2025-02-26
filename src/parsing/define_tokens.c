@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/02/25 20:37:04 by carlos           ###   ########.fr       */
+/*   Updated: 2025/02/26 13:36:12 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ t_token ft_define_token_struct(char **token)
     {
         char *start = *token;
         size_t len = 0;
-        while (**token && !ft_skip_white_spaces(token)
+        while (**token
             && **token != '>' && **token != '<'
             && **token != '|' && **token != '$')
         {

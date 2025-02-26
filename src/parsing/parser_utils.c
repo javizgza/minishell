@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/25 20:55:07 by carlos           ###   ########.fr       */
+/*   Updated: 2025/02/26 12:36:53 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,15 @@ int ft_white_spaces(char c)
 
 int ft_skip_white_spaces(char **token)
 {
+	int	yes;
+
+	yes = 0;
     while (ft_white_spaces(**token))
+	{
         (*token)++;
-    return (0);
+		yes = 1;
+	}
+    return (yes);
 }
 
 void	ft_free_tokens(t_token *tokens)

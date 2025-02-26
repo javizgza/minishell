@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/02/26 02:01:27 by carlos           ###   ########.fr       */
+/*   Updated: 2025/02/26 12:47:56 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_check_redir(t_token *tokens, t_mini *mini)
 			ft_mini_pipe(mini);
 		else if (tokens[i].type == COMMAND)
 			mini->c_line = tokens[i].value;
-		//printf("value: %s, type: %i\n", tokens[i].value, tokens[i].type);
+		printf("value: %s, type: %i\n", tokens[i].value, tokens[i].type);
 		i++;
 	}
 	ft_shell(mini);
