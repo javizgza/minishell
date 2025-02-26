@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/03 15:05:57 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:32:22 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ size_t alloc_tokens(char *input)
     while (*actual_pos)
     {
         token = ft_define_token_struct(&actual_pos);
+		if (token.type != PIPE && token.type != ERROR)
+			free (token.value);
         if (token.type != ERROR)
             count++;
     }
@@ -33,7 +35,7 @@ t_token *lexer(char *input)
     size_t token_count = 0;
     char *current_pos = input;
 
-    tokens = malloc(sizeof(t_token) * alloc_tokens(input)); 
+    tokens = malloc(sizeof(t_token) * (alloc_tokens(input) + 1)); 
     if (!tokens)
         return NULL;
 

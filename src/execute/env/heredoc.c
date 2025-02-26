@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:55:21 by cravegli          #+#    #+#             */
-/*   Updated: 2025/02/03 15:55:30 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:33:12 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_parent_heredoc(int heredoc[2], pid_t parent)
 	return (0);
 }
 
-int	ft_heredoc(t_mini *mini, t_token *tokens)
+int	ft_heredoc(t_mini *mini, t_token tokens)
 {
 	int		heredoc[2];
 	pid_t	parent;
@@ -80,7 +80,7 @@ int	ft_heredoc(t_mini *mini, t_token *tokens)
 	pipe(heredoc);
 	parent = fork();
 	if (!parent)
-		exit (ft_child_heredoc(heredoc[1], tokens->value, mini));
+		exit (ft_child_heredoc(heredoc[1], tokens.value, mini));
 	else
 		ft_parent_heredoc(heredoc, parent);
 	return (0);

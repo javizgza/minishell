@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/24 12:38:57 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:55:07 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,18 @@ int ft_skip_white_spaces(char **token)
     return (0);
 }
 
-int	ft_strlen(const char *s)
+void	ft_free_tokens(t_token *tokens)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (tokens[i].type != END)
+	{
+		if (tokens[i].type != PIPE && tokens[i].type != END)
+			free(tokens[i].value);
 		i++;
-	return (i);
+	}
+	free (tokens);
 }
 
 char	*ft_strndup(const char *s, size_t n)

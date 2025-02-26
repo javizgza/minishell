@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:56 by cravegli          #+#    #+#             */
-/*   Updated: 2025/01/22 13:51:45 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:55:58 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	ft_exit(t_mini *mini)
 	{
 		rl_clear_history();
 		ft_clean_array(mini->command);
+		ft_free_tokens(mini->tokens);
 		ft_clean_array(mini->env);
+		free(mini->line);
 		exit(115);
 	}
 	if (ft_nb_args(mini->command) == 2)
@@ -29,7 +31,9 @@ int	ft_exit(t_mini *mini)
 		e = ft_atoi(mini->command[1]);
 		rl_clear_history();
 		ft_clean_array(mini->command);
+		ft_free_tokens(mini->tokens);
 		ft_clean_array(mini->env);
+		free(mini->line);
 		exit (e);
 	}
 	return (1);

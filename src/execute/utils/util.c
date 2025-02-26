@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/01/22 14:07:58 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/25 21:02:37 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ void	ft_error(char *s)
 			write(2, &s[i], 1);
 			i ++;
 		}
-		write(2, "\n", 1);
 	}
-	exit(2);
 }
 
 int	ft_load_env(t_mini *mini, char**env)

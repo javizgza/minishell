@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/02/25 16:40:28 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/02/25 20:37:04 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char *ft_substr2(char *s, int start, int len)
     if (!substr)
         return NULL;
     ft_strncpy(substr, s + start, len);
-    printf("Len: %i\n", len);
+    //printf("Len: %i\n", len);
     substr[len] = '\0';
     return substr;
 }
@@ -183,7 +183,7 @@ t_token ft_define_token_struct(char **token)
             command_found = 1;
         }
         else
-            new_token.type = ARGUMENT;
+            new_token.type = COMMAND;
     }
     return new_token;
 }

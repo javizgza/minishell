@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/02/03 16:44:17 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/02/26 02:01:27 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,39 @@ int	ft_shell(t_mini *mini)
 	if (!ft_is_builtins(mini))
 	{
 		ft_execute(mini, mini->c_line);
+		dup2(mini->input, 0);
+		dup2(mini->output, 1);
 		return (1);
 	}
 	ft_clean_array(mini->command);
+	dup2(mini->input, 0);
+	dup2(mini->output, 1);
 	return (1);
 }
 
 int	ft_check_redir(t_token *tokens, t_mini *mini)
 {
-	while (tokens->type != END)
+	int	i;
+
+	i = 0;
+	dup2(0, mini->input);
+	dup2(1, mini->output);
+	while (tokens[i].type != END)
 	{
-		if (tokens->type == SMALLER)
-			ft_input_re(tokens);
-		else if (tokens->type == SMALLERX2)
-			ft_heredoc(mini, tokens);
-		else if (tokens->type == BIGGER)
-			ft_output_re(tokens);
-		else if (tokens->type == BIGGERX2)
-			ft_output_re_t(tokens);
-		else if (tokens->type == PIPE)
+		if (tokens[i].type == SMALLER)
+			ft_input_re(tokens[i]);
+		else if (tokens[i].type == SMALLERX2)
+			ft_heredoc(mini, tokens[i]);
+		else if (tokens[i].type == BIGGER)
+			ft_output_re(tokens[i]);
+		else if (tokens[i].type == BIGGERX2)
+			ft_output_re_t(tokens[i]);
+		else if (tokens[i].type == PIPE)
 			ft_mini_pipe(mini);
-		else if (tokens->type == COMMAND)
-			mini->c_line = tokens->value;
-		tokens = tokens->next;
+		else if (tokens[i].type == COMMAND)
+			mini->c_line = tokens[i].value;
+		//printf("value: %s, type: %i\n", tokens[i].value, tokens[i].type);
+		i++;
 	}
 	ft_shell(mini);
 	return (0);
@@ -75,13 +85,16 @@ int	main(int argc, char **argv, char **envp)
 		ft_error("ERROR loading env");
 	while (1)
 	{
-		mini.c_line = readline("minishell> ");
-		if (!ft_is_equal(mini.c_line, ""))
+		mini.line = readline("minishell> ");
+		mini.tokens = lexer(mini.line);
+		if (!ft_is_equal(mini.line, ""))
 		{
 			ft_check_redir(mini.tokens, &mini);
-			add_history(mini.c_line);
+			add_history(mini.line);
 		}
-		free(mini.c_line);
+		ft_free_tokens(mini.tokens);
+		free(mini.line);
+		mini.line = NULL;
 	}
 	return (0);
 }

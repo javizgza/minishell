@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: javierzaragozatejeda <javierzaragozatej    +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/25 16:20:05 by javierzarag      ###   ########.fr       */
+/*   Updated: 2025/02/25 18:00:45 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ t_token *lexer(char *input);
 void    execute_commands(t_commands *command);
 char *ft_strncpy(char *dest, const char *src, size_t n);
 int ft_white_spaces(char c);
+void	ft_free_tokens(t_token *tokens);
 
 #endif
