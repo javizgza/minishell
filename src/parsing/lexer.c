@@ -3,83 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/25 18:32:22 by carlos           ###   ########.fr       */
+/*   Updated: 2025/02/26 14:00:02 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-size_t alloc_tokens(char *input)
+size_t	alloc_tokens(char *input)
 {
-    size_t count = 0;
-    t_token token;
-    char *actual_pos = input;
+	size_t	count;
+	t_token	token;
+	char	*actual_pos;
 
-    while (*actual_pos)
-    {
-        token = ft_define_token_struct(&actual_pos);
+	count = 0;
+	actual_pos = input;
+	while (*actual_pos)
+	{
+		token = ft_define_token_struct(&actual_pos);
 		if (token.type != PIPE && token.type != ERROR)
-			free (token.value);
-        if (token.type != ERROR)
-            count++;
-    }
-    return (count);
+			free(token.value);
+		if (token.type != ERROR)
+			count++;
+	}
+	return (count);
 }
 
-t_token *lexer(char *input)
+int	tokenize_input(char **current_pos, t_token *tokens, size_t *token_count)
 {
-    t_token *tokens;
-    size_t token_count = 0;
-    char *current_pos = input;
+	t_token	token;
 
-    tokens = malloc(sizeof(t_token) * (alloc_tokens(input) + 1)); 
-    if (!tokens)
-        return NULL;
-
-    while (*current_pos)
-    {
-        t_token token = ft_define_token_struct(&current_pos);
-        if (token.type != ERROR)
-        {
-            tokens[token_count++] = token;
-        }
-        else
-        {
-            fprintf(stderr, "Error: Invalid token\n");
-            free(tokens);
-            return NULL;
-        }
-    }
-    tokens[token_count].type = END; // Mark the end of tokens
-    return (tokens);
+	while (**current_pos)
+	{
+		token = ft_define_token_struct(current_pos);
+		if (token.type != ERROR)
+			tokens[(*token_count)++] = token;
+		else
+		{
+			fprintf(stderr, "Error: Invalid token\n");
+			free(tokens);
+			return (0);
+		}
+	}
+	tokens[*token_count].type = END;
+	return (1);
 }
 
-/* int main(void)
+t_token	*lexer(char *input)
 {
-    char input[] = "echo hello | grep h > file.txt";
-    t_token *tokens;
-    
-    tokens = lexer(input);
-    if (!tokens)
-    {
-        fprintf(stderr, "Lexer returned NULL\n");
-        return 1;
-    }
-    
-    // Count detected tokens
-    size_t token_count = 0;
-    while (tokens[token_count].type != END)
-    {
-        printf("Token %zu: Type = %d, Value = %s\n", token_count, tokens[token_count].type, tokens[token_count].value);
-        token_count++;
-    }
-    
-    printf("Total tokens detected: %zu\n", token_count);
-    
-    free(tokens); // Free allocated memory
-    return 0;
-} */
+	t_token	*tokens;
+	size_t	token_count;
+	char	*current_pos;
 
+	token_count = 0;
+	current_pos = input;
+	tokens = malloc(sizeof(t_token) * (alloc_tokens(input) + 1));
+	if (!tokens)
+		return (NULL);
+	if (!tokenize_input(&current_pos, tokens, &token_count))
+		return (NULL);
+	return (tokens);
+}
