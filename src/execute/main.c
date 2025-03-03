@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/02/26 14:41:28 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:42:25 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@ int	ft_is_builtins(t_mini *mini)
 	return (0);
 }
 
+int	ft_reset_fd(t_mini *mini)
+{
+	if (mini->input > 0)
+		close(mini->input);
+	if (mini->output > 0)
+		close(mini->output);
+	dup2(mini->in, STDIN);
+	dup2(mini->out, STDOUT);
+	return (1);
+}
+
 int	ft_shell(t_mini *mini)
 {
 	if (!mini->c_line)
@@ -39,21 +50,11 @@ int	ft_shell(t_mini *mini)
 	if (!ft_is_builtins(mini))
 	{
 		ft_execute(mini, mini->c_line);
-		if (mini->input > 0)
-			close(mini->input);
-		if (mini->output > 0)
-			close(mini->output);
-		dup2(mini->in, STDIN);
-		dup2(mini->out, STDOUT);
+		ft_reset_fd(mini);
 		return (1);
 	}
 	ft_clean_array(mini->command);
-	if (mini->input > 0)
-		close(mini->input);
-	if (mini->output > 0)
-		close(mini->output);
-	dup2(mini->in, STDIN);
-	dup2(mini->out, STDOUT);
+	ft_reset_fd(mini);
 	return (1);
 }
 
@@ -91,17 +92,19 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	mini.in = dup(STDIN);
 	mini.out = dup(STDOUT);
+	mini.c_line = NULL;
 	if (!ft_load_env(&mini, envp))
 		ft_error("ERROR loading env");
 	while (1)
 	{
 		mini.line = readline("minishell> ");
 		mini.tokens = lexer(mini.line);
-		if (!ft_is_equal(mini.line, ""))
+		if (mini.tokens->value)
 		{
 			ft_check_redir(mini.tokens, &mini);
 			add_history(mini.line);
 		}
+		ft_reset_fd(&mini);
 		ft_free_tokens(mini.tokens);
 		free(mini.line);
 		mini.line = NULL;

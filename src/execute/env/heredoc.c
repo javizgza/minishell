@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:55:21 by cravegli          #+#    #+#             */
-/*   Updated: 2025/02/25 17:33:12 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/03 14:46:56 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_child_heredoc(int infile, char *del, t_mini *mini)
 int	ft_parent_heredoc(int heredoc[2], pid_t parent)
 {
 	waitpid(parent, 0, 0);
-	dup2(heredoc[0], 0);
+	dup2(heredoc[0], STDIN);
 	close(heredoc[1]);
 	return (0);
 }
@@ -71,12 +71,6 @@ int	ft_heredoc(t_mini *mini, t_token tokens)
 	int		heredoc[2];
 	pid_t	parent;
 
-	/* while (aux[i])
-	{
-		if (ft_is_equal(aux[i], "<<"))
-			tokens->value = aux[i + 1];
-		i++;
-	} */
 	pipe(heredoc);
 	parent = fork();
 	if (!parent)
