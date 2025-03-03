@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/02/26 14:29:04 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/03 11:59:55 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ t_token ft_define_token_struct(char **token)
     t_token new_token;
 
     new_token.value = NULL;
-    while (ft_skip_white_spaces(token))
-        (*token)++;
+    ft_skip_white_spaces(token);
 
     // End of string
     if (**token == '\0')
@@ -101,7 +100,7 @@ t_token ft_define_token_struct(char **token)
         {
             char *start = *token;
             size_t len = 0;
-            while (**token && !ft_skip_white_spaces(token)
+            while (**token && !ft_white_spaces(**token)
                 && **token != '>' && **token != '<'
                 && **token != '|' && **token != '$')
             {
@@ -131,7 +130,7 @@ t_token ft_define_token_struct(char **token)
         {
             char *start = *token;
             size_t len = 0;
-            while (**token && !ft_skip_white_spaces(token)
+            while (**token && !ft_white_spaces(**token)
                 && **token != '>' && **token != '<'
                 && **token != '|' && **token != '$')
             {
