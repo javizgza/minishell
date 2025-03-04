@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:41:49 by cravegli          #+#    #+#             */
-/*   Updated: 2025/02/24 13:46:42 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/04 11:38:33 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,36 @@ int	ft_cd_aux(char *var, char *value, char **env)
 	return (1);
 }
 
-int	ft_cd_error(t_mini *mini, char *old_pwd)
+int	ft_cd_error(t_mini *mini, char *old_pwd, char *value)
 {
+	ft_error("cd: ");
 	if (ft_nb_args(mini->command) > 2)
 	{
-		ft_error("cd: too many arguments\n");
+		ft_error("too many arguments\n");
 		free(old_pwd);
 		return (1);
 	}
 	if (!get_env_val("HOME", mini->env))
-		ft_error("cd: HOME not set");
-	if (ft_is_reg_file(mini->command[1]) == 0)
-	{
-		ft_error("cd: ");
-		ft_error(mini->command[1]);
+		ft_error("HOME not set");
+	ft_error(value);
+	if (ft_is_reg_file(value) == 0)
 		ft_error(": Not a directory\n");
-	}
 	else
-		printf("cd: %s: No such file or directory\n", mini->command[1]);
+		ft_error(": No such file or directory\n");
+	free(old_pwd);
+	mini->last_command = 1;
+	return (1);
+}
+
+int	ft_cd_not_access(t_mini *mini, char *value, char *old_pwd)
+{
+	if (access(value, X_OK) != 0)
+	{
+		ft_error("permission denied: ");
+		ft_error(value);
+		ft_error("\n");
+	}
+	mini->last_command = 1;
 	free(old_pwd);
 	return (1);
 }
@@ -58,12 +70,15 @@ int	ft_cd(t_mini *mini)
 	else if (ft_is_dir(mini->command[1]) == 0)
 		value = mini->command[1];
 	else
-		return (ft_cd_error(mini, old_pwd));
+		return (ft_cd_error(mini, old_pwd, mini->command[1]));
+	if (access(value, X_OK) != 0)
+		return (ft_cd_not_access(mini, value, old_pwd));
 	chdir(value);
 	value = getcwd(NULL, 0);
 	ft_cd_aux("PWD=", value, mini->env);
 	free(value);
 	ft_cd_aux("OLDPWD=", old_pwd, mini->env);
 	free(old_pwd);
+	mini->last_command = 0;
 	return (1);
 }

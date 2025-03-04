@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/02/26 14:35:38 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:21:29 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,7 @@ int		ft_output_re_t(t_token token, t_mini *mini);
 int		ft_heredoc(t_mini *mini, t_token token);
 int		ft_execute_command(char *command, char *envp[]);
 int		ft_mini_pipe(t_mini *mini);
+int		ft_is_num(char *num);
+int		ft_reset_fd(t_mini *mini);
+
 #endif
