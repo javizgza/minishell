@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/03 14:42:25 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:43:36 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_free_tokens(mini.tokens);
 		free(mini.line);
 		mini.line = NULL;
+		mini.c_line = NULL;
 	}
 	return (0);
 }
