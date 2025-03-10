@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/03 11:59:55 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/06 13:59:29 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,33 @@ t_tokens    ft_define_tokens(char **token)
     (*token)++;
     return (ERROR);
 }
+int	ft_has_quotes(char	**str, t_token *token)
+{
+	int		len;
+	char	quote;
+	char	*start;
+
+	len = 0;
+	if (**str == '"' || **str == '\'')
+	{
+		quote = **str;
+		(*str)++;
+		len++;
+		start = *str;
+		while (**str)
+		{
+			if (**str == quote)
+			{
+				token->value = ft_substr2(start, 0, len - 1);
+				token->type = COMMAND;
+				return (0);
+			}
+			len++;
+			(*str)++;
+		}
+	}
+	return (1);
+}
 
 t_token ft_define_token_struct(char **token) 
 {
@@ -74,7 +101,9 @@ t_token ft_define_token_struct(char **token)
 
     new_token.value = NULL;
     ft_skip_white_spaces(token);
-
+	if (!ft_has_quotes(token, &new_token))
+		return (new_token);
+	
     // End of string
     if (**token == '\0')
     {
@@ -102,7 +131,7 @@ t_token ft_define_token_struct(char **token)
             size_t len = 0;
             while (**token && !ft_white_spaces(**token)
                 && **token != '>' && **token != '<'
-                && **token != '|' && **token != '$')
+                && **token != '|')
             {
                 (*token)++;
                 len++;
@@ -132,7 +161,7 @@ t_token ft_define_token_struct(char **token)
             size_t len = 0;
             while (**token && !ft_white_spaces(**token)
                 && **token != '>' && **token != '<'
-                && **token != '|' && **token != '$')
+                && **token != '|')
             {
                 (*token)++;
                 len++;
@@ -150,7 +179,7 @@ t_token ft_define_token_struct(char **token)
         return new_token;
     }
 
-    // Check for $ variable
+/*     // Check for $ variable
     if (**token == '$')
     {
         (*token)++;
@@ -162,7 +191,7 @@ t_token ft_define_token_struct(char **token)
         else
             new_token.type = ENV_VAR;
         return new_token;
-    }
+    } */
 
     // Otherwise, it's some text. First becomes COMMAND, others become ARGUMENT
     {
@@ -170,7 +199,7 @@ t_token ft_define_token_struct(char **token)
         size_t len = 0;
         while (**token
             && **token != '>' && **token != '<'
-            && **token != '|' && **token != '$')
+            && **token != '|')
         {
             (*token)++;
             len++;

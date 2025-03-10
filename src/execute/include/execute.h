@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/04 14:21:29 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:49:59 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define STDOUT 1
 # define STDERROR 2
 
-typedef struct mini
+typedef struct s_mini
 {
 	int		last_command;
 	char	**env;
@@ -81,5 +81,7 @@ int		ft_execute_command(char *command, char *envp[]);
 int		ft_mini_pipe(t_mini *mini);
 int		ft_is_num(char *num);
 int		ft_reset_fd(t_mini *mini);
+
+int		ft_parsing(t_mini *mini, t_token *tokens);
 
 #endif

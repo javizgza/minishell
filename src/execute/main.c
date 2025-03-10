@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/04 14:14:15 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:50:37 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,13 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		mini.line = readline("minishell> ");
+		mini.tokens = lexer(mini.line);
 		if (!mini.line)
 			exit(mini.last_command);
-		mini.tokens = lexer(mini.line);
-		if (mini.tokens->value)
+		if (mini.line)
 		{
-			ft_check_redir(mini.tokens, &mini);
+			if (ft_parsing(&mini, mini.tokens))
+				ft_check_redir(mini.tokens, &mini);
 			add_history(mini.line);
 		}
 		ft_reset_fd(&mini);

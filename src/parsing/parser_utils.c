@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/26 14:01:51 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:39:26 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_free_tokens(t_token *tokens)
 	int	i;
 
 	i = 0;
-	while (tokens[i].type != END)
+	while (tokens[i].type != END && tokens[i].type)
 	{
 		if (tokens[i].type != PIPE && tokens[i].type != END)
 			free(tokens[i].value);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/02/26 14:00:02 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:53:31 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../execute/include/execute.h"
 
 size_t	alloc_tokens(char *input)
 {
@@ -43,7 +43,7 @@ int	tokenize_input(char **current_pos, t_token *tokens, size_t *token_count)
 		else
 		{
 			fprintf(stderr, "Error: Invalid token\n");
-			free(tokens);
+			ft_free_tokens(tokens);
 			return (0);
 		}
 	}
@@ -65,4 +65,21 @@ t_token	*lexer(char *input)
 	if (!tokenize_input(&current_pos, tokens, &token_count))
 		return (NULL);
 	return (tokens);
+}
+
+int	ft_parsing(t_mini *mini, t_token *tokens)
+{
+	int		i;
+	char	*aux;
+
+	i = 0;
+	while (tokens[i].type != END)
+	{
+		aux = tokens[i].value;
+		tokens[i].value = ft_has_dolar(aux, mini->env, mini->last_command);
+		if (ft_is_equal(tokens[i].value, ""))
+			return (0);
+		i++;
+	}
+	return (1);
 }
