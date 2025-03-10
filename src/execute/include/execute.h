@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/10 11:49:59 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/10 12:32:31 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ int		ft_is_num(char *num);
 int		ft_reset_fd(t_mini *mini);
 
 int		ft_parsing(t_mini *mini, t_token *tokens);
+char	**ft_add_arg(t_mini *mini, t_token token);	
 
 #endif
