@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/10 11:19:37 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/11 11:24:55 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ char		*ft_strncpy(char *dest, const char *src, size_t n);
 int			ft_white_spaces(char c);
 void		ft_free_tokens(t_token *tokens);
 char		*ft_has_dolar(char	*str, char **env, int last_command);
+char *ft_substr_ignore_quotes(char *start, size_t len);
 
 #endif

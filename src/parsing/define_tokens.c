@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/06 13:59:29 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/11 11:29:28 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,15 +103,11 @@ t_token ft_define_token_struct(char **token)
     ft_skip_white_spaces(token);
 	if (!ft_has_quotes(token, &new_token))
 		return (new_token);
-	
-    // End of string
     if (**token == '\0')
     {
         new_token.type = END;
         return new_token;
     }
-
-    // Check for >> or >
     if (**token == '>')
     {
         (*token)++; 
@@ -122,10 +118,7 @@ t_token ft_define_token_struct(char **token)
         }
         else
             new_token.type = BIGGER;
-
-        // Skip spaces before file name
         ft_skip_white_spaces(token);
-        // Gather next chunk as the token value
         {
             char *start = *token;
             size_t len = 0;
@@ -136,12 +129,10 @@ t_token ft_define_token_struct(char **token)
                 (*token)++;
                 len++;
             }
-            new_token.value = ft_substr2(start, 0, len);
+            new_token.value = ft_substr_ignore_quotes(start, len);
         }
         return new_token;
     }
-
-    // Check for << or <
     if (**token == '<')
     {
         (*token)++;
@@ -152,10 +143,7 @@ t_token ft_define_token_struct(char **token)
         }
         else
             new_token.type = SMALLER;
-
-        // Skip spaces before file name
         ft_skip_white_spaces(token);
-        // Gather next chunk as the token value
         {
             char *start = *token;
             size_t len = 0;
@@ -166,12 +154,10 @@ t_token ft_define_token_struct(char **token)
                 (*token)++;
                 len++;
             }
-            new_token.value = ft_substr2(start, 0, len);
+            new_token.value = ft_substr_ignore_quotes(start, len);
         }
         return new_token;
     }
-
-    // Check for pipe
     if (**token == '|')
     {
         new_token.type = PIPE;
@@ -192,8 +178,6 @@ t_token ft_define_token_struct(char **token)
             new_token.type = ENV_VAR;
         return new_token;
     } */
-
-    // Otherwise, it's some text. First becomes COMMAND, others become ARGUMENT
     {
         char *start = *token;
         size_t len = 0;
@@ -204,7 +188,7 @@ t_token ft_define_token_struct(char **token)
             (*token)++;
             len++;
         }
-        new_token.value = ft_substr2(start, 0, len);
+        new_token.value = ft_substr_ignore_quotes(start, len);
         if (!command_found)
         {
             new_token.type = COMMAND;

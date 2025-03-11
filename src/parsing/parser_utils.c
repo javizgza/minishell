@@ -3,14 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/10 11:39:26 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/11 11:40:12 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
+
+char *ft_substr_ignore_quotes(char *start, size_t len) 
+{
+    char *result;
+    char *res_ptr;
+    char *end;
+	
+	result = malloc(len + 1);
+	res_ptr = result;
+	end = start + len;
+    while (start < end) 
+	{
+        if (*start != '"')
+            *res_ptr++ = *start;
+        start++;
+    }
+    *res_ptr = '\0';
+    return (result);
+}
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
