@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/11 15:02:04 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:21:45 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char *ft_substr2(char *s, int start, int len)
     if (!substr)
         return NULL;
     ft_strncpy(substr, s + start, len);
-    //printf("Len: %i\n", len);
     substr[len] = '\0';
     return substr;
 }

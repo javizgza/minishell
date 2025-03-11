@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/11 15:14:59 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:22:54 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char *ft_substr_ignore_quotes(char *start, size_t len) 
 {
-    char *result;
-    char *res_ptr;
-    char *end;
+    char	*result;
+    char	*res_ptr;
+    char	*end;
 	
 	result = malloc(len + 1);
 	res_ptr = result;
