@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/02/24 13:39:07 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:29:37 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,14 @@ char	*ft_create_cmd(char **path, char *command)
 	return (s2);
 }
 
-int	ft_execute_command(char *command, char *envp[])
+int	ft_execute_command(char *envp[], char **aux)
 {
 	char	**path;
 	char	*cmd;
-	char	**aux;
 
 	path = ft_split_path(envp);
 	if (!path)
 		ft_error("NO PATH ERROR");
-	aux = ft_split(command, ' ');
 	cmd = ft_create_cmd(path, aux[0]);
 	if (!cmd)
 	{
@@ -71,13 +69,13 @@ int	ft_error_exe(int last_command, char *c_line)
 	return (0);
 }
 
-int	ft_execute(t_mini *mini, char *line)
+int	ft_execute(t_mini *mini)
 {
 	pid_t	parent;
 
 	parent = fork();
 	if (!parent)
-		exit(ft_execute_command(line, mini->env));
+		exit(ft_execute_command(mini->env, mini->command));
 	waitpid(parent, &mini->last_command, 0);
 	mini->last_command /= 256;
 	ft_error_exe(mini->last_command, mini->c_line);

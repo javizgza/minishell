@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:43 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/10 12:34:57 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/11 15:13:27 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ char	**ft_add_arg(t_mini *mini, t_token token)
 	{
 		command = ft_calloc(ft_nb_args(mini->command) + 2, sizeof(char *));
 		i = 0;
-		while (command[i])
+		while (mini->command[i])
 		{
 			command[i] = mini->command[i];
 			i++;
 		}
+		free(mini->command);
 		command[i] = token.value;
 	}
 	return (command);

@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/11 15:39:04 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:50:31 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		ft_set_up_redir(t_commands *command, t_tokens type, char *token);
 int			ft_strlen(char const *str);
 char		*ft_strndup(const char *s, size_t n);
 t_tokens	ft_define_tokens(char **token);
-t_token		ft_define_token_struct(char **token);
+t_token		ft_define_token_struct(char **token, int command_found);
 int			ft_skip_white_spaces(char **str);
 t_token		*lexer(char *input);
 void		execute_commands(t_commands *command);

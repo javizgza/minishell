@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/10 12:32:31 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/11 14:18:19 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		ft_exit(t_mini *mini);
 int		ft_cd(t_mini *mini);
 int		ft_export(t_mini *mini);
 int		ft_nb_args(char **args);
-int		ft_execute(t_mini *mini, char *line);
+int		ft_execute(t_mini *mini);
 int		ft_env(t_mini *mini);
 int		ft_unset(t_mini *mini);
 int		ft_load_env(t_mini *mini, char**env);
@@ -77,7 +77,7 @@ int		ft_input_re(t_token token, t_mini *mini);
 int		ft_output_re(t_token token, t_mini *mini);
 int		ft_output_re_t(t_token token, t_mini *mini);
 int		ft_heredoc(t_mini *mini, t_token token);
-int		ft_execute_command(char *command, char *envp[]);
+int		ft_execute_command(char *envp[], char **aux);
 int		ft_mini_pipe(t_mini *mini);
 int		ft_is_num(char *num);
 int		ft_reset_fd(t_mini *mini);

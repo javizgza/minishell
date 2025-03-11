@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/11 15:38:54 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:49:09 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,26 @@ char *ft_substr_ignore_quotes(char *start, size_t len)
 	end = start + len;
     while (start < end) 
 	{
-        if (*start != '"')
+        //if (*start != '"')
+        *res_ptr++ = *start;
+        start++;
+    }
+    *res_ptr = '\0';
+    return (result);
+}
+
+char *ft_substr_ignore_simple_quotes(char *start, size_t len) 
+{
+    char	*result;
+    char	*res_ptr;
+    char	*end;
+	
+	result = malloc(len + 1);
+	res_ptr = result;
+	end = start + len;
+    while (start < end) 
+	{
+        if (*start != '\'')
             *res_ptr++ = *start;
         start++;
     }
@@ -93,7 +112,7 @@ void	ft_free_tokens(t_token *tokens)
 	i = 0;
 	while (tokens[i].type != END && tokens[i].type)
 	{
-		if (tokens[i].type != PIPE && tokens[i].type != END)
+		if (tokens[i].type != PIPE && tokens[i].type != END && tokens[i].value)
 			free(tokens[i].value);
 		i++;
 	}

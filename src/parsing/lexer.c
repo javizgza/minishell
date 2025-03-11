@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/11 15:39:12 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:48:38 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	alloc_tokens(char *input)
 	actual_pos = input;
 	while (*actual_pos)
 	{
-		token = ft_define_token_struct(&actual_pos);
+		token = ft_define_token_struct(&actual_pos, 0);
 		if (token.type != PIPE && token.type != ERROR)
 			free(token.value);
 		if (token.type != ERROR)
@@ -34,10 +34,16 @@ size_t	alloc_tokens(char *input)
 int	tokenize_input(char **current_pos, t_token *tokens, size_t *token_count)
 {
 	t_token	token;
+	int		commando_found;
 
+	commando_found = 0;
 	while (**current_pos)
 	{
-		token = ft_define_token_struct(current_pos);
+		token = ft_define_token_struct(current_pos, commando_found);
+		if (token.type == COMMAND)
+			commando_found = 1;
+		if (token.type == PIPE)
+			commando_found = 0;
 		if (token.type != ERROR)
 			tokens[(*token_count)++] = token;
 		else
