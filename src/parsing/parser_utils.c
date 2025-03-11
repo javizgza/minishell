@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/11 11:40:12 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:48:30 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char *ft_substr_ignore_quotes(char *start, size_t len) 
 {
-    char *result;
-    char *res_ptr;
-    char *end;
+    char	*result;
+    char	*res_ptr;
+    char	*end;
 	
 	result = malloc(len + 1);
 	res_ptr = result;
