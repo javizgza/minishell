@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/10 12:39:37 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/11 15:16:19 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ int	ft_shell(t_mini *mini)
 {
 	if (!mini->c_line)
 		return (0);
-	mini->command = ft_split(mini->c_line, ' ');
+	if (!mini->command)
+		mini->command = ft_split(mini->c_line, ' ');
 	if (!ft_is_builtins(mini))
 	{
-		ft_execute(mini, mini->c_line);
+		ft_execute(mini);
 		ft_reset_fd(mini);
 		return (1);
 	}
@@ -95,6 +96,7 @@ int	main(int argc, char **argv, char **envp)
 	mini.in = dup(STDIN);
 	mini.out = dup(STDOUT);
 	mini.c_line = NULL;
+	mini.command = NULL;
 	if (!ft_load_env(&mini, envp))
 		ft_error("ERROR loading env");
 	while (1)
@@ -114,6 +116,7 @@ int	main(int argc, char **argv, char **envp)
 		free(mini.line);
 		mini.line = NULL;
 		mini.c_line = NULL;
+		mini.command = NULL;
 	}
 	return (0);
 }
