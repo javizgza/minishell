@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/11 11:24:55 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:39:04 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ int			ft_white_spaces(char c);
 void		ft_free_tokens(t_token *tokens);
 char		*ft_has_dolar(char	*str, char **env, int last_command);
 char *ft_substr_ignore_quotes(char *start, size_t len);
+char *ft_substr_ignore_simple_quotes(char *start, size_t len);
 
 #endif

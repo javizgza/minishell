@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/11 14:36:43 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:39:12 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,22 @@ t_token	*lexer(char *input)
 
 int	ft_parsing(t_mini *mini, t_token *tokens)
 {
-	int		i;
-	char	*aux;
+    int		i;
+    char	*aux;
+    char	*processed_value;
 
-	i = 0;
-	while (tokens[i].type != END)
-	{
-		aux = tokens[i].value;
-		tokens[i].value = ft_has_dolar(aux, mini->env, mini->last_command);
-		if (ft_is_equal(tokens[i].value, ""))
-			return (0);
-		i++;
-	}
-	return (1);
+    i = 0;
+	processed_value = 0;
+    while (tokens[i].type != END)
+    {
+        aux = tokens[i].value;
+        tokens[i].value = ft_has_dolar(aux, mini->env, mini->last_command);
+        if (ft_is_equal(tokens[i].value, ""))
+            return (0);
+		processed_value = ft_substr_ignore_simple_quotes(tokens[i].value, ft_strlen(tokens[i].value));
+        free(tokens[i].value);
+        tokens[i].value = processed_value;
+        i++;
+    }
+    return (1);
 }

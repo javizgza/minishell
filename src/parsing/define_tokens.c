@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/11 14:36:10 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:41:53 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,20 +118,22 @@ t_token ft_define_token_struct(char **token)
         (*token)++;
         return new_token;
     }
-
-/*     // Check for $ variable
     if (**token == '$')
     {
         (*token)++;
-        if (**token == '?')
+        char *start = *token;
+        size_t len = 0;
+        while (**token && !ft_white_spaces(**token)
+            && **token != '>' && **token != '<'
+            && **token != '|')
         {
-            new_token.type = RECENT;
             (*token)++;
+            len++;
         }
-        else
-            new_token.type = ENV_VAR;
+        new_token.value = ft_substr_ignore_quotes(start, len);
+        new_token.type = ENV_VAR;
         return new_token;
-    } */
+    }
     {
         char *start = *token;
         size_t len = 0;
