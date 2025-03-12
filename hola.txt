@@ -1,7 +1,0 @@
-value: hola.txt, type: 1
-Makefile
-README.md
-hola.txt
-libft
-minishell
-src
