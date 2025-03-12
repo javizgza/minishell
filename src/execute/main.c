@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/12 12:54:08 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:11:28 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,17 @@ int	ft_shell(t_mini *mini)
 	if (!mini->c_line)
 		return (0);
 	if (!mini->command)
-		mini->command = ft_split(mini->c_line, ' ');
+	{
+		mini->command = ft_calloc(2, sizeof(char *));
+		mini->command[0] = mini->c_line;
+	}
 	if (!ft_is_builtins(mini))
 	{
 		ft_execute(mini);
 		ft_reset_fd(mini);
 		return (1);
 	}
-	ft_clean_array(mini->command);
+	free(mini->command);
 	ft_reset_fd(mini);
 	return (1);
 }
@@ -80,7 +83,7 @@ int	ft_check_redir(t_token *tokens, t_mini *mini)
 			mini->c_line = tokens[i].value;
 		else if (tokens[i].type == ARGUMENT)
 			mini->command = ft_add_arg(mini, tokens[i]);
-		printf("value: %s, type: %i\n", tokens[i].value, tokens[i].type);
+		//printf("value: %s, type: %i\n", tokens[i].value, tokens[i].type);
 		i++;
 	}
 	ft_shell(mini);

@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:55:21 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/03 14:46:56 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:20:29 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execute.h"
+
+void	ft_dollar_heredoc(char *line, t_mini *mini, int infile)
+{
+	char	*aux;
+
+	aux = get_env_val(line + 1, mini->env);
+	if (aux)
+	{
+		ft_putstr_fd(aux, infile);
+		return ;
+	}
+	line++;
+	if (line && (*line == '0' || *line == '?'))
+	{
+		if (*line == '0')
+			ft_putstr_fd(get_env_val("SHELL", mini->env), infile);
+		if (*line == '?')
+			ft_putnbr_fd(mini->last_command, infile);
+	}
+}
 
 int	ft_print_heredoc(char	*line, t_mini *mini, int infile)
 {
@@ -24,11 +44,7 @@ int	ft_print_heredoc(char	*line, t_mini *mini, int infile)
 	{
 		aux = ft_strchr(split_line[i], '$');
 		if (aux)
-		{
-			aux = get_env_val(aux + 1, mini->env);
-			if (aux)
-				ft_putstr_fd(aux, infile);
-		}
+			ft_dollar_heredoc(aux, mini, infile);
 		else
 			ft_putstr_fd(split_line[i], infile);
 		if (split_line[i + 1])

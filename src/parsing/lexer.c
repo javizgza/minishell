@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/12 12:42:05 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:46:14 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	alloc_tokens(char *input)
 	while (*actual_pos)
 	{
 		token = ft_define_token_struct(&actual_pos, 0);
-		if (token.type != PIPE && token.type != ERROR)
+		if (token.type != PIPE && token.type != ERROR && token.type != END)
 			free(token.value);
 		if (token.type != ERROR)
 			count++;
@@ -77,19 +77,22 @@ int	ft_parsing(t_mini *mini, t_token *tokens)
 {
 	int		i;
 	char	*aux;
-	char	*processed_value;
+	char	*value;
 
 	i = 0;
-	processed_value = 0;
+	value = NULL;
 	while (tokens[i].type != END)
 	{
-		aux = tokens[i].value;
-		tokens[i].value = ft_has_dolar(aux, mini->env, mini->last_command);
-		if (ft_is_equal(tokens[i].value, ""))
-			return (0);
-		processed_value = ft_quote(tokens[i].value, ft_strlen(tokens[i].value));
-		free(tokens[i].value);
-		tokens[i].value = processed_value;
+		if (tokens[i].value)
+		{
+			aux = tokens[i].value;
+			tokens[i].value = ft_has_dolar(aux, mini->env, mini->last_command);
+			if (ft_is_equal(tokens[i].value, ""))
+				return (0);
+			value = ft_quote(tokens[i].value, ft_strlen(tokens[i].value));
+			free(tokens[i].value);
+			tokens[i].value = value;
+		}
 		i++;
 	}
 	return (1);

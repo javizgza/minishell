@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   has_dollar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:55:45 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/12 12:36:35 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:46:44 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	*ft_add_var(char *str, char *add)
 
 char	*ft_has_dolar(char	*str, char **env, int last_command)
 {
-	char	*aux;
 	char	*res;
 	char	*itoa_res;
 	int		single_quote;
@@ -81,27 +80,27 @@ char	*ft_has_dolar(char	*str, char **env, int last_command)
 	res = str;
 	single_quote = 1;
 	i = 0;
-	aux = str;
-	while (aux[i])
+	while (str[i])
 	{
-		if (aux[i] == '\'')
+		if (str[i] == '\'')
 			single_quote *= -1;
-		if (aux[i] == '$')
+		if (str[i] == '$')
 		{
 			i++;
-			if (get_env_val(aux + i, env) && (single_quote > 0))
-				res = ft_add_var(res, get_env_val(aux + i, env));
-			else if (aux[i] == '?' && (single_quote > 0))
+			if (str[i] && get_env_val(str + i, env) && (single_quote > 0))
+				res = ft_add_var(res, get_env_val(str + i, env));
+			else if (str[i] && str[i] == '?' && (single_quote > 0))
 			{
 				itoa_res = ft_itoa(last_command);
 				res = ft_add_var(res, itoa_res);
 				free(itoa_res);
 			}
-			else 
+			else
 			{
-				if (single_quote > 0)
+				if (single_quote > 0 && str[i])
 					res = ft_add_var(res, "");
 			}
+			i--;
 		}
 		i++;
 	}
