@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/12 12:25:14 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:54:08 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	main(int argc, char **argv, char **envp)
 	mini.out = dup(STDOUT);
 	mini.c_line = NULL;
 	mini.command = NULL;
-	
 	ft_set_signals();
 	if (!ft_load_env(&mini, envp))
 		ft_error("ERROR loading env");

@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/12 12:51:25 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:53:45 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,18 +76,12 @@ char	*ft_define_value(char **token)
 	return (result);
 }
 
-t_token	ft_define_token_struct(char **token, int command_found)
+t_token	ft_define_special_token(char **token)
 {
-	t_token		new_token;
+	t_token	new_token;
 
 	new_token.value = NULL;
-	ft_skip_white_spaces(token);
-	if (**token == '\0')
-	{
-		new_token.type = END;
-		return (new_token);
-	}
-	else if (**token == '>')
+	if (**token == '>')
 	{
 		(*token)++;
 		if (**token == '>')
@@ -109,19 +103,28 @@ t_token	ft_define_token_struct(char **token, int command_found)
 		else
 			new_token.type = SMALLER;
 	}
-	else if (**token == '|')
-	{
+	else
 		new_token.type = PIPE;
-		(*token)++;
+	(*token)++;
+	return (new_token);
+}
+
+t_token	ft_define_token_struct(char **token, int command_found)
+{
+	t_token		new_token;
+
+	ft_skip_white_spaces(token);
+	if (**token == '\0')
+	{
+		new_token.type = END;
 		return (new_token);
 	}
+	else if (**token == '>' || **token == '<' || **token == '|')
+		return (ft_define_special_token(token));
+	if (command_found == 0)
+		new_token.type = COMMAND;
 	else
-	{
-		if (command_found == 0)
-			new_token.type = COMMAND;
-		else
-			new_token.type = ARGUMENT;
-	}
+		new_token.type = ARGUMENT;
 	new_token.value = ft_define_value(token);
 	return (new_token);
 }
