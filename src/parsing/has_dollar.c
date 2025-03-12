@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:55:45 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/12 13:46:44 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/12 17:31:03 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,31 @@ char	*ft_add_var(char *str, char *add)
 	return (res);
 }
 
-char	*ft_has_dolar(char	*str, char **env, int last_command)
+char	*ft_dollar_found(char *str, char *res, t_mini *mini, int single_quote)
+{
+	char	*itoa_res;
+	int		i;
+
+	i = 1;
+	if (str[i] && get_env_val(str + i, mini->env) && (single_quote > 0))
+		res = ft_add_var(res, get_env_val(str + i, mini->env));
+	else if (str[i] && str[i] == '?' && (single_quote > 0))
+	{
+		itoa_res = ft_itoa(mini->last_command);
+		res = ft_add_var(res, itoa_res);
+		free(itoa_res);
+	}
+	else
+	{
+		if (single_quote > 0 && str[i])
+			res = ft_add_var(res, "");
+	}
+	return (res);
+}
+
+char	*ft_has_dollar(char	*str, t_mini *mini)
 {
 	char	*res;
-	char	*itoa_res;
 	int		single_quote;
 	int		i;
 
@@ -85,23 +106,7 @@ char	*ft_has_dolar(char	*str, char **env, int last_command)
 		if (str[i] == '\'')
 			single_quote *= -1;
 		if (str[i] == '$')
-		{
-			i++;
-			if (str[i] && get_env_val(str + i, env) && (single_quote > 0))
-				res = ft_add_var(res, get_env_val(str + i, env));
-			else if (str[i] && str[i] == '?' && (single_quote > 0))
-			{
-				itoa_res = ft_itoa(last_command);
-				res = ft_add_var(res, itoa_res);
-				free(itoa_res);
-			}
-			else
-			{
-				if (single_quote > 0 && str[i])
-					res = ft_add_var(res, "");
-			}
-			i--;
-		}
+			res = ft_dollar_found(str + i, res, mini, single_quote);
 		i++;
 	}
 	if (!ft_is_equal(res, str))

@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/12 14:46:14 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/12 17:27:33 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_parsing(t_mini *mini, t_token *tokens)
 		if (tokens[i].value)
 		{
 			aux = tokens[i].value;
-			tokens[i].value = ft_has_dolar(aux, mini->env, mini->last_command);
+			tokens[i].value = ft_has_dollar(aux, mini);
 			if (ft_is_equal(tokens[i].value, ""))
 				return (0);
 			value = ft_quote(tokens[i].value, ft_strlen(tokens[i].value));

@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/12 13:21:32 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/12 18:16:52 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	ft_execute_command(char *envp[], char **aux)
 	execve(cmd, aux, envp);
 	free(cmd);
 	ft_clean_array(path);
-	//ft_clean_array(aux);
 	return (1);
 }
 
@@ -65,6 +64,11 @@ int	ft_error_exe(int last_command, char *c_line)
 	{
 		ft_error(c_line);
 		ft_error(": command not found\n");
+	}
+	if (last_command == 1)
+	{
+		ft_error(c_line);
+		ft_error(": Is a directory\n");
 	}
 	return (0);
 }

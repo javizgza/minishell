@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/12 14:11:28 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/12 17:35:56 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ int	ft_check_redir(t_token *tokens, t_mini *mini)
 			mini->c_line = tokens[i].value;
 		else if (tokens[i].type == ARGUMENT)
 			mini->command = ft_add_arg(mini, tokens[i]);
-		//printf("value: %s, type: %i\n", tokens[i].value, tokens[i].type);
 		i++;
 	}
 	ft_shell(mini);
@@ -96,13 +95,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void) argc;
 	(void) argv;
-	mini.in = dup(STDIN);
-	mini.out = dup(STDOUT);
-	mini.c_line = NULL;
-	mini.command = NULL;
-	ft_set_signals();
-	if (!ft_load_env(&mini, envp))
-		ft_error("ERROR loading env");
+	ft_main_init(&mini, envp);
 	while (1)
 	{
 		mini.line = readline("minishell> ");
@@ -115,12 +108,7 @@ int	main(int argc, char **argv, char **envp)
 				ft_check_redir(mini.tokens, &mini);
 			add_history(mini.line);
 		}
-		ft_reset_fd(&mini);
-		ft_free_tokens(mini.tokens);
-		free(mini.line);
-		mini.line = NULL;
-		mini.c_line = NULL;
-		mini.command = NULL;
+		ft_reset_mini(&mini);
 	}
 	return (0);
 }
