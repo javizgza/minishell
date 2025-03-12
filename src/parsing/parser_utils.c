@@ -6,48 +6,48 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/11 15:50:09 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:47:48 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-char *ft_substr_ignore_quotes(char *start, size_t len) 
+char	*ft_substr_ignore_quotes(char *start, size_t len)
 {
-    char	*result;
-    char	*res_ptr;
-    char	*end;
-	
+	char	*result;
+	char	*res_ptr;
+	char	*end;
+
 	result = malloc(len + 1);
 	res_ptr = result;
 	end = start + len;
-    while (start < end) 
+	while (start < end)
 	{
-        if (*start != '"')
-            *res_ptr++ = *start;
-        start++;
-    }
-    *res_ptr = '\0';
-    return (result);
+		if (*start != '"')
+			*res_ptr++ = *start;
+		start++;
+	}
+	*res_ptr = '\0';
+	return (result);
 }
 
-char *ft_substr_ignore_simple_quotes(char *start, size_t len) 
+char	*ft_quote(char *start, size_t len)
 {
-    char	*result;
-    char	*res_ptr;
-    char	*end;
-	
+	char	*result;
+	char	*res_ptr;
+	char	*end;
+
 	result = malloc(len + 1);
 	res_ptr = result;
 	end = start + len;
-    while (start < end) 
+	while (start < end)
 	{
-        if (*start != '\'')
-            *res_ptr++ = *start;
-        start++;
-    }
-    *res_ptr = '\0';
-    return (result);
+		if (*start != '\'')
+			*res_ptr++ = *start;
+		start++;
+	}
+	*res_ptr = '\0';
+	return (result);
 }
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
@@ -84,39 +84,4 @@ int	ft_skip_white_spaces(char **token)
 		yes = 1;
 	}
 	return (yes);
-}
-
-void	ft_free_tokens(t_token *tokens)
-{
-	int	i;
-
-	i = 0;
-	while (tokens[i].type != END && tokens[i].type)
-	{
-		if (tokens[i].type != PIPE && tokens[i].type != END)
-			free(tokens[i].value);
-		i++;
-	}
-	free (tokens);
-}
-
-char	*ft_strndup(const char *s, size_t n)
-{
-	char	*result;
-	int		size;
-	int		i;
-
-	size = ft_strlen(s) + 1;
-	(void) n;
-	result = (char *)malloc(size * sizeof(char));
-	if (!result)
-		return (NULL);
-	i = 0;
-	while (s[i] && i < size)
-	{
-		result[i] = s[i];
-		i++;
-	}
-	result[i] = '\0';
-	return (result);
 }

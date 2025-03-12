@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/11 15:50:31 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:49:19 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <stdbool.h> 
 # include <stdlib.h>
 # include "../../libft/libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
 
 typedef enum s_tokens
 {
@@ -70,7 +73,8 @@ char		*ft_strncpy(char *dest, const char *src, size_t n);
 int			ft_white_spaces(char c);
 void		ft_free_tokens(t_token *tokens);
 char		*ft_has_dolar(char	*str, char **env, int last_command);
-char *ft_substr_ignore_quotes(char *start, size_t len);
-char *ft_substr_ignore_simple_quotes(char *start, size_t len);
+char		*ft_substr_ignore_quotes(char *start, size_t len);
+char		*ft_quote(char *start, size_t len);
+void		ft_set_signals(void);
 
 #endif

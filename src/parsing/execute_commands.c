@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 11:30:00 by javierzarag       #+#    #+#             */
-/*   Updated: 2025/02/26 13:50:00 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:18:40 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	execute_commands(t_commands *command)
 	pid_t	pid;
 	int		status;
 
+	printf("hola");
+	ft_set_signals();
 	pid = fork();
 	if (pid == -1)
 	{

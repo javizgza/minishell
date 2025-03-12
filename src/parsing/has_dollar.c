@@ -6,7 +6,7 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:55:45 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/11 15:06:02 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:36:35 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ char	*ft_has_dolar(char	*str, char **env, int last_command)
 					res = ft_add_var(res, "");
 			}
 		}
-		//printf("res: %s\n", res);
-		//printf("char: %c\n", aux[i]);
 		i++;
 	}
 	if (!ft_is_equal(res, str))

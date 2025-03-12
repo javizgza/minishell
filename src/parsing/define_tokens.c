@@ -6,20 +6,22 @@
 /*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/11 15:47:29 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:51:25 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-char *ft_substr2(char *s, int start, int len)
+char	*ft_substr2(char *s, int start, int len)
 {
-    char *substr = malloc(len + 1);
-    if (!substr)
-        return NULL;
-    ft_strncpy(substr, s + start, len);
-    substr[len] = '\0';
-    return substr;
+	char	*substr;
+
+	substr = malloc(len + 1);
+	if (!substr)
+		return (NULL);
+	ft_strncpy(substr, s + start, len);
+	substr[len] = '\0';
+	return (substr);
 }
 
 int	ft_has_quotes(char	**str)
@@ -71,7 +73,6 @@ char	*ft_define_value(char **token)
 		}
 		result = ft_substr_ignore_quotes(start, len);
 	}
-	//printf("%s\n", result);
 	return (result);
 }
 
