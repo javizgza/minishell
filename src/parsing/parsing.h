@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/13 14:45:26 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:48:18 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum s_tokens
 	ARGUMENT,
 	ENV_VAR,
 	RECENT,
-	FILENAME, // <--- new token type
+	FILENAME,
 	END,
 	ERROR,
 }			t_tokens;
@@ -74,5 +74,6 @@ char		*ft_substr_ignore_quotes(char *start, size_t len);
 char		*ft_quote(char *start, size_t len);
 void		ft_set_signals(void);
 int			ft_parse_error(t_token token, int command_found);
+void		unset_signals(void);
 
 #endif
