@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/12 17:26:53 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/13 14:45:26 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int			ft_strlen(char const *str);
 char		*ft_strndup(const char *s, size_t n);
 t_token		ft_define_token_struct(char **token, int command_found);
 int			ft_skip_white_spaces(char **str);
-t_token		*lexer(char *input);
 void		execute_commands(t_commands *command);
 char		*ft_strncpy(char *dest, const char *src, size_t n);
 int			ft_white_spaces(char c);
@@ -74,5 +73,6 @@ void		ft_free_tokens(t_token *tokens);
 char		*ft_substr_ignore_quotes(char *start, size_t len);
 char		*ft_quote(char *start, size_t len);
 void		ft_set_signals(void);
+int			ft_parse_error(t_token token, int command_found);
 
 #endif

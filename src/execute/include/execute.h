@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/12 17:19:42 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/13 13:02:24 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ int		ft_reset_fd(t_mini *mini);
 int		ft_parsing(t_mini *mini, t_token *tokens);
 char	*ft_has_dollar(char	*str, t_mini *mini);
 char	**ft_add_arg(t_mini *mini, t_token token);
+t_token	*lexer(char *input, t_mini *mini);
+t_token	*ft_re_lexer(char *input, t_mini *mini);
 
 void	ft_main_init(t_mini *mini, char **env);
 void	ft_reset_mini(t_mini *mini);

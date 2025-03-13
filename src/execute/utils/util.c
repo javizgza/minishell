@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/02/26 14:33:28 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/13 14:36:21 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_is_equal(char *a, char *b)
 	{
 		if (a[i] != b[i])
 			return (0);
-		i ++;
+		i++;
 	}
 	return (1);
 }
@@ -34,7 +34,7 @@ int	ft_nb_args(char **args)
 
 	size = 0;
 	while (args[size])
-		size ++;
+		size++;
 	return (size);
 }
 
@@ -46,7 +46,7 @@ void	ft_clean_array(char **matrix)
 	while (matrix[i])
 	{
 		free(matrix[i]);
-		i ++;
+		i++;
 	}
 	free(matrix);
 }
@@ -63,7 +63,7 @@ void	ft_error(char *s)
 		while (s[i])
 		{
 			write(STDERROR, &s[i], 1);
-			i ++;
+			i++;
 		}
 	}
 }

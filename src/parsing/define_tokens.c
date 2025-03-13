@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/12 14:20:24 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/13 14:26:04 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char	*ft_define_value(char **token)
 	size_t	len;
 
 	ft_skip_white_spaces(token);
+	if (**token == '\0')
+		return (NULL);
 	start = *token;
 	len = 0;
 	{
@@ -100,7 +102,6 @@ t_token	ft_define_special_token(char **token, t_token new_token)
 	}
 	else
 		new_token.type = PIPE;
-	(*token)++;
 	return (new_token);
 }
 

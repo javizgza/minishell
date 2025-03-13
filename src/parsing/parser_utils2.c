@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:46:45 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/12 14:31:28 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/13 14:42:24 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../execute/include/execute.h"
 
 void	ft_free_tokens(t_token *tokens)
 {
@@ -45,4 +45,36 @@ char	*ft_strndup(const char *s, size_t n)
 	}
 	result[i] = '\0';
 	return (result);
+}
+
+t_token	*ft_re_lexer(char *input, t_mini *mini)
+{
+	char	*aux;
+	char	*join_res;
+	char	*join_aux;
+
+	aux = readline(">");
+	join_aux = ft_strjoin(" ", aux);
+	free(aux);
+	join_res = ft_strjoin(input, join_aux);
+	free(input);
+	free(join_aux);
+	mini->line = join_res;
+	return (lexer(join_res, mini));
+}
+
+int	ft_parse_error(t_token token, int command_found)
+{
+	if (token.type != END && token.type != PIPE && !token.value)
+	{
+		free(token.value);
+		ft_error("syntax error near unexpected token `newline'\n");
+		return (0);
+	}
+	if (token.type == PIPE && command_found == 0)
+	{
+		ft_error("syntax error near unexpected token `|'\n");
+		return (0);
+	}
+	return (1);
 }
