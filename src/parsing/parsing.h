@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:03:55 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/12 17:26:53 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/13 12:53:54 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum s_tokens
 	ARGUMENT,
 	ENV_VAR,
 	RECENT,
-	FILENAME, // <--- new token type
+	FILENAME,
 	END,
 	ERROR,
 }			t_tokens;
@@ -74,5 +74,6 @@ void		ft_free_tokens(t_token *tokens);
 char		*ft_substr_ignore_quotes(char *start, size_t len);
 char		*ft_quote(char *start, size_t len);
 void		ft_set_signals(void);
+void		unset_signals(void);
 
 #endif
