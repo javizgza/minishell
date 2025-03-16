@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rediret.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/02/26 14:39:17 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:20:43 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_mini_pipe(t_mini *mini)
 		close(pip[0]);
 		exit (ft_shell(mini));
 	}
-	waitpid(parent, 0, 0);
+	//waitpid(parent, 0, 0);
 	if (dup2(pip[0], STDIN) == -1)
 		return (1);
 	close(pip[1]);

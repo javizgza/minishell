@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/13 14:26:04 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:19:27 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ t_token	ft_define_token_struct(char **token, int command_found)
 		new_token = ft_define_special_token(token, new_token);
 		if (new_token.type != PIPE)
 			new_token.value = ft_define_value(token);
+		else
+			(*token)++;
 		return (new_token);
 	}
 	if (command_found == 0)

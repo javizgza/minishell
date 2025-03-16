@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/13 14:47:29 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/16 20:48:36 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	ft_shell(t_mini *mini)
 	{
 		unset_signals();
 		ft_execute(mini);
-		ft_set_signals();
 		ft_reset_fd(mini);
 		return (1);
 	}
@@ -85,6 +84,7 @@ int	ft_check_redir(t_token *tokens, t_mini *mini)
 			mini->c_line = tokens[i].value;
 		else if (tokens[i].type == ARGUMENT)
 			mini->command = ft_add_arg(mini, tokens[i]);
+		//printf("type: %i, value: %s\n", tokens[i].type, tokens[i].value);
 		i++;
 	}
 	ft_shell(mini);
@@ -100,6 +100,8 @@ int	main(int argc, char **argv, char **envp)
 	ft_main_init(&mini, envp);
 	while (1)
 	{
+		waitpid(0, 0, 0);
+		ft_set_signals();
 		mini.line = readline("minishell> ");
 		if (!mini.line)
 			exit(mini.last_command);
