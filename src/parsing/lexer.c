@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/14 14:18:40 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:49:54 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	tokenize_input(char **current_pos, t_token *tokens)
 		{
 			fprintf(stderr, "Error: Invalid token\n");
 			ft_free_tokens(tokens);
-
 			return (0);
 		}
 	}

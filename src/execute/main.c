@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/16 20:48:36 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/17 12:19:44 by jazarago         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	ft_check_redir(t_token *tokens, t_mini *mini)
 			mini->c_line = tokens[i].value;
 		else if (tokens[i].type == ARGUMENT)
 			mini->command = ft_add_arg(mini, tokens[i]);
-		//printf("type: %i, value: %s\n", tokens[i].type, tokens[i].value);
 		i++;
 	}
 	ft_shell(mini);
