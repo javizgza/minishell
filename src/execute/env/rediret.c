@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rediret.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/14 14:20:43 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/17 15:24:12 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,11 @@ int	ft_output_re_t(t_token tokens, t_mini *mini)
 int	ft_mini_pipe(t_mini *mini)
 {
 	int		pip[2];
-	pid_t	parent;
 
 	if (pipe(pip) != 0)
 		return (1);
-	parent = fork();
-	if (!parent)
+	mini->parent = fork();
+	if (!mini->parent)
 	{
 		if (dup2(pip[1], STDOUT) == -1)
 			return (1);

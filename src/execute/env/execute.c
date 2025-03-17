@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/12 18:16:52 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/17 15:03:01 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,5 @@ int	ft_execute(t_mini *mini)
 	waitpid(parent, &mini->last_command, 0);
 	mini->last_command /= 256;
 	ft_error_exe(mini->last_command, mini->c_line);
-	free(mini->command);
 	return (1);
 }

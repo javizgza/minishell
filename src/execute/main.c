@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/17 12:19:44 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:27:02 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	ft_shell(t_mini *mini)
 		ft_reset_fd(mini);
 		return (1);
 	}
-	free(mini->command);
 	ft_reset_fd(mini);
 	return (1);
 }
@@ -99,8 +98,9 @@ int	main(int argc, char **argv, char **envp)
 	ft_main_init(&mini, envp);
 	while (1)
 	{
-		waitpid(0, 0, 0);
+		waitpid(mini.parent, 0, 0);
 		ft_set_signals();
+		mini.parent = -1;
 		mini.line = readline("minishell> ");
 		if (!mini.line)
 			exit(mini.last_command);
