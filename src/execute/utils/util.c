@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 14:26:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/13 14:36:21 by cravegli         ###   ########.fr       */
+/*   Created: 2025/03/17 20:25:46 by carlos            #+#    #+#             */
+/*   Updated: 2025/03/17 20:45:54 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../../include/execute.h"
 
 int	ft_is_equal(char *a, char *b)
 {

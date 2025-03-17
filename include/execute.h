@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 17:28:08 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/17 15:22:38 by cravegli         ###   ########.fr       */
+/*   Created: 2025/03/17 20:26:38 by carlos            #+#    #+#             */
+/*   Updated: 2025/03/17 20:46:08 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,39 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "../../parsing/parsing.h"
-# include "../../../libft/libft.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <termios.h>
+# include <signal.h>
 
 # define STDIN 0
 # define STDOUT 1
 # define STDERROR 2
+
+typedef enum s_tokens
+{
+	PIPE,
+	BIGGER,
+	SMALLER,
+	BIGGERX2,
+	SMALLERX2,
+	COMMAND,
+	ARGUMENT,
+	ENV_VAR,
+	RECENT,
+	FILENAME,
+	END,
+	ERROR,
+}			t_tokens;
+
+typedef struct s_token
+{
+	t_tokens			type;
+	char				*value;
+	struct s_token		*next;
+}				t_token;
 
 typedef struct s_mini
 {
@@ -73,21 +96,35 @@ char	**ft_del_env_val(char *var, char **env);
 int		ft_is_dir(char *file);
 int		ft_is_reg_file(char *file);
 int		ft_shell(t_mini *mini);
+void	ft_set_last_command(t_mini *mini, char *value);
 
 int		ft_input_re(t_token token, t_mini *mini);
 int		ft_output_re(t_token token, t_mini *mini);
 int		ft_output_re_t(t_token token, t_mini *mini);
 int		ft_heredoc(t_mini *mini, t_token token);
-int		ft_execute_command(char *envp[], char **aux);
+int		ft_execute_command(char **envp, char **arg);
 int		ft_mini_pipe(t_mini *mini);
 int		ft_is_num(char *num);
 int		ft_reset_fd(t_mini *mini);
 
+
+/* FUNCTIONS  PARSE*/
 int		ft_parsing(t_mini *mini, t_token *tokens);
 char	*ft_has_dollar(char	*str, t_mini *mini);
 char	**ft_add_arg(t_mini *mini, t_token token);
 t_token	*lexer(char *input, t_mini *mini);
 t_token	*ft_re_lexer(char *input, t_mini *mini);
+char	*ft_strndup(const char *s, size_t n);
+t_token	ft_define_token_struct(char **token, int command_found);
+int		ft_skip_white_spaces(char **str);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
+int		ft_white_spaces(char c);
+void	ft_free_tokens(t_token *tokens);
+char	*ft_substr_ignore_quotes(char *start, size_t len);
+char	*ft_quote(char *start, size_t len);
+void	ft_set_signals(void);
+int		ft_parse_error(t_token token, int command_found);
+void	unset_signals(void);
 
 void	ft_main_init(t_mini *mini, char **env);
 void	ft_reset_mini(t_mini *mini);

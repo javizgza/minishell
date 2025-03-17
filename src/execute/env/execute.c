@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/17 15:03:01 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:45:24 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../../include/execute.h"
 
 char	*ft_create_cmd(char **path, char *command)
 {
@@ -37,7 +37,7 @@ char	*ft_create_cmd(char **path, char *command)
 	return (s2);
 }
 
-int	ft_execute_command(char *envp[], char **aux)
+int	ft_execute_command(char **envp, char **arg)
 {
 	char	**path;
 	char	*cmd;
@@ -45,14 +45,14 @@ int	ft_execute_command(char *envp[], char **aux)
 	path = ft_split_path(envp);
 	if (!path)
 		ft_error("NO PATH ERROR");
-	cmd = ft_create_cmd(path, aux[0]);
+	cmd = ft_create_cmd(path, arg[0]);
 	if (!cmd)
 	{
-		ft_clean_array(aux);
+		ft_clean_array(arg);
 		ft_clean_array(path);
 		return (127);
 	}
-	execve(cmd, aux, envp);
+	execve(cmd, arg, envp);
 	free(cmd);
 	ft_clean_array(path);
 	return (1);

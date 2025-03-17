@@ -6,11 +6,11 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:55:21 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/12 15:20:29 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/17 20:47:16 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../../include/execute.h"
 
 void	ft_dollar_heredoc(char *line, t_mini *mini, int infile)
 {

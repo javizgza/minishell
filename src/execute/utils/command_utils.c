@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   command_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 12:27:43 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/11 15:13:27 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:46:20 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../../include/execute.h"
 
 char	**ft_add_arg(t_mini *mini, t_token token)
 {

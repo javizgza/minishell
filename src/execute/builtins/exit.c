@@ -6,11 +6,11 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:56 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/12 13:22:25 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/17 20:51:39 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../../include/execute.h"
 
 void	ft_exit_free(t_mini *mini)
 {
@@ -19,6 +19,12 @@ void	ft_exit_free(t_mini *mini)
 	ft_free_tokens(mini->tokens);
 	ft_clean_array(mini->env);
 	free(mini->line);
+}
+
+void	ft_exit_signal(t_mini *mini)
+{
+	rl_clear_history();
+	exit(mini->last_command);
 }
 
 int	ft_error_exit(char **command, t_mini *mini)

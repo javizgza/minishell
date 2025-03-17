@@ -6,11 +6,11 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/14 14:19:27 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/17 20:47:48 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../include/execute.h"
 
 char	*ft_substr2(char *s, int start, int len)
 {

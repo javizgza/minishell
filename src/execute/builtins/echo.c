@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 15:07:30 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/01/22 14:01:47 by cravegli         ###   ########.fr       */
+/*   Created: 2025/03/17 20:28:31 by carlos            #+#    #+#             */
+/*   Updated: 2025/03/17 20:46:41 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../../include/execute.h"
 
 int	ft_echo(char **args, t_mini *mini)
 {

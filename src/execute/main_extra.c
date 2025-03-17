@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main_extra.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:00:50 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/17 15:26:12 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:44:08 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/execute.h"
+#include "../../include/execute.h"
+
+char	*ft_level_up_shell(char **env)
+{
+	char	*value;
+	char	*result;
+	int		level;
+
+	value = get_env_val("SHLVL", env);
+	level = (ft_atoi(value) + 1);
+	value = ft_itoa(level);
+	result = ft_strjoin("SHLVL=", value);
+	free (value);
+	return (result);
+}
 
 void	ft_main_init(t_mini *mini, char **env)
 {
@@ -23,6 +37,7 @@ void	ft_main_init(t_mini *mini, char **env)
 	ft_set_signals();
 	if (!ft_load_env(mini, env))
 		ft_error("ERROR loading env");
+	set_env_val(ft_level_up_shell(mini->env), mini->env);
 }
 
 void	ft_reset_mini(t_mini *mini)

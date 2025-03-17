@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/13 14:26:15 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:44:33 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../include/execute.h"
 
 char	*ft_substr_ignore_quotes(char *start, size_t len)
 {

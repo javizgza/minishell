@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:46:45 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/13 14:42:24 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:44:38 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../execute/include/execute.h"
+#include "../../include/execute.h"
 
 void	ft_free_tokens(t_token *tokens)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:36:45 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/17 15:17:57 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:48:46 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "../../include/execute.h"
 
 void	ft_handle_sigint(int signum)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   file_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:34:04 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/04 11:54:52 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:47:29 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../../include/execute.h"
 
 int	ft_is_dir(char *file)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jazarago <jazarago@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/17 12:49:54 by jazarago         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:48:25 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../execute/include/execute.h"
+#include "../../include/execute.h"
 
 int	alloc_tokens(char *input)
 {

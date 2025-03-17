@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:46:59 by cravegli          #+#    #+#             */
-/*   Updated: 2024/11/13 20:37:16 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:47:26 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../../include/execute.h"
 
 char	*get_env_val(char *var, char **env)
 {
@@ -91,4 +91,12 @@ char	**ft_del_env_val(char *var, char **env)
 	}
 	free(env);
 	return (new_env);
+}
+
+void	ft_set_last_command(t_mini *mini, char *value)
+{
+	char	*var;
+
+	var = ft_strjoin("_=", value);
+	set_env_val(var, mini->env);
 }

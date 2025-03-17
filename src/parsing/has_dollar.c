@@ -6,11 +6,11 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:55:45 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/12 17:31:03 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/17 20:48:20 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../execute/include/execute.h"
+#include "../../include/execute.h"
 
 int	ft_var_result_len(char *str, char *add)
 {

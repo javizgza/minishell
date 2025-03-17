@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/19 17:28:15 by cagonza2          #+#    #+#             */
-/*   Updated: 2025/03/17 15:27:02 by cravegli         ###   ########.fr       */
+/*   Created: 2025/03/17 20:29:09 by carlos            #+#    #+#             */
+/*   Updated: 2025/03/17 20:43:36 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/execute.h"
+#include "../../include/execute.h"
 
 int	ft_is_builtins(t_mini *mini)
 {
@@ -51,6 +51,7 @@ int	ft_shell(t_mini *mini)
 		mini->command = ft_calloc(2, sizeof(char *));
 		mini->command[0] = mini->c_line;
 	}
+	ft_set_last_command(mini, mini->c_line);
 	if (!ft_is_builtins(mini))
 	{
 		unset_signals();

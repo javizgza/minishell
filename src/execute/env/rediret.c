@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rediret.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/17 15:24:12 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:47:20 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execute.h"
+#include "../../../include/execute.h"
 
 int	ft_input_re(t_token tokens, t_mini *mini)
 {
@@ -61,7 +61,6 @@ int	ft_mini_pipe(t_mini *mini)
 		close(pip[0]);
 		exit (ft_shell(mini));
 	}
-	//waitpid(parent, 0, 0);
 	if (dup2(pip[0], STDIN) == -1)
 		return (1);
 	close(pip[1]);
