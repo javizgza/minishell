@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:56 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/17 20:51:39 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/18 12:56:20 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_exit_free(t_mini *mini)
 void	ft_exit_signal(t_mini *mini)
 {
 	rl_clear_history();
+	printf("exit\n");
 	exit(mini->last_command);
 }
 

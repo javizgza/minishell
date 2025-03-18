@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:55:21 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/17 20:47:16 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/18 13:09:20 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_dollar_heredoc(char *line, t_mini *mini, int infile)
 	if (line && (*line == '0' || *line == '?'))
 	{
 		if (*line == '0')
-			ft_putstr_fd(get_env_val("SHELL", mini->env), infile);
+			ft_putstr_fd("minishell", infile);
 		if (*line == '?')
 			ft_putnbr_fd(mini->last_command, infile);
 	}

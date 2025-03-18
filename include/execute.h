@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:26:38 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/18 12:44:10 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:57:32 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int		ft_nb_args(char **args);
 int		ft_execute(t_mini *mini);
 int		ft_env(t_mini *mini);
 int		ft_unset(t_mini *mini);
+void	ft_exit_signal(t_mini *mini);
 int		ft_load_env(t_mini *mini, char**env);
 char	*get_env_val(char *var, char **env);
 int		set_env_val(char *var, char **env);

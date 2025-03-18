@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:29:09 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/18 12:43:21 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/18 12:57:14 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	main(int argc, char **argv, char **envp)
 		mini.parent = -1;
 		mini.line = readline("minishell> ");
 		if (!mini.line)
-			exit(mini.last_command);
+			ft_exit_signal(&mini);
 		if (mini.line)
 		{
 			mini.tokens = lexer(mini.line, &mini);
