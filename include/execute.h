@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:26:38 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/17 20:46:08 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/18 12:44:10 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int		ft_execute_command(char **envp, char **arg);
 int		ft_mini_pipe(t_mini *mini);
 int		ft_is_num(char *num);
 int		ft_reset_fd(t_mini *mini);
-
 
 /* FUNCTIONS  PARSE*/
 int		ft_parsing(t_mini *mini, t_token *tokens);
