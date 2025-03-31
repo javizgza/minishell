@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 16:08:01 by cravegli          #+#    #+#             */
-/*   Updated: 2024/01/29 13:01:26 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/25 21:20:06 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	*ft_start_read(char *res, int fd, char *buff)
 	while (b_read && !(ft_strrchr(res, '\n')))
 	{
 		b_read = read(fd, buff, BUFFER_SIZE);
+		//ft_putnbr_fd(fd, 2);
 		if (b_read == -1)
 		{
 			free(buff);

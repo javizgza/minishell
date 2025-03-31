@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:26:38 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/18 12:57:32 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:59:41 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ typedef enum s_tokens
 	SMALLERX2,
 	COMMAND,
 	ARGUMENT,
-	ENV_VAR,
-	RECENT,
-	FILENAME,
 	END,
 	ERROR,
 }			t_tokens;
@@ -46,29 +43,25 @@ typedef struct s_token
 {
 	t_tokens			type;
 	char				*value;
-	struct s_token		*next;
 }				t_token;
 
 typedef struct s_mini
 {
 	int		last_command;
-	pid_t	parent;
 	char	**env;
 	char	**command;
 	char	*c_line;
 	char	*line;
 	char	**args;
-	int		args_num;
 	int		input;
 	int		output;
 	int		in;
 	int		out;
-	char	*output_append;
-	char	*input_delim;
-	char	*env_var;
-	char	*pipes;
-	char	*recent;
-	int		pipe[2];
+	int		num_pipe;
+	int		pipe_done;
+	int		*pip_fd;
+	pid_t	*process;
+	pid_t	sub_process;
 	t_token	*tokens;
 }	t_mini;
 
@@ -96,7 +89,7 @@ char	**ft_add_env_val(char	*var, char **env);
 char	**ft_del_env_val(char *var, char **env);
 int		ft_is_dir(char *file);
 int		ft_is_reg_file(char *file);
-int		ft_shell(t_mini *mini);
+int		ft_shell(t_mini *mini, int pipe);
 void	ft_set_last_command(t_mini *mini, char *value);
 
 int		ft_input_re(t_token token, t_mini *mini);
@@ -104,6 +97,7 @@ int		ft_output_re(t_token token, t_mini *mini);
 int		ft_output_re_t(t_token token, t_mini *mini);
 int		ft_heredoc(t_mini *mini, t_token token);
 int		ft_execute_command(char **envp, char **arg);
+int		ft_execute_pipe(t_mini *mini);
 int		ft_mini_pipe(t_mini *mini);
 int		ft_is_num(char *num);
 int		ft_reset_fd(t_mini *mini);
@@ -128,5 +122,6 @@ void	unset_signals(void);
 
 void	ft_main_init(t_mini *mini, char **env);
 void	ft_reset_mini(t_mini *mini);
+void	ft_wait_pipes(t_mini *mini);
 
 #endif

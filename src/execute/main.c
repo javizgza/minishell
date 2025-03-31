@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:29:09 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/18 12:57:14 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:26:02 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_reset_fd(t_mini *mini)
 	return (1);
 }
 
-int	ft_shell(t_mini *mini)
+int	ft_shell(t_mini *mini, int pipe)
 {
 	if (!mini->c_line)
 		return (0);
@@ -55,7 +55,10 @@ int	ft_shell(t_mini *mini)
 	if (!ft_is_builtins(mini))
 	{
 		unset_signals();
-		ft_execute(mini);
+		if (pipe == 0)
+			ft_execute(mini);
+		else
+			ft_execute_pipe(mini);
 		ft_reset_fd(mini);
 		return (1);
 	}
@@ -86,7 +89,7 @@ int	ft_check_redir(t_token *tokens, t_mini *mini)
 			mini->command = ft_add_arg(mini, tokens[i]);
 		i++;
 	}
-	ft_shell(mini);
+	ft_shell(mini, 0);
 	return (0);
 }
 
@@ -99,9 +102,9 @@ int	main(int argc, char **argv, char **envp)
 	ft_main_init(&mini, envp);
 	while (1)
 	{
-		waitpid(mini.parent, 0, 0);
+		if (mini.num_pipe > 0)
+			ft_wait_pipes(&mini);
 		ft_set_signals();
-		mini.parent = -1;
 		mini.line = readline("minishell> ");
 		if (!mini.line)
 			ft_exit_signal(&mini);

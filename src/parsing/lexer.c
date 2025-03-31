@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/17 20:48:25 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/24 12:36:37 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,11 @@ int	ft_parsing(t_mini *mini, t_token *tokens)
 			free(tokens[i].value);
 			tokens[i].value = value;
 		}
+		if (tokens[i].type == PIPE)
+			mini->num_pipe++;
 		i++;
 	}
+	if (mini->num_pipe > 0)
+		mini->process = ft_calloc(mini->num_pipe + 1, sizeof(size_t));
 	return (1);
 }

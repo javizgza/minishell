@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/17 20:47:20 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/31 19:41:40 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,19 @@ int	ft_mini_pipe(t_mini *mini)
 {
 	int		pip[2];
 
-	if (pipe(pip) != 0)
-		return (1);
-	mini->parent = fork();
-	if (!mini->parent)
+	pipe(pip);
+	mini->process[mini->pipe_done] = fork();
+	if (!mini->process[mini->pipe_done])
 	{
-		if (dup2(pip[1], STDOUT) == -1)
-			return (1);
+		dup2(pip[1], STDOUT);
 		close(pip[0]);
-		exit (ft_shell(mini));
+		close(pip[1]);
+		ft_shell(mini, 1);
+		exit (1);
 	}
-	if (dup2(pip[0], STDIN) == -1)
-		return (1);
+	dup2(pip[0], mini->input);
+	close(pip[0]);
 	close(pip[1]);
+	mini->pipe_done++;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:43:41 by cravegli          #+#    #+#             */
-/*   Updated: 2025/01/22 14:09:17 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/03/25 20:39:39 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 512
-# endif
-# if BUFFER_SIZE < 1 || BUFFER_SIZE > 100000
+# ifdef BUFFER_SIZE 
 #  undef BUFFER_SIZE
-#  define BUFFER_SIZE 512
+#  define BUFFER_SIZE 1
+# endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
 # endif
 # ifndef OPEN_MAX
 #  define OPEN_MAX 1024

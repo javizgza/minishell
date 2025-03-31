@@ -6,11 +6,23 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:28:31 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/17 20:46:41 by carlos           ###   ########.fr       */
+/*   Updated: 2025/03/21 16:21:34 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/execute.h"
+
+int	ft_check_jump(char *first_arg)
+{
+	int	i;
+
+	i = 1;
+	while (first_arg[i] && first_arg[i] == 'n')
+		i++;
+	if (first_arg[i])
+		return (1);
+	return (0);
+}
 
 int	ft_echo(char **args, t_mini *mini)
 {
@@ -22,14 +34,17 @@ int	ft_echo(char **args, t_mini *mini)
 	mini->last_command = 0;
 	if (ft_nb_args(args) > 1)
 	{
-		if (ft_is_equal(args[1], "-n"))
+		if (args[1][0] == '-')
 		{
-			jump = 0;
-			i++;
+			jump = ft_check_jump(args[1]);
+			if (jump == 0)
+				i++;
 		}
 		while (args[i] != NULL)
 		{
-			printf("%s ", args[i]);
+			printf("%s", args[i]);
+			if (args[i + 1])
+				printf(" ");
 			i++;
 		}
 	}
