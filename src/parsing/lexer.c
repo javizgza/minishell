@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/24 12:36:37 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/02 11:24:13 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_token	*lexer(char *input, t_mini *mini)
 	token_count = 0;
 	current_pos = input;
 	token_count = alloc_tokens(input);
-	if (token_count == -1)
+	if (token_count <= 0)
 		return (NULL);
 	tokens = malloc(sizeof(t_token) * (token_count + 1));
 	if (!tokens)
@@ -138,6 +138,6 @@ int	ft_parsing(t_mini *mini, t_token *tokens)
 		i++;
 	}
 	if (mini->num_pipe > 0)
-		mini->process = ft_calloc(mini->num_pipe + 1, sizeof(size_t));
+		mini->proc = ft_calloc(mini->num_pipe + 1, sizeof(t_process));
 	return (1);
 }

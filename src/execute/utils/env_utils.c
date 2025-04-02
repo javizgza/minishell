@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:46:59 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/17 20:47:26 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/02 11:39:59 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ void	ft_set_last_command(t_mini *mini, char *value)
 	char	*var;
 
 	var = ft_strjoin("_=", value);
-	set_env_val(var, mini->env);
+	if (set_env_val(var, mini->env) == 1)
+		free(var);
 }

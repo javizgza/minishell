@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:29:09 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/26 11:26:02 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/02 11:41:25 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ int	ft_shell(t_mini *mini, int pipe)
 		if (pipe == 0)
 			ft_execute(mini);
 		else
-			ft_execute_pipe(mini);
+			return (ft_execute_pipe(mini));
 		ft_reset_fd(mini);
-		return (1);
+		return (0);
 	}
 	ft_reset_fd(mini);
-	return (1);
+	return (0);
 }
 
 int	ft_check_redir(t_token *tokens, t_mini *mini)
@@ -102,8 +102,6 @@ int	main(int argc, char **argv, char **envp)
 	ft_main_init(&mini, envp);
 	while (1)
 	{
-		if (mini.num_pipe > 0)
-			ft_wait_pipes(&mini);
 		ft_set_signals();
 		mini.line = readline("minishell> ");
 		if (!mini.line)
@@ -112,9 +110,13 @@ int	main(int argc, char **argv, char **envp)
 		{
 			mini.tokens = lexer(mini.line, &mini);
 			if (mini.tokens && ft_parsing(&mini, mini.tokens))
+			{
 				ft_check_redir(mini.tokens, &mini);
-			add_history(mini.line);
+				add_history(mini.line);
+			}
 		}
+		if (mini.num_pipe > 0)
+			ft_wait_pipes(&mini);
 		ft_reset_mini(&mini);
 	}
 	return (0);

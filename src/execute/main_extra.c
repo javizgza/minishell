@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:00:50 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/26 14:32:19 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/02 11:41:32 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ft_main_init(t_mini *mini, char **env)
 	mini->last_command = 0;
 	mini->num_pipe = 0;
 	mini->pipe_done = 0;
-	mini->pip_fd = NULL;
 	ft_set_signals();
 	if (!ft_load_env(mini, env))
 		ft_error("ERROR loading env");
@@ -58,20 +57,17 @@ void	ft_reset_mini(t_mini *mini)
 
 void	ft_wait_pipes(t_mini *mini)
 {
-	int		i;
-	//char	*buff;
+	int	l_com;
 
-	i = 0;
-	while (i < mini->num_pipe)
+	mini->num_pipe--;
+	while (mini->num_pipe >= 0)
 	{
-/* 		buff = get_next_line(mini->pip_fd[i]);
-		free(buff);
-		kill(mini->process[i], SIGCHLD); */
-		waitpid(mini->process[i], 0, 0);
-		i++;
+		waitpid(mini->proc[mini->num_pipe].process, &l_com, 0);
+		l_com /= 256;
+		if (l_com != 0)
+			ft_error_exe(l_com, mini->proc[mini->num_pipe].command, mini->env);
+		mini->num_pipe--;
 	}
-	free (mini->process);
-	free(mini->pip_fd);
-	mini->pip_fd = NULL;
+	free (mini->proc);
 	mini->num_pipe = 0;
 }

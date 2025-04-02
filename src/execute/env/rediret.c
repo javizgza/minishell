@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/31 19:41:40 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/02 11:31:30 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ int	ft_mini_pipe(t_mini *mini)
 	int		pip[2];
 
 	pipe(pip);
-	mini->process[mini->pipe_done] = fork();
-	if (!mini->process[mini->pipe_done])
+	mini->proc[mini->pipe_done].command = mini->c_line;
+	mini->proc[mini->pipe_done].process = fork();
+	if (!mini->proc[mini->pipe_done].process)
 	{
 		dup2(pip[1], STDOUT);
 		close(pip[0]);
@@ -61,9 +62,11 @@ int	ft_mini_pipe(t_mini *mini)
 		ft_shell(mini, 1);
 		exit (1);
 	}
-	dup2(pip[0], mini->input);
+	dup2(pip[0], STDIN);
 	close(pip[0]);
 	close(pip[1]);
 	mini->pipe_done++;
+	free(mini->command);
+	mini->command = NULL;
 	return (0);
 }

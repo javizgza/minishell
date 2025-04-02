@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/31 19:35:05 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/02 11:26:58 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ int	ft_execute(t_mini *mini)
 		exit(ft_execute_command(mini->env, mini->command));
 	waitpid(sub_process, &mini->last_command, 0);
 	mini->last_command /= 256;
-	ft_error_exe(mini->last_command, mini->c_line, mini->env);
+	if (mini->last_command != 0)
+		ft_error_exe(mini->last_command, mini->c_line, mini->env);
 	return (1);
 }
 
@@ -102,6 +103,5 @@ int	ft_execute_pipe(t_mini *mini)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	ft_execute_command(mini->env, mini->command);
-	return (1);
+	exit (ft_execute_command(mini->env, mini->command));
 }

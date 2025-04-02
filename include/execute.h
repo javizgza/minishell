@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:26:38 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/26 13:59:41 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/02 11:25:46 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,29 @@ typedef struct s_token
 	char				*value;
 }				t_token;
 
+typedef struct s_process
+{
+	pid_t	process;
+	char	*command;
+}				t_process;
+
 typedef struct s_mini
 {
-	int		last_command;
-	char	**env;
-	char	**command;
-	char	*c_line;
-	char	*line;
-	char	**args;
-	int		input;
-	int		output;
-	int		in;
-	int		out;
-	int		num_pipe;
-	int		pipe_done;
-	int		*pip_fd;
-	pid_t	*process;
-	pid_t	sub_process;
-	t_token	*tokens;
+	int			last_command;
+	char		**env;
+	char		**command;
+	char		*c_line;
+	char		*line;
+	char		**args;
+	int			input;
+	int			output;
+	int			in;
+	int			out;
+	int			error;
+	int			num_pipe;
+	int			pipe_done;
+	t_process	*proc;
+	t_token		*tokens;
 }	t_mini;
 
 void	ft_clean_array(char **matrix);
@@ -96,6 +101,7 @@ int		ft_input_re(t_token token, t_mini *mini);
 int		ft_output_re(t_token token, t_mini *mini);
 int		ft_output_re_t(t_token token, t_mini *mini);
 int		ft_heredoc(t_mini *mini, t_token token);
+int		ft_error_exe(int last_command, char *c_line, char **env);
 int		ft_execute_command(char **envp, char **arg);
 int		ft_execute_pipe(t_mini *mini);
 int		ft_mini_pipe(t_mini *mini);
