@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 12:53:54 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/17 20:46:51 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/03 12:24:06 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,6 @@ int	ft_export_cont(t_mini *mini)
 int	ft_export(t_mini *mini)
 {
 	if (ft_nb_args(mini->command) < 2)
-	{
-		mini->last_command = 0;
 		return (ft_print_env(mini->env));
-	}
-	mini->last_command = 0;
 	return (ft_export_cont(mini));
 }

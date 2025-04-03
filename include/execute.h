@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:26:38 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/02 11:25:46 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/03 12:47:59 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ void	ft_error(char *s);
 
 char	*ft_create_cmd(char **path, char *command);
 char	**ft_split_path(char *envp[]);
+char	**ft_find_env(void);
 
 int		ft_is_equal(char *a, char *b);
-int		ft_echo(char **args, t_mini *mini);
-int		ft_pwd(t_mini *mini);
+int		ft_echo(char **args);
+int		ft_pwd(void);
 int		ft_exit(t_mini *mini);
 int		ft_cd(t_mini *mini);
 int		ft_export(t_mini *mini);

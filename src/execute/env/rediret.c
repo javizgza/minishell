@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rediret.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/04/02 11:31:30 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/03 12:11:37 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	ft_input_re(t_token tokens, t_mini *mini)
 		ft_error("bash: ");
 		ft_error(tokens.value);
 		ft_error(": No such file or directory\n");
+		mini->error = 2;
 		return (1);
 	}
 	if (dup2(mini->input, STDIN) == -1)
@@ -34,6 +35,14 @@ int	ft_output_re(t_token tokens, t_mini *mini)
 	if (mini->output > 0)
 		close(mini->output);
 	mini->output = open(tokens.value, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU);
+	if (mini->output == -1)
+	{
+		ft_error("bash: ");
+		ft_error(tokens.value);
+		ft_error(": No such file or directory\n");
+		mini->error = 2;
+		return (1);
+	}
 	dup2(mini->output, STDOUT);
 	return (1);
 }
@@ -43,6 +52,14 @@ int	ft_output_re_t(t_token tokens, t_mini *mini)
 	if (mini->output > 0)
 		close(mini->output);
 	mini->output = open(tokens.value, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU);
+	if (mini->output == -1)
+	{
+		ft_error("bash: ");
+		ft_error(tokens.value);
+		ft_error(": No such file or directory\n");
+		mini->error = 2;
+		return (1);
+	}
 	dup2(mini->output, STDOUT);
 	return (1);
 }
@@ -59,8 +76,9 @@ int	ft_mini_pipe(t_mini *mini)
 		dup2(pip[1], STDOUT);
 		close(pip[0]);
 		close(pip[1]);
-		ft_shell(mini, 1);
-		exit (1);
+		if (mini->error == 0)
+			ft_shell(mini, 1);
+		exit (mini->error);
 	}
 	dup2(pip[0], STDIN);
 	close(pip[0]);

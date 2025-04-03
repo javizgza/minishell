@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:56 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/18 12:56:20 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/03 12:36:21 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_exit_free(t_mini *mini)
 	free(mini->command);
 	ft_free_tokens(mini->tokens);
 	ft_clean_array(mini->env);
+	if (mini->proc)
+		free(mini->proc);
 	free(mini->line);
 }
 

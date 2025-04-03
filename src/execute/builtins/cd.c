@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:41:49 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/17 20:49:39 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/03 12:13:46 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_cd_error(t_mini *mini, char *old_pwd, char *value)
 	else
 		ft_error(": No such file or directory\n");
 	free(old_pwd);
-	mini->last_command = 1;
+	mini->error = 1;
 	return (1);
 }
 
@@ -51,7 +51,7 @@ int	ft_cd_not_access(t_mini *mini, char *value, char *old_pwd)
 		ft_error(value);
 		ft_error("\n");
 	}
-	mini->last_command = 1;
+	mini->error = 1;
 	free(old_pwd);
 	return (1);
 }
@@ -79,6 +79,5 @@ int	ft_cd(t_mini *mini)
 	free(value);
 	ft_cd_aux("OLDPWD=", old_pwd, mini->env);
 	free(old_pwd);
-	mini->last_command = 0;
 	return (1);
 }

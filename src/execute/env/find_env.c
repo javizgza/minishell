@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   find_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/14 17:12:05 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/03 12:23:34 by cravegli         ###   ########.fr       */
+/*   Created: 2025/04/03 12:41:37 by cravegli          #+#    #+#             */
+/*   Updated: 2025/04/03 12:47:09 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/execute.h"
 
-int	ft_env(t_mini *mini)
+char	**ft_find_env(void)
 {
-	int	i;
+	char	**result;
+	int		fd_path;
+	char	*path;
 
-	i = 0;
-	if (ft_nb_args(mini->command) > 1)
-	{
-		ft_error("env: too many arguments\n");
-		mini->error = 1;
-		return (1);
-	}
-	while (mini->env[i])
-	{
-		printf("%s\n", mini->env[i]);
-		i++;
-	}
-	return (1);
+	fd_path = open("/etc/environment", O_RDONLY, 0);
+	if (!fd_path)
+		return (NULL);
+	path = get_next_line(fd_path);
+	close (fd_path);
+	result = ft_calloc(2, sizeof(char *));
+	result[0] = path;
+	return (result);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:28:31 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/21 16:21:34 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/03 12:30:33 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,13 @@ int	ft_check_jump(char *first_arg)
 	return (0);
 }
 
-int	ft_echo(char **args, t_mini *mini)
+int	ft_echo(char **args)
 {
 	int	i;
 	int	jump;
 
 	i = 1;
 	jump = 1;
-	mini->last_command = 0;
 	if (ft_nb_args(args) > 1)
 	{
 		if (args[1][0] == '-')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/02 11:26:58 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/03 12:30:01 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,10 @@ int	ft_execute(t_mini *mini)
 	sub_process = fork();
 	if (!sub_process)
 		exit(ft_execute_command(mini->env, mini->command));
-	waitpid(sub_process, &mini->last_command, 0);
-	mini->last_command /= 256;
-	if (mini->last_command != 0)
-		ft_error_exe(mini->last_command, mini->c_line, mini->env);
+	waitpid(sub_process, &mini->error, 0);
+	mini->error /= 256;
+	if (mini->error != 0)
+		ft_error_exe(mini->error, mini->c_line, mini->env);
 	return (1);
 }
 

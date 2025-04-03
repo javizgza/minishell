@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:46:59 by cravegli          #+#    #+#             */
-/*   Updated: 2025/04/02 11:39:59 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/03 13:05:36 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*get_env_val(char *var, char **env)
 	int		i;
 
 	i = 0;
+	if (!env)
+		return (NULL);
 	value = NULL;
 	while (env[i])
 	{
@@ -57,6 +59,11 @@ char	**ft_add_env_val(char *var, char **env)
 	int		i;
 	char	**new_env;
 
+	if (!env)
+	{
+		new_env = ft_calloc(2, sizeof(char *));
+		new_env[0] = var;
+	}
 	new_env = ft_calloc(sizeof(char *), ft_nb_args(env) + 2);
 	i = 0;
 	while (env[i])

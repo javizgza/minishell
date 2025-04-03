@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:29:09 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/02 11:41:25 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/03 12:40:27 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	ft_is_builtins(t_mini *mini)
 {
 	if (ft_is_equal(mini->command[0], "echo"))
-		return (ft_echo(mini->command, mini));
+		return (ft_echo(mini->command));
 	if (ft_is_equal(mini->command[0], "pwd"))
-		return (ft_pwd(mini));
+		return (ft_pwd());
 	if (ft_is_equal(mini->command[0], "env"))
 		return (ft_env(mini));
 	if (ft_is_equal(mini->command[0], "exit"))
@@ -33,12 +33,16 @@ int	ft_is_builtins(t_mini *mini)
 
 int	ft_reset_fd(t_mini *mini)
 {
-	if (mini->input > 0)
-		close(mini->input);
 	if (mini->output > 0)
 		close(mini->output);
 	dup2(mini->in, STDIN);
 	dup2(mini->out, STDOUT);
+	if (mini->input != 0)
+	{
+		if (mini->input > 0)
+			close(mini->input);
+		mini->input = STDIN;
+	}
 	return (1);
 }
 
@@ -89,7 +93,8 @@ int	ft_check_redir(t_token *tokens, t_mini *mini)
 			mini->command = ft_add_arg(mini, tokens[i]);
 		i++;
 	}
-	ft_shell(mini, 0);
+	if (mini->error == 0)
+		ft_shell(mini, 0);
 	return (0);
 }
 

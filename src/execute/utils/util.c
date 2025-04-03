@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:25:46 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/18 12:43:50 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/03 11:23:11 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	ft_load_env(t_mini *mini, char**env)
 {
 	int	i;
 
+	if (!env || !env[0])
+		return (0);
 	mini->env = ft_calloc(sizeof(char *), ft_nb_args(env) + 1);
 	if (!mini->env)
 		return (0);
