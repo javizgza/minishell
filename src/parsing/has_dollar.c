@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:55:45 by carlos            #+#    #+#             */
-/*   Updated: 2025/03/17 20:48:20 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/04 13:09:57 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ char	*ft_add_var(char *str, char *add)
 	return (res);
 }
 
-char	*ft_dollar_found(char *str, char *res, t_mini *mini, int single_quote)
+char	*ft_dollar_found(char *str, char *res, t_mini *mini)
 {
 	char	*itoa_res;
 	int		i;
 
 	i = 1;
-	if (str[i] && get_env_val(str + i, mini->env) && (single_quote > 0))
+	if (str[i] && get_env_val(str + i, mini->env))
 		res = ft_add_var(res, get_env_val(str + i, mini->env));
-	else if (str[i] && str[i] == '?' && (single_quote > 0))
+	else if (str[i] && str[i] == '?')
 	{
 		itoa_res = ft_itoa(mini->last_command);
 		res = ft_add_var(res, itoa_res);
@@ -86,7 +86,7 @@ char	*ft_dollar_found(char *str, char *res, t_mini *mini, int single_quote)
 	}
 	else
 	{
-		if (single_quote > 0 && str[i])
+		if (str[i])
 			res = ft_add_var(res, "");
 	}
 	return (res);
@@ -96,17 +96,21 @@ char	*ft_has_dollar(char	*str, t_mini *mini)
 {
 	char	*res;
 	int		single_quote;
+	int		double_quote;
 	int		i;
 
 	res = str;
 	single_quote = 1;
+	double_quote = 1;
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'')
+		if (str[i] == '\'' && double_quote < 0)
 			single_quote *= -1;
-		if (str[i] == '$')
-			res = ft_dollar_found(str + i, res, mini, single_quote);
+		if (str[i] == '"' && single_quote < 0)
+			double_quote *= -1;
+		if (str[i] == '$' && single_quote > 0)
+			res = ft_dollar_found(str + i, res, mini);
 		i++;
 	}
 	if (!ft_is_equal(res, str))
