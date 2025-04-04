@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:55:45 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/04 13:09:57 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/04 13:13:23 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ char	*ft_has_dollar(char	*str, t_mini *mini)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\'' && double_quote < 0)
+		if (str[i] == '\'' && double_quote > 0)
 			single_quote *= -1;
-		if (str[i] == '"' && single_quote < 0)
+		if (str[i] == '"' && single_quote > 0)
 			double_quote *= -1;
 		if (str[i] == '$' && single_quote > 0)
 			res = ft_dollar_found(str + i, res, mini);
