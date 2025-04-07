@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:55:21 by cravegli          #+#    #+#             */
-/*   Updated: 2025/03/25 15:48:10 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/07 16:39:47 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,13 @@ int	ft_child_heredoc(int infile, char *del, t_mini *mini)
 	return (0);
 }
 
-int	ft_parent_heredoc(int heredoc[2], pid_t parent)
+int	ft_parent_heredoc(int heredoc[2], pid_t parent, t_mini *mini)
 {
 	waitpid(parent, 0, 0);
-	dup2(heredoc[0], STDIN);
+	mini->input = heredoc[0];
+	dup2(mini->input, STDIN);
 	close(heredoc[1]);
+	close(heredoc[0]);
 	return (0);
 }
 
@@ -87,11 +89,19 @@ int	ft_heredoc(t_mini *mini, t_token tokens)
 	int		heredoc[2];
 	pid_t	parent;
 
+	if (mini->input > 0)
+	{
+		close(mini->input);
+		dup2(mini->in, STDIN);
+	}
 	pipe(heredoc);
 	parent = fork();
 	if (!parent)
+	{
+		close(heredoc[0]);
 		exit (ft_child_heredoc(heredoc[1], tokens.value, mini));
+	}
 	else
-		ft_parent_heredoc(heredoc, parent);
+		ft_parent_heredoc(heredoc, parent, mini);
 	return (0);
 }
