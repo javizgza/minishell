@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:25:26 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/03 12:32:19 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:54:59 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_pwd(void)
 	char	*aux;
 
 	aux = getcwd(NULL, 0);
+	if (!aux)
+		return (1);
 	printf("%s\n", aux);
 	free(aux);
 	return (1);

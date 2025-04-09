@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:29:09 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/07 16:18:57 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/09 11:32:51 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,12 @@ int	ft_is_builtins(t_mini *mini)
 
 int	ft_reset_fd(t_mini *mini)
 {
+	if (mini->input > 0)
+		close(mini->input);
 	if (mini->output > 0)
 		close(mini->output);
 	dup2(mini->in, STDIN);
 	dup2(mini->out, STDOUT);
-	if (mini->input != 0)
-	{
-		if (mini->input > 0)
-			close(mini->input);
-		mini->input = STDIN;
-	}
 	return (1);
 }
 

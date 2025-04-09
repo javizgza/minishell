@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/04/02 11:24:13 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/09 10:26:09 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ int	alloc_tokens(char *input)
 	{
 		token = ft_define_token_struct(&actual_pos, 0);
 		if (token.type != PIPE && token.type != ERROR && token.type != END)
+		{
 			free(token.value);
-		if (token.type == COMMAND)
 			command_found = 1;
+		}
 		if (!ft_parse_error(token, command_found))
 			return (-1);
+		if (token.type == PIPE)
+			command_found = 0;
 		count++;
 	}
 	return (count);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:46:59 by cravegli          #+#    #+#             */
-/*   Updated: 2025/04/03 13:05:36 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/09 12:33:57 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ char	**ft_add_env_val(char *var, char **env)
 	{
 		new_env = ft_calloc(2, sizeof(char *));
 		new_env[0] = var;
+		return (new_env);
 	}
 	new_env = ft_calloc(sizeof(char *), ft_nb_args(env) + 2);
 	i = 0;

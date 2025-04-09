@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rediret.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/04/03 12:11:37 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/09 11:24:59 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	ft_input_re(t_token tokens, t_mini *mini)
 		mini->error = 2;
 		return (1);
 	}
-	if (dup2(mini->input, STDIN) == -1)
-		ft_error("dup error\n");
+	dup2(mini->input, STDIN);
 	return (1);
 }
 
@@ -86,5 +85,8 @@ int	ft_mini_pipe(t_mini *mini)
 	mini->pipe_done++;
 	free(mini->command);
 	mini->command = NULL;
+	if (mini->output > 0)
+		close(mini->output);
+	dup2(mini->out, STDOUT);
 	return (0);
 }

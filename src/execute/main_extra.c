@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_extra.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:00:50 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/03 13:08:02 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/09 12:39:46 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ char	*ft_level_up_shell(char **env)
 	int		level;
 
 	value = get_env_val("SHLVL", env);
-	level = (ft_atoi(value) + 1);
+	if (!value)
+		level = 1;
+	else
+		level = (ft_atoi(value) + 1);
 	value = ft_itoa(level);
 	result = ft_strjoin("SHLVL=", value);
 	free (value);
@@ -46,7 +49,10 @@ void	ft_main_init(t_mini *mini, char **env)
 	if (!mini->env)
 		mini->env = ft_add_env_val(ft_level_up_shell(mini->env), mini->env);
 	else
-		set_env_val(ft_level_up_shell(mini->env), mini->env);
+	{
+		if (set_env_val(ft_level_up_shell(mini->env), mini->env) == 1)
+			mini->env = ft_add_env_val(ft_level_up_shell(mini->env), mini->env);
+	}
 }
 
 void	ft_reset_mini(t_mini *mini)
