@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 12:17:15 by cravegli          #+#    #+#             */
-/*   Updated: 2025/04/09 11:24:59 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/10 11:56:11 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	ft_mini_pipe(t_mini *mini)
 	mini->pipe_done++;
 	free(mini->command);
 	mini->command = NULL;
+	mini->error = 0;
 	if (mini->output > 0)
 		close(mini->output);
 	dup2(mini->out, STDOUT);

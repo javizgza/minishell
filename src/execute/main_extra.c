@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:00:50 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/09 12:39:46 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/10 12:06:03 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_main_init(t_mini *mini, char **env)
 	mini->command = NULL;
 	mini->proc = NULL;
 	mini->input = STDIN;
-	mini->out = STDOUT;
+	mini->output = STDOUT;
 	mini->error = 0;
 	mini->last_command = 0;
 	mini->num_pipe = 0;
