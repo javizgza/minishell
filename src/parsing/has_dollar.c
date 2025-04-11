@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:55:45 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/04 13:13:23 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/11 13:48:38 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,15 @@ char	*ft_add_var(char *str, char *add)
 char	*ft_dollar_found(char *str, char *res, t_mini *mini)
 {
 	char	*itoa_res;
-	int		i;
+	char	*aux;
+	char	**aux_2;
 
-	i = 1;
-	if (str[i] && get_env_val(str + i, mini->env))
-		res = ft_add_var(res, get_env_val(str + i, mini->env));
-	else if (str[i] && str[i] == '?')
+	aux = ft_strtrim(str + 1, "\"");
+	aux_2 = ft_split(aux, ' ');
+	free(aux);
+	if (aux_2[0][0] && get_env_val(aux_2[0], mini->env))
+		res = ft_add_var(res, get_env_val(aux_2[0], mini->env));
+	else if (aux_2[0][0] && aux_2[0][0] == '?')
 	{
 		itoa_res = ft_itoa(mini->last_command);
 		res = ft_add_var(res, itoa_res);
@@ -86,9 +89,10 @@ char	*ft_dollar_found(char *str, char *res, t_mini *mini)
 	}
 	else
 	{
-		if (str[i])
+		if (aux_2[0][0])
 			res = ft_add_var(res, "");
 	}
+	ft_clean_array(aux_2);
 	return (res);
 }
 
@@ -107,7 +111,7 @@ char	*ft_has_dollar(char	*str, t_mini *mini)
 	{
 		if (str[i] == '\'' && double_quote > 0)
 			single_quote *= -1;
-		if (str[i] == '"' && single_quote > 0)
+		if (str[i] == '\"' && single_quote > 0)
 			double_quote *= -1;
 		if (str[i] == '$' && single_quote > 0)
 			res = ft_dollar_found(str + i, res, mini);

@@ -6,7 +6,7 @@
 /*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:26:18 by codespace         #+#    #+#             */
-/*   Updated: 2025/03/17 20:44:33 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/11 13:10:27 by carlos           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ char	*ft_substr_ignore_quotes(char *start, size_t len)
 	end = start + len;
 	while (start < end)
 	{
-		if (*start != '"')
-			*res_ptr++ = *start;
+		*res_ptr++ = *start;
 		start++;
 	}
 	*res_ptr = '\0';
@@ -36,13 +35,23 @@ char	*ft_quote(char *start, size_t len)
 	char	*result;
 	char	*res_ptr;
 	char	*end;
+	int		quote;
+	int		quote_s;
 
 	result = malloc(len + 1);
 	res_ptr = result;
 	end = start + len;
+	quote = 1;
+	quote_s = 1;
 	while (start < end)
 	{
-		if (*start != '\'')
+		if (*start == '\'' && quote > 0)
+			quote_s *= -1;
+		if (*start == '\"' && quote_s > 0)
+			quote *= -1;
+		if ((*start == '\'' && quote < 0) || (*start == '\"' && quote_s < 0))
+			*res_ptr++ = *start;
+		else if (*start != '\'' && *start != '\"')
 			*res_ptr++ = *start;
 		start++;
 	}
