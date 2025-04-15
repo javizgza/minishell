@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:59:07 by codespace         #+#    #+#             */
-/*   Updated: 2025/04/09 10:26:09 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:32:29 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	tokenize_input(char **current_pos, t_token *tokens)
 			tokens[token_count++] = token;
 		else
 		{
-			fprintf(stderr, "Error: Invalid token\n");
+			ft_error("Error: Invalid token\n");
 			ft_free_tokens(tokens);
 			return (0);
 		}
@@ -102,6 +102,7 @@ t_token	*lexer(char *input, t_mini *mini)
 	char	*current_pos;
 
 	token_count = 0;
+	mini->error = 2;
 	current_pos = input;
 	token_count = alloc_tokens(input);
 	if (token_count <= 0)
@@ -113,6 +114,9 @@ t_token	*lexer(char *input, t_mini *mini)
 		return (NULL);
 	if (!ft_pipe_empty(tokens))
 		return (ft_re_lexer(input, mini));
+	mini->error = 0;
+	if (g_signal.exit_sig > 0)
+		mini->last_command = 128 + g_signal.exit_sig;
 	return (tokens);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:46:45 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/17 20:44:38 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/15 13:49:47 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ int	ft_parse_error(t_token token, int command_found)
 	if (token.type == PIPE && command_found == 0)
 	{
 		ft_error("syntax error near unexpected token `|'\n");
+		return (0);
+	}
+	if (token.type == ERROR)
+	{
+		ft_error("parse error\n");
 		return (0);
 	}
 	return (1);

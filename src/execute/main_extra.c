@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_extra.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:00:50 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/10 12:06:03 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:30:55 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	ft_main_init(t_mini *mini, char **env)
 	mini->last_command = 0;
 	mini->num_pipe = 0;
 	mini->pipe_done = 0;
+	g_signal.exit_sig = 0;
+	g_signal.heredoc_fd = 0;
 	ft_set_signals();
 	if (!ft_load_env(mini, env))
 		mini->env = ft_find_env();
@@ -66,8 +68,11 @@ void	ft_reset_mini(t_mini *mini)
 	mini->line = NULL;
 	mini->c_line = NULL;
 	mini->command = NULL;
+	if (g_signal.exit_sig > 0)
+		mini->error = 128 + g_signal.exit_sig;
 	mini->last_command = mini->error;
 	mini->error = 0;
+	g_signal.exit_sig = 0;
 }
 
 void	ft_wait_pipes(t_mini *mini)

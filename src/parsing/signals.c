@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:36:45 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/25 22:12:35 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:39:46 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,23 @@
 
 void	ft_handle_sigint(int signum)
 {
-	if (signum == SIGINT)
+	printf("\n");
+	if (g_signal.heredoc_fd > 0)
+		close(g_signal.exit_sig);
+	else
 	{
-		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+	g_signal.exit_sig = signum;
 }
 
 void	ft_handle_sigquit(int signum)
 {
 	if (signum == SIGQUIT)
 		printf("Quit\n");
+	g_signal.exit_sig = signum;
 }
 
 void	ft_set_signals(void)
@@ -40,6 +44,7 @@ void	ft_new_line(int signal)
 	(void)signal;
 	rl_on_new_line();
 	printf("\n");
+	g_signal.exit_sig = signal;
 }
 
 void	unset_signals(void)

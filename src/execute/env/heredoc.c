@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:55:21 by cravegli          #+#    #+#             */
-/*   Updated: 2025/04/07 16:39:47 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/15 14:39:01 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_dollar_heredoc(char *line, t_mini *mini, int infile)
 	}
 }
 
-int	ft_print_heredoc(char	*line, t_mini *mini, int infile)
+int	ft_print_heredoc(char *line, t_mini *mini, int infile)
 {
 	int		i;
 	char	**split_line;
@@ -63,7 +63,7 @@ int	ft_child_heredoc(int infile, char *del, t_mini *mini)
 	while (1)
 	{
 		line = readline(">");
-		if (ft_is_equal(line, del))
+		if (ft_is_equal(line, del) || !line)
 			break ;
 		ft_print_heredoc(line, mini, infile);
 		free(line);
@@ -95,6 +95,7 @@ int	ft_heredoc(t_mini *mini, t_token tokens)
 		dup2(mini->in, STDIN);
 	}
 	pipe(heredoc);
+	g_signal.heredoc_fd = heredoc[1];
 	parent = fork();
 	if (!parent)
 	{

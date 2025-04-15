@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   define_tokens.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:16:29 by jazarago          #+#    #+#             */
-/*   Updated: 2025/03/17 20:47:48 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/15 13:38:13 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_substr2(char *s, int start, int len)
 	return (substr);
 }
 
-int	ft_has_quotes(char	**str)
+int	ft_has_quotes(char	**str, t_token *new_token)
 {
 	int		len;
 	int		quote;
@@ -43,13 +43,13 @@ int	ft_has_quotes(char	**str)
 	}
 	if (quote < 0)
 	{
-		printf("error: quote\n");
-		exit(0);
+		new_token->type = ERROR;
+		return (0);
 	}
 	return (len);
 }
 
-char	*ft_define_value(char **token)
+char	*ft_define_value(char **token, t_token *new_token)
 {
 	char	*result;
 	char	*start;
@@ -60,21 +60,18 @@ char	*ft_define_value(char **token)
 		return (NULL);
 	start = *token;
 	len = 0;
+	while (**token && !ft_white_spaces(**token)
+		&& **token != '>' && **token != '<' && **token != '|')
 	{
-		while (**token && !ft_white_spaces(**token)
-			&& **token != '>' && **token != '<'
-			&& **token != '|')
+		if (**token == '"' || **token == '\'')
+			len += ft_has_quotes(token, new_token);
+		else
 		{
-			if (**token == '"' || **token == '\'')
-				len += ft_has_quotes(token);
-			else
-			{
-				(*token)++;
-				len++;
-			}
+			(*token)++;
+			len++;
 		}
-		result = ft_substr_ignore_quotes(start, len);
 	}
+	result = ft_substr_ignore_quotes(start, len);
 	return (result);
 }
 
@@ -120,7 +117,7 @@ t_token	ft_define_token_struct(char **token, int command_found)
 	{
 		new_token = ft_define_special_token(token, new_token);
 		if (new_token.type != PIPE)
-			new_token.value = ft_define_value(token);
+			new_token.value = ft_define_value(token, &new_token);
 		else
 			(*token)++;
 		return (new_token);
@@ -129,6 +126,6 @@ t_token	ft_define_token_struct(char **token, int command_found)
 		new_token.type = COMMAND;
 	else
 		new_token.type = ARGUMENT;
-	new_token.value = ft_define_value(token);
+	new_token.value = ft_define_value(token, &new_token);
 	return (new_token);
 }

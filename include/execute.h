@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:26:38 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/03 12:47:59 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:30:07 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct s_process
 	pid_t	process;
 	char	*command;
 }				t_process;
+
+typedef struct s_signal
+{
+
+	int	exit_sig;
+	int	heredoc_fd;
+}				t_signal;
 
 typedef struct s_mini
 {
@@ -131,4 +138,5 @@ void	ft_main_init(t_mini *mini, char **env);
 void	ft_reset_mini(t_mini *mini);
 void	ft_wait_pipes(t_mini *mini);
 
+extern t_signal g_signal;
 #endif

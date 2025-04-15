@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:29:56 by cravegli          #+#    #+#             */
-/*   Updated: 2025/04/03 12:36:21 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:53:59 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_exit_free(t_mini *mini)
 void	ft_exit_signal(t_mini *mini)
 {
 	rl_clear_history();
+	ft_clean_array(mini->env);
 	printf("exit\n");
 	exit(mini->last_command);
 }
