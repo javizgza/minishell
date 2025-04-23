@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:26:38 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/23 12:29:03 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:22:23 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ int		ft_white_spaces(char c);
 void	ft_free_tokens(t_token *tokens);
 char	*ft_substr_ignore_quotes(char *start, size_t len);
 char	*ft_quote(char *start, size_t len);
+char	*ft_dollar_quote(char *str);
 void	ft_set_signals(void);
 int		ft_parse_error(t_token token, int command_found);
 void	unset_signals(void);

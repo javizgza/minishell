@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   has_dollar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carlos <carlos@student.42.fr>              +#+  +:+       +#+        */
+/*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 12:55:45 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/11 13:48:38 by carlos           ###   ########.fr       */
+/*   Updated: 2025/04/23 14:30:55 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_var_result_len(char *str, char *add)
 	len = ft_strlen(str);
 	while (str[i] && str[i] != '$')
 		i++;
-	while (str[i] && str[i] != ' ')
+	while (str[i] && str[i] != ' ' && str[i] != '\'')
 	{
 		i++;
 		len--;
@@ -58,7 +58,7 @@ char	*ft_add_var(char *str, char *add)
 		i++;
 		new_len++;
 	}
-	while (str[i] != ' ' && str[i])
+	while (str[i] != ' ' && str[i] && str[i] != '\'')
 		i++;
 	while (add[j])
 	{
@@ -74,14 +74,11 @@ char	*ft_dollar_found(char *str, char *res, t_mini *mini)
 {
 	char	*itoa_res;
 	char	*aux;
-	char	**aux_2;
 
-	aux = ft_strtrim(str + 1, "\"");
-	aux_2 = ft_split(aux, ' ');
-	free(aux);
-	if (aux_2[0][0] && get_env_val(aux_2[0], mini->env))
-		res = ft_add_var(res, get_env_val(aux_2[0], mini->env));
-	else if (aux_2[0][0] && aux_2[0][0] == '?')
+	aux = ft_dollar_quote(str + 1);
+	if (aux[0] && get_env_val(aux, mini->env))
+		res = ft_add_var(res, get_env_val(aux, mini->env));
+	else if (aux[0] && aux[0] == '?')
 	{
 		itoa_res = ft_itoa(mini->last_command);
 		res = ft_add_var(res, itoa_res);
@@ -89,10 +86,10 @@ char	*ft_dollar_found(char *str, char *res, t_mini *mini)
 	}
 	else
 	{
-		if (aux_2[0][0])
+		if (aux[0])
 			res = ft_add_var(res, "");
 	}
-	ft_clean_array(aux_2);
+	free(aux);
 	return (res);
 }
 

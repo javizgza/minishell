@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:46:45 by jazarago          #+#    #+#             */
-/*   Updated: 2025/04/15 13:49:47 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/23 14:39:11 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,23 @@ int	ft_parse_error(t_token token, int command_found)
 		return (0);
 	}
 	return (1);
+}
+
+char	*ft_dollar_quote(char *str)
+{
+	char	*result;
+	int		len;
+	int		i;
+
+	len = 0;
+	i = 0;
+	while (str[len] != ' ' && str[len] != '"' && str[len] != '\'' && str[len])
+		len++;
+	result = (char *)ft_calloc(len + 1, sizeof(char));
+	while (i != len)
+	{
+		result[i] = str[i];
+		i++;
+	}
+	return (result);
 }
