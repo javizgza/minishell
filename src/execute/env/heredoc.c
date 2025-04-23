@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:55:21 by cravegli          #+#    #+#             */
-/*   Updated: 2025/04/15 14:39:01 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:46:54 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	ft_child_heredoc(int infile, char *del, t_mini *mini)
 	while (1)
 	{
 		line = readline(">");
+		if (!line)
+			return (0);
 		if (ft_is_equal(line, del) || !line)
 			break ;
 		ft_print_heredoc(line, mini, infile);
@@ -78,6 +80,7 @@ int	ft_parent_heredoc(int heredoc[2], pid_t parent, t_mini *mini)
 {
 	waitpid(parent, 0, 0);
 	mini->input = heredoc[0];
+	g_signal.heredoc_fd = -1;
 	dup2(mini->input, STDIN);
 	close(heredoc[1]);
 	close(heredoc[0]);
@@ -100,7 +103,9 @@ int	ft_heredoc(t_mini *mini, t_token tokens)
 	if (!parent)
 	{
 		close(heredoc[0]);
-		exit (ft_child_heredoc(heredoc[1], tokens.value, mini));
+		ft_child_heredoc(heredoc[1], tokens.value, mini);
+		ft_exit_free(mini);
+		exit (0);
 	}
 	else
 		ft_parent_heredoc(heredoc, parent, mini);

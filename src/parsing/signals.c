@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:36:45 by jazarago          #+#    #+#             */
-/*   Updated: 2025/04/15 14:39:46 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:46:29 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ void	ft_handle_sigint(int signum)
 {
 	printf("\n");
 	if (g_signal.heredoc_fd > 0)
-		close(g_signal.exit_sig);
+	{
+		close(0);
+		g_signal.heredoc_fd = 0;
+	}
 	else
 	{
 		rl_on_new_line();

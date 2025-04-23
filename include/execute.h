@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:26:38 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/15 14:30:07 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:29:03 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int		ft_output_re(t_token token, t_mini *mini);
 int		ft_output_re_t(t_token token, t_mini *mini);
 int		ft_heredoc(t_mini *mini, t_token token);
 int		ft_error_exe(int last_command, char *c_line, char **env);
-int		ft_execute_command(char **envp, char **arg);
+
 int		ft_execute_pipe(t_mini *mini);
 int		ft_mini_pipe(t_mini *mini);
 int		ft_is_num(char *num);
@@ -137,6 +137,7 @@ void	unset_signals(void);
 void	ft_main_init(t_mini *mini, char **env);
 void	ft_reset_mini(t_mini *mini);
 void	ft_wait_pipes(t_mini *mini);
+void	ft_exit_free(t_mini *mini);
 
 extern t_signal g_signal;
 #endif

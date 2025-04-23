@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 20:29:09 by carlos            #+#    #+#             */
-/*   Updated: 2025/04/15 14:35:22 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/23 13:55:28 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int	ft_reset_fd(t_mini *mini)
 int	ft_shell(t_mini *mini, int pipe)
 {
 	if (!mini->c_line)
+	{
+		ft_exit_free(mini);
 		return (0);
+	}
 	if (!mini->command)
 	{
 		mini->command = ft_calloc(2, sizeof(char *));

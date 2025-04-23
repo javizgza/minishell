@@ -6,7 +6,7 @@
 /*   By: cravegli <cravegli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:07:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/04/15 13:57:05 by cravegli         ###   ########.fr       */
+/*   Updated: 2025/04/23 12:34:09 by cravegli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_create_cmd(char **path, char *command)
 	return (s2);
 }
 
-int	ft_execute_command(char **envp, char **arg)
+int	ft_execute_command(char **envp, char **arg, t_mini *mini)
 {
 	char	**path;
 	char	*cmd;
@@ -51,7 +51,7 @@ int	ft_execute_command(char **envp, char **arg)
 	{
 		if (path)
 			ft_clean_array(path);
-		ft_clean_array(arg);
+		ft_exit_free(mini);
 		return (127);
 	}
 	execve(cmd, arg, envp);
@@ -91,7 +91,7 @@ int	ft_execute(t_mini *mini)
 
 	sub_process = fork();
 	if (!sub_process)
-		exit(ft_execute_command(mini->env, mini->command));
+		exit(ft_execute_command(mini->env, mini->command, mini));
 	waitpid(sub_process, &mini->error, 0);
 	mini->error /= 256;
 	if (mini->error != 0)
@@ -103,5 +103,5 @@ int	ft_execute_pipe(t_mini *mini)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	exit (ft_execute_command(mini->env, mini->command));
+	exit (ft_execute_command(mini->env, mini->command, mini));
 }
