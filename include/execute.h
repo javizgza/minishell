@@ -53,7 +53,6 @@ typedef struct s_process
 
 typedef struct s_signal
 {
-
 	int	exit_sig;
 	int	heredoc_fd;
 }				t_signal;
@@ -140,5 +139,5 @@ void	ft_reset_mini(t_mini *mini);
 void	ft_wait_pipes(t_mini *mini);
 void	ft_exit_free(t_mini *mini);
 
-extern t_signal g_signal;
+extern t_signal	g_signal;
 #endif

@@ -48,7 +48,8 @@ int	ft_shell(t_mini *mini, int pipe)
 {
 	if (!mini->c_line)
 	{
-		ft_exit_free(mini);
+		if (pipe != 0)
+			ft_exit_free(mini);
 		return (0);
 	}
 	if (!mini->command)

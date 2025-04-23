@@ -37,13 +37,14 @@ char	**ft_find_env(void)
 	char	*aux_pwd;
 
 	fd_path = open("/etc/environment", O_RDONLY, 0);
+	result = NULL;
 	if (fd_path)
-		{
-			path = get_next_line(fd_path);
-			path = ft_fix_path(path);
-			close (fd_path);
-			result = ft_add_env_val(path, NULL);
-		}
+	{
+		path = get_next_line(fd_path);
+		path = ft_fix_path(path);
+		close (fd_path);
+		result = ft_add_env_val(path, result);
+	}
 	pwd = getcwd(NULL, 0);
 	aux_pwd = ft_strjoin("PWD=", pwd);
 	free(pwd);

@@ -25,7 +25,6 @@ int	ft_env(t_mini *mini)
 	}
 	while (mini->env[i])
 	{
-	//if (ft_strchr(mini->env[i], '='))
 		printf("%s\n", mini->env[i]);
 		i++;
 	}
